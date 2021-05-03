@@ -13,6 +13,7 @@ Admission - Upload passport
     <div class="row">
       <div class="col card-body">
         <h4 class="text-center">You are to upload your passport.</h4>
+        <p class="text-danger"><b>Note: You are to upload a passport that majorly captures your face. if otherwise, you will not be qualified</b></p>
       </div>
     </div>
     <div class="container">
@@ -26,6 +27,23 @@ Admission - Upload passport
         <div class="row">
           <div class="col-md-4"></div>
           <div class="text-danger col-md-5"><strong id="not_ify"></strong></div>
+        </div>
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <label>
+                    Choose your course : ----></label>
+            </div>
+            <div class='col-lg-4'>
+
+                <select class="form-control input-sm" name="course" id="" required>
+                   <option selected value="">Select</option>
+                   <!--  @foreach($dept as $dep)
+                        <option value="{{$dep->id}}">{{$dep->name}}</option>
+                    @endforeach
+                    <option value="2">Basic Midwifery</option>-->
+                    <option value="1">Basic General Nursing</option>
+                </select>
+            </div>
         </div>
 
           <div class="form-group row">

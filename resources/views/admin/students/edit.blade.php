@@ -42,19 +42,25 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Full Name:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly id="first_name" value="{{ $student->user->last_name.', '.$student->user->first_name.' '.$student->user->last_name }}" type="text" class="form-control input-sm" readonly />
+                                                        <input readonly id="first_name" value="{{ $student->user->last_name.', '.$student->user->first_name.' '.$student->user->middle_name }}" type="text" class="form-control input-sm" readonly />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Matric No.:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly value="{{$student->matric_no}}" type="text"  class="form-control input-sm" />
+                                                        <input name="matric_no" value="{{$student->matric_no}}" type="text"  class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Department:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
                                                         <input readonly  value="{{ $student->department->name}}" type="text" class="form-control input-sm" />
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Level:</label>
+                                                    <div class="col-sm-9 col-md-6 col-lg-6">
+                                                        <input name="level" value="{{ $student->level}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -80,7 +86,7 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Email:</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input readonly  value="{{ $student->user->email}}" type="text" class="form-control input-sm" />
+                                                        <input  name="email" value="{{ $student->user->email}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">

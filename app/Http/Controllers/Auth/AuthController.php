@@ -31,8 +31,14 @@ class AuthController extends Controller
             }
             //check roles
             $userrole = $request->user()->roles->first();
-            if ($userrole->name == "Student") {
+            
+            if ($userrole == NULL) {
+               session()->flush();
+              return redirect()->back()->with('error', 'Role issue, Contact the Administrator');
+            }else{
+                if ($userrole->name == "Student") {
               return redirect()->route('portal.dashboard');
+            }
             }
           }
             return redirect()->route('dashboard.home');
