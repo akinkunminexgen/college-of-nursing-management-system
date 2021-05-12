@@ -18,7 +18,7 @@ class FeeController extends Controller
     public function index()
     {
         $fees = Fee::orderBy('created_at', 'DESC')->paginate();
-        return view('admin.fees.index', ['fees' => $fees]);
+        return view('admin.fees.index', ['sub_section' => 'all', 'section' => 'fees', 'fees' => $fees]);
     }
 
     /**
@@ -29,7 +29,7 @@ class FeeController extends Controller
     public function create()
     {
         $departments = Department::all();
-        return view('admin.fees.create', ['departments' => $departments]);
+        return view('admin.fees.create', ['sub_section' => 'create', 'section' => 'fees', 'departments' => $departments]);
     }
 
     /**
@@ -96,6 +96,7 @@ class FeeController extends Controller
             'level' => 'required|in:100,200,300,400,500',
             'indigene' => 'required|numeric',
             'non_indigene' => 'required|numeric',
+            'expiry_date' => 'required'
         ]);
 
         $count = Fee::where('department_id', $fee->department->id)
@@ -109,7 +110,7 @@ class FeeController extends Controller
             throw $error;
         }
 
-        $fee->update($request->only(['level', 'indigene', 'non_indigene']));
+        $fee->update($request->only(['level', 'indigene', 'non_indigene', 'expiry_date']));
 
         return redirect()->route('fees.index')->with('success', 'Fee updated');
     }

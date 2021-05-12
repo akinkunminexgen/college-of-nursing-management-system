@@ -87,6 +87,30 @@
                                                 <input type="number" name="acceptance_payment_fee" value="{{$settings['acceptance_payment_fee']}}" class="form-control" required>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Admission Exam Date For Nursing</td>
+                                            <td>
+                                                <input type="date" name="admission_exam_date_nursing" value="{{$settings['admission_exam_date_nursing']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Exam Date For Midwifery</td>
+                                            <td>
+                                                <input type="date" name="admission_exam_date_midwifery" value="{{$settings['admission_exam_date_midwifery']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maintenance</td>
+                                            <td>
+                                              @if($settings['maintenance'] == 'YES')
+                                              <input type="checkbox" name="maintenance" class="custom-control-input"  checked id="customControlAutosizing">
+                                              <label class="badge badge-success">ENABLED</label><span> unclick to disable maintenace</span>
+                                              @else
+                                              <input type="checkbox" name="maintenance" class="custom-control-input" id="customControlAutosizing">
+                                              <label class="badge badge-danger">DISABLED</label><span> click to enable maintenace</span>
+                                              @endif
+                                            </td>
+                                        </tr>
                                         {{--
                                             <tr>
                                                 <td></td>

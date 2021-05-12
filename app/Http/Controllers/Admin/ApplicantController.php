@@ -19,8 +19,7 @@ class ApplicantController extends Controller
 {
     public function index()
     {
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-        ->join('paymentapplicants', 'paymentapplicants.studentapplicant_id', '=', 'studentapplicants.id')->paginate(10);
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->paginate(10);
         //dd($applicants[0]->cardapplicant);
         return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants]);
     }
@@ -46,7 +45,7 @@ class ApplicantController extends Controller
                  $notification = Alert::alertMe($note, 'success');
                  return redirect()->back()->with($notification);
                }
-            
+
           $notification = Alert::alertMe('Admission DataTable Deleted successfully!!!', 'success');
             return redirect()->route('applicants.index')->with($notification);
       }
@@ -82,6 +81,72 @@ class ApplicantController extends Controller
 
     }
 
+
+    public function editapplicant(Studentapplicant $studentapplicant)
+    {
+      //dd($studentapplicant);
+      return view('admin.applicants.editapplicant', ['section' =>'applicants','sub_section' => 'all', 'student' => $studentapplicant, 'states' => State::all()]);
+    }
+
+    public function updateapplicant(Request $request, Studentapplicant $studentapplicant)
+    {
+      $this->validate($request, [
+          'surname' => 'string|required',
+          'first_name' => 'string|required',
+          'middle_name' => 'string',
+          'gender' => 'required',
+          'phone' => 'required|digits:11',
+          'dob' => 'required|date|before:16 years ago',
+          'email' => 'required|email',
+          'home_address' => 'string|required',
+          'lga' => 'required',
+          'state_of_origin' => 'required',
+          'religion' => 'required',
+          'sponsor_name' => 'string|required',
+          'sponsor_phone' => 'required|digits:11',
+          'sponsor_add' => 'required|string',
+          'exam_no' => 'required',
+          'mathematics' => 'required',
+          'english' => 'required',
+          'biology' => 'required',
+          'physics' => 'required',
+          'chemistry' => 'required'
+      ], [
+          'dob.before' => 'The date of birth should be 16 years upward',
+          'state.required' => 'select your present state',
+          'state_of_origin.required' => 'Select a State of origin',
+          'lga.required' => 'Select a local government'
+      ]);
+
+      $studentapplicant->update([
+        'surname' => $request->surname,
+        'first_name' => $request->first_name,
+        'middle_name' => $request->middle_name,
+        'gender' => $request->gender,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'dob' => $request->dob,
+        'home_address' => $request->home_address,
+        'lga' => $request->lga,
+        'state_of_origin' => $request->state_of_origin,
+        'religion' => $request->religion,
+          'sponsor_name' => $request->sponsor_name,
+          'sponsor_phone' => $request->sponsor_phone,
+          'sponsor_add' => $request->sponsor_add,
+          'exam_no' => $request->exam_no,
+          'mathematics' => $request->mathematics,
+          'english' => $request->english,
+          'biology' => $request->biology,
+          'physics' => $request->physics,
+          'chemistry' => $request->chemistry,
+      ]);
+        $notification = Alert::alertMe("Student's information updated", 'success');
+        return redirect()->route('applicants.index')->with($notification);
+    }
+
+
+
+
     public function edit(Studentapplicant $studentapplicant)
     {
       return view('admin.applicants.addscore', ['section' =>'applicants','sub_section' => 'all', 'studentapplicant' => $studentapplicant]);
@@ -108,36 +173,123 @@ class ApplicantController extends Controller
         $this->validate($request, [
           'user' => 'required'
           ]);
+            $email= $request->user;
+          if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+              $variable = 'studentapplicants.email';
+            } else {
+              $variable = 'cardapplicants.reg_no';
+            }
 
           //$student = Cardapplicant::with('studentapplicant')->where('reg_no', $request->user)->first();
-          $student = Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-          ->join('paymentapplicants', 'paymentapplicants.studentapplicant_id', '=', 'studentapplicants.id')
-          ->where('cardapplicants.reg_no', $request->user)->first();
+          $student = Studentapplicant::select('studentapplicants.id', 'reg_no', 'admission_status', 'email', 'phone', 'home_address', 'first_name', 'sponsor_phone', 'surname', 'state_of_origin', 'pic_url')
+          ->join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
+          ->where($variable, $request->user)->first();
           //dd($student);
           if ($student == null) {
-            return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student]);
+            return $student;
+          //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student]);
           }
-          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student->reg_no]);
+          else {
+            return $student;
+          }
+        //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student->reg_no]);
       }
 
 
       public function searchunapproved(Request $request)
       {
+        // aim is to check for the Invoice table inoder to make payment incase of any webhook delay
         $this->validate($request, [
           'user' => 'required'
           ]);
 
-          //$student = Cardapplicant::with('studentapplicant')->where('reg_no', $request->user)->first();
-          $student = Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-          ->whereDoesntHave('paymentapplicant')->where('cardapplicants.reg_no', $request->user)->first();
 
-          //just get student the id gotten from the query above is for cardapplicants
-          $studentID = Studentapplicant::where('cardapplicant_id', $student->id)->first();
+            $student = Invoice::where('email', $request->user)->first();
+            //dd($student);
 
           if ($student == null) {
             return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => $student]);
           }
-          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => $student->reg_no, 'studentID' => $studentID]);
+          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => NULL]);
+      }
+
+      public function manualpay(Request $request)
+      {
+        $this->validate($request, [
+          'email' => 'required',
+          'reference' => 'required',
+          'id' => 'required',
+          'amount' => 'required|numeric'
+          ]);
+
+          $invoice = Invoice::find($request->id);
+          $student = Studentapplicant::where('email', $request->email)->first();
+        //  dd($student);
+          if ($student == NULL) {
+
+            //generate a rand pin
+                  $pin = (string)rand(1000000000, 9999999999);
+
+                 $card = Cardapplicant::create([
+                    'reg_no' =>  $invoice->reg_no,
+                    'password' => bcrypt($pin),
+                    'pin' => $pin,
+                  ]);
+
+                  $arr = explode(",", $invoice->name);
+                  $lastname = $arr[0];
+                  $firstname = $arr[1];
+
+                  //create a date for examination
+                  $num = $card->id;
+                  $arr1 = explode('-',$invoice->reg_no);
+                  $dep = $arr1[0];
+
+                  if($dep == 'BMID'){
+                        if ($num <= 2500 ) {
+                          $date=date_create("2021-02-09");
+                        }else {
+                          $date=date_create("2021-02-10");
+                        }
+                  }else{
+                       if ($num <= 600 ) {
+                          $date=date_create("2021-03-08");
+                        }elseif ($num > 600 and $num <= 1150) {
+                          $date=date_create("2021-03-09");
+                        }elseif ($num > 1150 and $num <= 1986) {
+                          $date=date_create("2021-03-10");
+                        }else {
+                          $date=date_create("2021-03-11");
+                        }
+                  }
+
+                  $student = $card->studentapplicant()->create([
+                     'first_name' => $firstname,
+                     'surname' => $lastname,
+                     'phone' =>  $invoice->phone,
+                     'email' => $invoice->email,
+                     'dob' => $invoice->dob,
+                     'date_exam' => $date
+                  ]);
+
+                    $payment = $student->Paymentapplicant()->create([
+                      'reference' => $request->reference,
+                      'payment_modes_id' => 1, // to show it is paid through paystack
+                      'status' => 'PAID',
+                      'amount' => $request->amount - 300, //getting exact amount from paystack
+                    ]);
+
+            $notification = Alert::alertMe('Payment Made!!!', 'success');
+              return redirect()->back()->with($notification);
+          }else {
+
+            $notification = Alert::alertMe('Student Already Exist!!!', 'success');
+              return redirect()->back()->with($notification);
+          }
+
+
+
+
       }
 
 

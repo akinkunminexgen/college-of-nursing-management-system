@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Studentapplicant;
+use App\Models\Paymentapplicant;
 use App\Models\Admin;
 use App\Models\Lecturer;
 use App\Models\Student;
@@ -16,10 +18,10 @@ class DashboardController extends Controller
     {
         return view('admin.index', [
             'section' => 'dashboard',
-            'users' => User::all(),
+            'users' => Studentapplicant::all(),
             'students' => Student::all(),
             'admins' => Admin::all(),
-            'lecturers' => Lecturer::all(),
+            'userstoday' => Studentapplicant::where('created_at', date("Y-m-d")),
             'posts' => Post::all()
         ]);
     }

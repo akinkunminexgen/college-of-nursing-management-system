@@ -16,6 +16,7 @@
 <script src="{{ asset('js/chart.min.js') }}"></script>
 <script src="/js/iyiola-forms.js"></script>
 <script>
+@yield('admin.scripts')
 @if(Session::has('message'))
   var type = "{{ Session::get('alert-type') }}";
   switch(type){
@@ -79,6 +80,3 @@ var myChart = new Chart(ctx, {
 });
 
 </script>
-
-
-@yield('admin.scripts')

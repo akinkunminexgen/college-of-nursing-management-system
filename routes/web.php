@@ -203,11 +203,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     // Applicants
     Route::put('applicants/index', 'ApplicantController@deleteall')->name('applicants.deleteall');
     Route::delete('applicants/destroy/{studentapplicant}', 'ApplicantController@delete')->name('applicants.destroy');
+
     Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
     Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
     Route::get('applicants/downloadpdf', 'ApplicantController@pdfApplicants')->name('applicants.downloadPDF');
     Route::get('applicants/addresult', 'ApplicantController@showresultpage')->name('applicants.addresult');
     Route::post('applicants/addresult', 'ApplicantController@importresult')->name('applicants.addresultfile');
+    Route::post('applicants/payfor', 'ApplicantController@manualpay')->name('applicants.manualpay');
+
 
     // Admins section
     Route::resource('admins', 'AdminController',  ['parameters' => ['admins' => 'admin']]);
@@ -246,6 +249,9 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
   Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
   Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
-  Route::post('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
+  Route::get('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
+  Route::get('editapplicant/{studentapplicant}', 'ApplicantController@editapplicant')->name('applicants.editapplicant');
+  Route::put('editapplicant/{studentapplicant}', 'ApplicantController@updateapplicant')->name('applicants.updateapplicant');
+
 });

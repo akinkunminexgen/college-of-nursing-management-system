@@ -18,25 +18,26 @@
             <br />
             <div class="row">
               <div class="col-xs-6">
-                <form class="form-inline" method="post" action="{{route('applicants.search')}}" enctype="multipart/form-data">
+                <form class="form-inline">
                   @csrf
                   <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Registration No." required>
+                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Email/Reg No." required>
                     @error('user')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                   </div>
-                  <button type="submit" class="btn btn-primary mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
+                <!--   <input class="btn btn-primary mb-2" type="submit" value="Submit">-->
+                 <button type="submit"  id="studentapproved" class="btn btn-primary mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
                 </form>
               </div>
 
               <div class="col-xs-6">
-                <form class="form-inline" method="post" action="{{route('applicants.searchunapproved')}}" enctype="multipart/form-data">
+                <form class="form-inline" method="get" action="{{route('applicants.searchunapproved')}}" enctype="multipart/form-data">
                   @csrf
                   <div class="form-group mx-sm-3 mb-2">
-                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Registration No." required>
+                    <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Email/Reg No." required>
                     @error('user')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -50,7 +51,7 @@
                 <div class="col-xs-12">
 
                     @if($applicant->count())
-                    <table class="table table-bordered table-striped table-hover data-table">
+                    <table id="clear2" class="table table-bordered table-striped table-hover data-table">
                         <thead>
                         <tr>
                             <th></th>
@@ -65,7 +66,7 @@
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="justclear">
                             @foreach($applicant as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
@@ -85,7 +86,7 @@
                                     </td>
                                     <td>
                                       @if (Gate::allows('add-applicant-score'))
-                                        <a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a>
+                                      <a href="{{route('applicants.editapplicant', ['studentapplicant' => $data->id])}}" title="Edit student Details">Edit</a> |  <a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a>
                                       @endif
                                     </td>
                                 </tr>
@@ -97,7 +98,7 @@
                             <p class="lead">No Applicants!</p>
                         </div>
                     @endif
-                    {{$applicant->links()}}
+                    <div id="justclear2">{{$applicant->links()}}</div>
                 </div>
 
                 @if (Gate::allows('delete-all-applicants'))
@@ -144,3 +145,36 @@
     </div>
 
 @stop
+
+@section('admin.scripts')
+  $("#studentapproved").click(function(e){
+    e.preventDefault();
+    var user = $("input[name=user]").val();
+
+    var url = "{{ route('applicants.search')}}";
+
+    $.ajax({
+      type: "POST",
+      url: url,
+      data:{user:user,  "_token": "{{ csrf_token() }}"},
+      success: function(data){
+
+        $('#justclear').empty();
+        $('#justclear2').empty();
+        if(data != false){
+        var newurl="{{route('applicants.editapplicant', ['studentapplicant' => 'studentapplicant'])}}";
+        newurl = newurl.replace("studentapplicant", data.id);
+        var edit = "<a href="+newurl+" title='Edit student Details'>Edit</a>";
+        var mark = "<tr><td>"+data.id+"</td><td>"+data.reg_no+"</td><td>"+data.surname+"</td><td>"+data.email+"</td><td>"+data.phone+"</td><td>"+data.sponsor_phone+"</td><td>"+data.home_address+"</td><td><span class='badge badge-success'>"+data.state_of_origin+"</span></td><td>NO View</td><td>"+edit+"</td></tr>";
+        $('#justclear').append(mark);
+        //alert(data.biology);
+      }else{
+        $('#justclear').append("<b>NO registration number or email address present</b>");
+      }
+      }
+      });
+  });
+
+
+
+@endsection
