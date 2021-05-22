@@ -24,6 +24,7 @@
 
                                         <li><a class="dropdown-item" href="{{url('/admission')}}">Application Requirement</a></li>
                                         <li><a class="dropdown-item" href="{{route('admission.login')}}">Application Form</a></li>
+                                        <li><a class="dropdown-item" href="{{route('invoice.activate')}}">BUY FORM</a></li>
                                         </ul>
                                     </li>
 

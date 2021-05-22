@@ -61,14 +61,14 @@ class UploadController extends Controller
         $featuredpport = $request->pport_upload;
       $featurednewname = time().$featuredpport->getClientOriginalName();
 
-      /*  try {
+        try {
              $imageData = $this->upload($featuredpport, 'applicants', 3600, '', 'auto');
            } catch (\Exception $e) {
              $note = $e->getMessage();
              $notification = Alert::alertMe($note, 'info');
              return redirect()->back()->with($notification);
            }
-*/
+
 
       $featuredpport->move('uploads/admissionPassport2', $featurednewname);
       $pic_url = 'uploads/admissionPassport2/'.$featurednewname;

@@ -231,45 +231,40 @@ class ApplicantController extends Controller
                   $pin = (string)rand(1000000000, 9999999999);
 
                  $card = Cardapplicant::create([
-                    'reg_no' =>  $invoice->reg_no,
-                    'password' => bcrypt($pin),
-                    'pin' => $pin,
-                  ]);
+                     'invoice_id' =>  $invoice->id,
+                     'password' => bcrypt($pin),
+                     'pin' => $pin,
+                   ]);
+                   //create registration number
+                   $id = $card->id;
+                   $dep = 'CNM/21B/';
+                   if ($id < 10) {
+                       $txt = sprintf("%s000%u",$dep,$id);
+                   }
+                   if ($id < 100 and $id > 9) {
+                     $txt = sprintf("%s00%u",$dep,$id);
+                   }
+                   if ($id < 1000 and $id > 99) {
+                       $txt = sprintf("%s0%u",$dep,$id);
+                   }
+                   if ($id > 1000) {
+                       $txt = sprintf("%s%u",$dep,$id);
+                   }
+                   $card->update([
+                     'reg_no' => $txt,
+                   ]);
 
-                  $arr = explode(",", $invoice->name);
+                  $arr = explode(",", $invoice->metadata);
                   $lastname = $arr[0];
                   $firstname = $arr[1];
 
-                  //create a date for examination
-                  $num = $card->id;
-                  $arr1 = explode('-',$invoice->reg_no);
-                  $dep = $arr1[0];
-
-                  if($dep == 'BMID'){
-                        if ($num <= 2500 ) {
-                          $date=date_create("2021-02-09");
-                        }else {
-                          $date=date_create("2021-02-10");
-                        }
-                  }else{
-                       if ($num <= 600 ) {
-                          $date=date_create("2021-03-08");
-                        }elseif ($num > 600 and $num <= 1150) {
-                          $date=date_create("2021-03-09");
-                        }elseif ($num > 1150 and $num <= 1986) {
-                          $date=date_create("2021-03-10");
-                        }else {
-                          $date=date_create("2021-03-11");
-                        }
-                  }
 
                   $student = $card->studentapplicant()->create([
                      'first_name' => $firstname,
                      'surname' => $lastname,
                      'phone' =>  $invoice->phone,
                      'email' => $invoice->email,
-                     'dob' => $invoice->dob,
-                     'date_exam' => $date
+                     'dob' => $invoice->dob
                   ]);
 
                     $payment = $student->Paymentapplicant()->create([

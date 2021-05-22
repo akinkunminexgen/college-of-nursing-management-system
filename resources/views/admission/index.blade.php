@@ -20,7 +20,7 @@ Application Guide
                 <h4><strong>Basic General Nursing</strong></h4>
                 <br>
                 <p>
-                  This is a three year (3) programme commencing from 1st April, 2021, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
+                  This is a three year (3) programme commencing from 4TH October, 2021, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
                   </p>
             </div>
             <div class="col-md-5 admission-form_mr">
@@ -65,7 +65,7 @@ Application Guide
             <br>
               <h4><strong>Post Basic Midwifery</strong></h4>
               <br>
-              <p>This is  eighteen (18) month programme commencing from September, 2020. </p>
+              <p>This is an eighteen (18) months programme commencing in September, 2021. </p>
           </div>
           <div class="col-md-5 admission-form_mr">
             <ul class="admission-form_listed">
@@ -85,7 +85,7 @@ Application Guide
               <strong><p class="text-center">Method of Application</p></strong>
             <p class="text-justify">Interested candidates are to follow the underlisted process for online application:</p>
             <ul>
-              <li>Online payment with the sum of Ten Thousand, Five Hundred Naira (N10,500.00) via this <a href="#">link</a> is expected to be made.</li>
+              <li>Online payment with the sum of Ten Thousand, Five Hundred Naira (N10,500.00) via this <a href="/admission/appform">link</a> is expected to be made.</li>
               <li>Pin generated after payment should be printed out</li>
               <li>After pin generation, a <a href="#">link</a> will direct you to the page where you complete your application process</li>
               <li>Photo card to be printed out by the applicant which is expected to be brought on the examination day</li>
@@ -97,21 +97,21 @@ Application Guide
       <div class="row">
         <div class="col-md-12">
 
-             <strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
+             <!--<strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
           <p class="text-justify">Sale of forms starts from Thursday 12th November, 2020 online application must be completed on or before 24th January, 2021.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Tuesday, 9th February – Friday, 12th February, 2021.</li>
-            <li>Date of Interview: Tuesday, 23rd  – Friday, 26th  February, 2021. </li>
+            <li>Date of Entrance Examination (CBT): Monday, 2nd – Friday, 6th August, 2021</li>
+            <li>Date of Interview: Monday, 23rd – Friday, 27th August, 2021</li>
             <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
-          <br>
+          <br>-->
 
             <strong><p class="text-center">Closing Date For Basic General Nursing</p></strong>
-          <p class="text-justify">Online application starts Tuesday 1st December, 2020 and must be completed on or before Friday, 5th March, 2021</p>
+          <p class="text-justify">Sale of forms will commence from Wednesday, 19th May, 2021.  Online application must be completed on or before Friday, 23th July, 2021.</p>
           <ul>
-            <li>	Date of Entrance Examination (CBT): Monday, 8th– Friday, 12th March, 2021.</li>
-            <li>	Date of Interview: Monday, 15th – Friday, 19th March, 2021. </li>
+            <li>Date of Entrance Examination (CBT): Monday, 2nd – Friday, 6th August, 2021</li>
+            <li>Date of Interview: Monday, 23rd – Friday, 27th August, 2021</li>
             <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>

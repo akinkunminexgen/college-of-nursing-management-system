@@ -28,7 +28,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{url('/admission')}}">Application Requirement</a></li>
                                     <li><a class="dropdown-item" href="{{route('admission.login')}}">Application form</a></li>
-                                    <li><a class="dropdown-item" href="{{route('invoice.activate')}}">Generate Form Pin</a></li>
+                                    <li><a class="dropdown-item" href="{{route('invoice.activate')}}">BUY FORM</a></li>
                                 </ul>
                             </li>
                             <li class="js-navbar-collapse">

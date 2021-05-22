@@ -10,6 +10,12 @@ use Illuminate\Validation\ValidationException;
 
 class FeeController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('checkAdminPermissions:super,intermediate')->except('index');
+      $this->middleware('checkAdminPermissions:super')->only(['edit', 'destroy']);
+  }
     /**
      * Display a listing of the resource.
      *

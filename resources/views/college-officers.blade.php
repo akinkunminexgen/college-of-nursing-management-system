@@ -83,7 +83,7 @@ Principal Officers
               <div class="our-teachers-block">
                   <img src="images/bursar.jpg" class="img-fluid teachers-img" alt="#">
                   <div class="teachers-description">
-                      <p><strong>Mrs E.O Odidi</strong>
+                      <p><strong>Mrs I.A Bello</strong>
                           <br> Bsc, HND Accts, ACA
                       </p>
                       <hr>

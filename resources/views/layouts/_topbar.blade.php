@@ -17,15 +17,19 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-              
+
               <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-danger">2020/2021 GENERAL NURSING ADMISSION LIST IS OUT!!!</b> <hr>
-                <p class="text-success">The candidates who wrote entrance examination and called for interview into the College of Nursing and Midwifery, Eleyele, Ibadan have been offered admission into Basic General Nursing programme of the Institution
-                <br><a href='shortlist'> Click here</a> for more information.
+                <h4 class="alert-heading text-success text-justify"><b class="text-danger">Advertisement for Admission into Basic General Nursing and Post Basic Midwifery Programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2021/2022 Academic Session</b> <hr>
+                <p class="text-success">Applications are hereby invited from suitably qualified candidates for admission into the following programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
+                    <p>1.	Basic General Nursing
+                    <br>
+                    2.	Post-Basic Midwifery</p>
+
+                <br><a href='/admission'> Click here</a> for more information.
                 <br>
                <!-- <a href='admission/login'>Click here</a> to check your result</p> -->
                 </h4>
-    
+
                 <!--<strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
           <p class="text-justify">Sale of forms starts from Thursday 12th November, 2020 online application must be completed on or before 24th January, 2021.</p>
           <ul>
@@ -36,14 +40,14 @@
           </ul>-->
           <hr>
               </div>
-              
-              
-              
+
+
+
           <!--  <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
                 <h4 class="alert-heading text-primary text-justify"><b class="text-primary">Advertisement for Admission into Basic General Nursing Programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2021/2022 Academic Session</b> <hr>
                 <p>Applications are hereby invited from suitably qualified candidates for admission into the following programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan. <a href='admission'>Click here</a> for more information</p>
                 </h4>
-    
+
                 <strong><p class="text-center">Closing Date For Basic General Nursing</p></strong>
           <p class="text-justify">Online application starts Tuesday 1st December, 2020 and must be completed on or before Friday, 5th March, 2021</p>
           <ul>
@@ -53,11 +57,11 @@
             <li>Time: 8.00 am prompt</li>
           </ul>
           <hr>-->
-             
+
 
               </div>
-              
-              
+
+
           </div>
 
 

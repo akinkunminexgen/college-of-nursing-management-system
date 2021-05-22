@@ -210,6 +210,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::get('applicants/addresult', 'ApplicantController@showresultpage')->name('applicants.addresult');
     Route::post('applicants/addresult', 'ApplicantController@importresult')->name('applicants.addresultfile');
     Route::post('applicants/payfor', 'ApplicantController@manualpay')->name('applicants.manualpay');
+    Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
 
 
     // Admins section
@@ -249,7 +250,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');
-  Route::get('applicants/index/{studentapplicant}', 'ApplicantController@edit')->name('applicants.edit');
+
   Route::post('applicants/search', 'ApplicantController@search')->name('applicants.search');
   Route::get('applicants/searchunapproved', 'ApplicantController@searchunapproved')->name('applicants.searchunapproved');
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
