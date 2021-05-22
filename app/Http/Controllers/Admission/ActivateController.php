@@ -19,13 +19,15 @@ class ActivateController extends Controller
     }
 
     $invoice = Invoice::find(session()->get('appAuth'));
+    $card= $invoice->cardapplicant;
 
-    $card = Cardapplicant::where('reg_no', $invoice->reg_no)->first();
+  //  $card = Cardapplicant::where('reg_no', $invoice->reg_no)->first();
     if ($card == null) {
-      $system = SystemSetting::where('name','admission_payment_fee')->first();
-
+      $system = SystemSetting::where('name','admission_payment_fee')->orWhere('name','admission_sub_account')->get();
+      //dd($system[0]->value);
       return view('admission.Appformfee')->with('user', $invoice)
-                                        ->with('setting', $system->value)
+                                        ->with('setting', $system[0]->value)
+                                        ->with('subaccount', $system[1]->value)
                                         ->with('card', null);
     }
 

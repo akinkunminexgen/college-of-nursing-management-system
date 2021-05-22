@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Invoice;
 use App\Models\Department;
+use App\Models\SystemSetting;
 use Hash;
 
 class InvoiceController extends Controller
@@ -15,7 +16,8 @@ class InvoiceController extends Controller
     if (session()->has('appAuth')) {
      return redirect()->route('appformfee.activate')->with('error', 'please login');
    }
-    return view('admission.Appform');
+   $settings = SystemSetting::where('name', 'admission_close_date')->first();
+    return view('admission.Appform',['settings' => $settings]);
   }
 
   public function store(Request $request)
@@ -23,11 +25,10 @@ class InvoiceController extends Controller
    $this->validate($request, [
         'first_name' => 'string|required',
         'last_name' => 'string|required',
-        'email' => 'string|required|email|unique:invoices',
+        'email' => 'string|required|email|unique:invoices|unique:users',
         'password' => 'required|confirmed|min:6',
-        'phone' => 'required|numeric|min:11|unique:invoices',
-        'dob' => 'required|before:16 years ago',
-        'course' => 'required',
+        'phone' => 'required|numeric|min:11|unique:invoices|unique:users',
+        'dob' => 'required|before:16 years ago'
       ]);
 
       $name = $request->last_name.",".$request->first_name;
@@ -43,26 +44,7 @@ class InvoiceController extends Controller
              $note = 'There is an error in your input.';
              return redirect()->back()->with('warning', $note);
         }
-            $id = $invoice->id;
-            $dep = $request->course;
-            if ($id < 10) {
-                $txt = sprintf("%s000%u",$dep,$id);
-            }
-            if ($id < 100 and $id > 9) {
-              $txt = sprintf("%s00%u",$dep,$id);
-            }
-            if ($id < 1000 and $id > 99) {
-                $txt = sprintf("%s0%u",$dep,$id);
-            }
-            if ($id > 1000) {
-                $txt = sprintf("%s%u",$dep,$id);
-            }
 
-        $invoice->update([
-          'reg_no' => $txt,
-        ]);
-
-        //dd($txt);
         session(['appAuth' => $invoice->id]);
 
         return redirect()->route('appformfee.activate')->with('success', 'succesful!!!');
@@ -76,7 +58,8 @@ class InvoiceController extends Controller
     if (session()->has('appAuth')) {
       return redirect()->route('appformfee.activate')->with('error', 'please login');
    }
-    return view('admission.Appformlogin');
+   $settings = SystemSetting::where('name', 'admission_close_date')->first();
+    return view('admission.Appformlogin',['settings' => $settings]);
   }
 
   public function storeLogin(Request $request)

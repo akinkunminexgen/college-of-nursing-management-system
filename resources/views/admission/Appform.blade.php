@@ -51,7 +51,8 @@ Application Form (Registration Page)
                             </span>
 
                           </div>
-                        </div><!--
+                        </div>
+                        @if($settings->value >= date("Y-m-d"))
                        <form method="POST" action="{{route('invoice.store')}}">
                             @csrf
                         <div class="row">
@@ -89,12 +90,12 @@ Application Form (Registration Page)
                                                   <input type="password" class="form-control form-control-sm" name="password_confirmation" required >
                                                   <span class="help-block"></span>
 
-                                                  <label for="password" class="control-label">Course/Program</label>
+                                                <!--  <label for="password" class="control-label">Course/Program</label>
                                                   <select class="form-control" name="course" required>
                                                       <option seleted="" value="">select </option>
-                                                      <!--<option value="BMID-">Basic Midwifery</option> -->
-                                               <!--      <option value="NUR-">Basic General Nursing</option>
-                                                  </select>
+                                                      <option value="BMID-">Basic Midwifery</option> 
+                                                   <option value="NUR-">Basic General Nursing</option>
+                                                  </select>-->
                                                   <span class="help-block"></span>
                                               </div>
 
@@ -102,8 +103,11 @@ Application Form (Registration Page)
                                               <b>Have you signed up? if yes  <a href="{{route('invoice.activateLogin')}}">click here to login</a></b>
 
                                       </div>
-                                </div>  
-                              </form> -->
+                                </div>
+                              </form>
+                              @else
+                              <b class="badge badge-danger text-center">Admission Form Closed!!!</b>
+                              @endif
                           </div>
                       </div>
                   </div>

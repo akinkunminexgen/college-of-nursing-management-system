@@ -46,9 +46,9 @@ Application Form Fee
   <input type="hidden" name="email" value="{{$user->email}}"> {{-- required --}}
   <input type="hidden" name="orderID" value="">
   <input type="hidden" name="amount" value='{{($setting + 300 )* 100}}'>
-  <input type="hidden" name="quantity" value="">
-  <input type="hidden" name="subaccount" value="ACCT_601t8hvkd009irp"> <!--WEMA-->
-  <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $user->id, 'payment_type'=> 'Admission', 'Appname' => $user->metadata, 'phone' => $user->phone, 'reg_no' => $user->reg_no, 'dob' => $user->dob])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
+  <input type="hidden" name="quantity" value="1">
+  <input type="hidden" name="subaccount" value='{{$subaccount}}'> <!--ACCESS-->
+  <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $user->id, 'payment_type'=> 'Admission', 'Appname' => $user->metadata, 'phone' => $user->phone, 'dob' => $user->dob])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
   <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
   <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
   {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}

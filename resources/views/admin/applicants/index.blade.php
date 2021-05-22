@@ -152,7 +152,7 @@
     var user = $("input[name=user]").val();
 
     var url = "{{ route('applicants.search')}}";
-
+    $(this).prop("disabled", true);
     $.ajax({
       type: "POST",
       url: url,
@@ -172,7 +172,7 @@
         $('#justclear').append("<b>NO registration number or email address present</b>");
       }
       }
-      });
+      }); $(this).prop("disabled", false);
   });
 
 

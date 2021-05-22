@@ -72,16 +72,34 @@ class PaymentController extends Controller
      switch ($paymentDetails['data']['status']) {
        case 'success':
         sleep(3);
-       $chck = Cardapplicant::where('reg_no', $paymentDetails['data']['metadata']['reg_no'])->first();
+       $chck = Cardapplicant::where('invoice_id', $paymentDetails['data']['metadata']['student_id'])->first();
       if ($chck == null)
       {
      //generate a rand pin
            $pin = (string)rand(1000000000, 9999999999);
 
           $card = Cardapplicant::create([
-             'reg_no' =>  $paymentDetails['data']['metadata']['reg_no'],
+             'invoice_id' =>  $paymentDetails['data']['metadata']['student_id'],
              'password' => bcrypt($pin),
              'pin' => $pin,
+           ]);
+           //create registration number
+           $id = $card->id;
+           $dep = 'OYS/21/';
+           if ($id < 10) {
+               $txt = sprintf("%s000%u",$dep,$id);
+           }
+           if ($id < 100 and $id > 9) {
+             $txt = sprintf("%s00%u",$dep,$id);
+           }
+           if ($id < 1000 and $id > 99) {
+               $txt = sprintf("%s0%u",$dep,$id);
+           }
+           if ($id > 1000) {
+               $txt = sprintf("%s%u",$dep,$id);
+           }
+           $card->update([
+             'reg_no' => $txt,
            ]);
 
            $arr = explode(",", $paymentDetails['data']['metadata']['Appname']);
@@ -89,11 +107,11 @@ class PaymentController extends Controller
            $firstname = $arr[1];
 
            //create a date for examination
-           $num = $card->id;
+        /*   $num = $card->id;
            $arr1 = explode('-',$paymentDetails['data']['metadata']['reg_no']);
-           $dep = $arr1[0];
-           
-           if($dep == 'BMID'){
+           $dep = $arr1[0];*/
+
+           /*if($dep == 'BMID'){
                  if ($num <= 2500 ) {
                    $date=date_create("2021-02-09");
                  }else {
@@ -109,15 +127,14 @@ class PaymentController extends Controller
                  }else {
                    $date=date_create("2021-03-11");
                  }
-           }
+           }*/
 
            $student = $card->studentapplicant()->create([
               'first_name' => $firstname,
               'surname' => $lastname,
               'phone' =>  $paymentDetails['data']['metadata']['phone'],
               'email' => $paymentDetails['data']['customer']['email'],
-              'dob' => $paymentDetails['data']['metadata']['dob'],
-              'date_exam' => $date
+              'dob' => $paymentDetails['data']['metadata']['dob']
            ]);
 
              $payment = $student->Paymentapplicant()->create([
@@ -147,7 +164,7 @@ class PaymentController extends Controller
    {  //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
-           
+
          $ref = "accept/".$paymentDetails['data']['reference'];
         $chck = Paymentapplicant::where('reference', $ref)->first();
     if ($chck == null)
@@ -163,7 +180,7 @@ class PaymentController extends Controller
 
        //automatically insert students that have paid acceptance fee into the school database
        $student = studentapplicant::find($paymentDetails['data']['metadata']['student_id']);
-      
+
 
        $user = User::create([
          'first_name' => $student->first_name,
@@ -210,7 +227,7 @@ class PaymentController extends Controller
            'url' => $imageData['secure_url']
        ]);
 
-    
+
          $notification = Alert::alertMe('Payment successful!!!', 'success');
          return redirect()->route('admission.dashboard')->with($notification);
         break;
@@ -220,7 +237,7 @@ class PaymentController extends Controller
        return redirect()->route('admission.dashboard')->with($notification);
          break;
      }
-     
+
    }
 
 
@@ -281,16 +298,34 @@ class PaymentController extends Controller
    switch ($event->event) {
      case 'charge.success':
      //check whether the payment has been completed
-     $chck = Cardapplicant::where('reg_no', $event->data->metadata->reg_no)->first();
+     $chck = Cardapplicant::where('reg_no', $event->data->metadata->student_id)->first();
     if ($chck == null)
     {
    //generate a rand pin
          $pin = (string)rand(1000000000, 9999999999);
 
         $card = Cardapplicant::create([
-           'reg_no' => $event->data->metadata->reg_no,
+           'invoice_id' => $event->data->metadata->student_id,
            'password' => bcrypt($pin),
            'pin' => $pin,
+         ]);
+
+         $id = $card->id;
+         $dep = 'OYS/21/';
+         if ($id < 10) {
+             $txt = sprintf("%s000%u",$dep,$id);
+         }
+         if ($id < 100 and $id > 9) {
+           $txt = sprintf("%s00%u",$dep,$id);
+         }
+         if ($id < 1000 and $id > 99) {
+             $txt = sprintf("%s0%u",$dep,$id);
+         }
+         if ($id > 1000) {
+             $txt = sprintf("%s%u",$dep,$id);
+         }
+         $card->update([
+           'reg_no' => $txt,
          ]);
 
          $arr = explode(",",$event->data->metadata->Appname);
@@ -298,10 +333,10 @@ class PaymentController extends Controller
          $firstname = $arr[1];
 
          //create a date for examination
-         $num = $card->id;
+        /* $num = $card->id;
            $arr1 = explode('-',$event->data->metadata->reg_no);
            $dep = $arr1[0];
-           
+
            if($dep == 'BMID'){
                  if ($num <= 2500 ) {
                    $date=date_create("2021-02-09");
@@ -318,15 +353,14 @@ class PaymentController extends Controller
                  }else {
                    $date=date_create("2021-03-11");
                  }
-           }
+           }*/
 
          $student = $card->studentapplicant()->create([
             'first_name' => $firstname,
             'surname' => $lastname,
             'phone' => $event->data->metadata->phone,
             'email' => $event->data->customer->email,
-            'dob' => $event->data->metadata->dob,
-            'date_exam' => $date
+            'dob' => $event->data->metadata->dob
          ]);
 
            $payment = $student->Paymentapplicant()->create([
@@ -347,7 +381,7 @@ class PaymentController extends Controller
 //acceptance
 
 if ($event->data->metadata->payment_type == "Acceptance")
-   {  
+   {
    $txt = $event->data->reference.", ".$event->data->metadata->email."/ ";
         $fWrite = fopen("akinator.txt","a");
  $wrote = fwrite($fWrite, $txt);
@@ -356,7 +390,7 @@ if ($event->data->metadata->payment_type == "Acceptance")
        case 'charge.success':
            $ref = "accept/".$event->data->reference;
         $chck = Paymentapplicant::where('reference', $ref)->first();
-        
+
     if ($chck == null)
     {
 
@@ -368,10 +402,10 @@ if ($event->data->metadata->payment_type == "Acceptance")
          'amount' => ($event->data->amount/100) - 300, //getting exact amount from paystack
          'created_at' => $event->data->created_at,
        ]);
-    
+
        //automatically insert students that have paid acceptance fee into the school database
        $student = studentapplicant::find($event->data->metadata->student_id);
-      
+
 
        $user = User::create([
          'first_name' => $student->first_name,

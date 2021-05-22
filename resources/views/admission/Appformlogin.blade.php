@@ -33,7 +33,8 @@ Application Form Login Page
                             </span>
 
                           </div>
-                        </div><!--
+                        </div>
+                        @if($settings->value >= date("Y-m-d"))
                         <form method="POST" action="{{route('invoice.storeLogin')}}">
                             @csrf
                         <div class="row">
@@ -59,7 +60,10 @@ Application Form Login Page
                                               </div>
 
                         </div>
-                        </form> -->
+                        </form>
+                        @else
+                        <b class="badge badge-danger text-center">Admission Form Closed!!!</b>
+                        @endif
                           </div>
                       </div>
                   </div>

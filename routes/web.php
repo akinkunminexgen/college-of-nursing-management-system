@@ -223,6 +223,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::put('settings/update', 'SettingController@update')->name('settings.update');
   });
 
+
   // Dashboard
   Route::get('', 'DashboardController@index')->name('dashboard.home');
 
@@ -244,6 +245,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
   // Students section
   Route::resource('students', 'StudentController');
+  Route::post('students/search', 'StudentController@search')->name('students.search');
 
   // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');

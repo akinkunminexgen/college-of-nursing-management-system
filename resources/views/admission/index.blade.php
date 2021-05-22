@@ -96,7 +96,7 @@ Application Guide
 
       <div class="row">
         <div class="col-md-12">
-            
+
              <strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
           <p class="text-justify">Sale of forms starts from Thursday 12th November, 2020 online application must be completed on or before 24th January, 2021.</p>
           <ul>
@@ -106,7 +106,7 @@ Application Guide
             <li>Time: 8.00 am prompt</li>
           </ul>
           <br>
-            
+
             <strong><p class="text-center">Closing Date For Basic General Nursing</p></strong>
           <p class="text-justify">Online application starts Tuesday 1st December, 2020 and must be completed on or before Friday, 5th March, 2021</p>
           <ul>
@@ -115,14 +115,13 @@ Application Guide
             <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
-         
-          
+
+
           <p>For further enquiries, please contact the Office of the Registrar or Heads of Department of Nursing and Midwifery respectively.</p>
           <strong>Contact Numbers:</strong>
           <ul>
-            <li>09096943713</li>
-            <li>08063258781</li>
-            <li>08073864856</li>
+            <li>09138766976</li>
+            <li>08156903399</li>
           </ul>
           <b>Note: No payment to any Individual/Agent or Personal Bank Account. All payment should be done via the school website
           <br>Thank You. </b>

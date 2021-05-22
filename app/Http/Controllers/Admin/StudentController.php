@@ -69,6 +69,24 @@ class StudentController extends Controller
       return redirect()->route('students.index')->with($notification);
     }
 
+    //search for student either by email or matric no.
+    public function search(Request $request)
+    {
+      $this->validate($request, [
+        'user' => 'required'
+        ]);
+          $email= $request->user;
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $variable = 'users.email';
+          } else {
+            $variable = 'students.matric_no';
+          }
+          $student = Student::select('students.id', 'first_name', 'last_name', 'middle_name', 'is_active', 'department_id')->join('users', 'users.id', '=', 'students.user_id')->where($variable, $request->user)->first();
+          return $student;
+    }
+
+
+
     public function addresult(Request $request)
     {
 
@@ -249,7 +267,7 @@ class StudentController extends Controller
         $student->update([
             'matric_no' => $request->matric_no,
             'level' => $request->level
-            
+
             ]);
 
           $notification = Alert::alertMe('Student Updated!', 'success');

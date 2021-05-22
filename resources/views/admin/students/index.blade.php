@@ -16,19 +16,32 @@
         </div>
         <div class="container-fluid">
           <div class="row">
-            <div class="col-sm-2">
-              <label for="inputState">Sort by department</label>
+            <div class="col-xs-6">
               <div class="dropdown">
-                  <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Select by clicking
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">Sort by department  <span class="caret"></span></button>
+                  <ul class="dropdown-menu dropdown-info">
                     @foreach($dept as $department)
-                    <strong><a class="dropdown-item" href="{{route('students.index2dep', ['id' => $department->id])}}">{{$department->name}}</a></strong>
-                    <br>
+                      <li class="divider"></li>
+											<li><a href="{{route('students.index2dep', ['id' => $department->id])}}">{{$department->name}}</a>
                     @endforeach
-                  </div>
+										</ul>
                 </div>
+            </div>
+
+            <div class="col-xs-6 nopadding">
+              <form class="form-inline">
+                @csrf
+                <div class="form-group mx-sm-3 mb-2 input-group nopadding">
+                  <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Matric_no/Email" required>
+                  @error('user')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                  @enderror
+                </div>
+              <!--   <input class="btn btn-primary mb-2" type="submit" value="Submit">-->
+               <button type="submit"  id="studentapproved" class="btn btn-primary mb-2" title="search student with reference or email"> <i class="fa fa-search"></i>Search</button>
+              </form>
             </div>
 
           </div>
@@ -53,7 +66,7 @@
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id='justclear'>
                                         @foreach ($students as $student)
                                             <tr>
                                                 <td>{{$student->user->last_name." ".$student->user->first_name." ".$student->user->middle_name}}</td>
@@ -73,7 +86,7 @@
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $students->links() }}
+                              <div id="justclear2">{{ $students->links() }}</div>
 
                             @else
                                 <div class="p-5 text-center">
@@ -88,3 +101,48 @@
     </div>
 
 @stop
+@section('admin.scripts')
+
+$(function () {
+$('[data-toggle="popover"]').popover()
+})
+
+  $("#studentapproved").click(function(e){
+    e.preventDefault();
+    var user = $("input[name=user]").val();
+
+    var url = "{{ route('students.search')}}";
+    $(this).prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      url: url,
+      data:{user:user,  "_token": "{{ csrf_token() }}"},
+      success: function(data){
+        $('#justclear').empty();
+        $('#justclear2').empty();
+        if(data != false){
+
+        var newurl ="{{route('students.edit', ['student' => 'student'])}}";
+        newurl = newurl.replace("student", data.id);
+        var newurl2 ="{{route('students.showresult', ['id' => 'id'])}}";
+        newurl2 = newurl2.replace("id", data.id)
+        var details = "<a href="+newurl+" title='Edit student Details'>Details</a>";
+        var addscore = "<a href="+newurl2+" title='Edit student Details'>Add Result</a>";
+        if (data.is_active = "ACTIVE") {
+          var act = "<label class='badge badge-success'>"+data.is_active+"</label>";
+        } else {
+          var act = "<label class='badge badge-danger'>"+data.is_active+"</label>";
+        }
+        var mark = "<tr><td>"+data.id+"</td><td>"+data.last_name+" "+data.first_name+" "+data.middle_name+"</td><td>"+data.department_id+"</td><td>"+act+"</td><td>"+details+" | "+addscore+"</td></tr>";
+        $('#justclear').append(mark);
+
+      }else{
+        $('#justclear').append("<b>NO Matric number or email address present</b>");
+      }
+      }
+      }); $(this).prop("disabled", false);
+  });
+
+
+
+@endsection

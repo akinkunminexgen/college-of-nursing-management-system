@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\CloudinaryUpload;
 use App\Models\Studentapplicant;
 use App\Models\Paymentapplicant;
+use App\Models\Systemsetting;
 use App\Models\Department;
 use App\Alert;
 use Session;
@@ -14,8 +15,8 @@ use Session;
 class UploadController extends Controller
 {
      use CloudinaryUpload;
-    
-    
+
+
     public function index()
     {
 
@@ -56,26 +57,54 @@ class UploadController extends Controller
           'pport_upload.max' => 'Upload file less than 180kb',
           'pport_upload.dimensions' => 'Upload file should have maximum width of 200px'
         ]);
-        
+
         $featuredpport = $request->pport_upload;
       $featurednewname = time().$featuredpport->getClientOriginalName();
-        
-        try {
+
+      /*  try {
              $imageData = $this->upload($featuredpport, 'applicants', 3600, '', 'auto');
            } catch (\Exception $e) {
              $note = $e->getMessage();
              $notification = Alert::alertMe($note, 'info');
              return redirect()->back()->with($notification);
            }
+*/
 
-      
       $featuredpport->move('uploads/admissionPassport2', $featurednewname);
       $pic_url = 'uploads/admissionPassport2/'.$featurednewname;
+
+      //update the date column for examination date
+      // 1 represent general nursing department
+      $dep = $request->course;
+      //check for the number of students who has completed thier application
+      $num = Studentapplicant::where([['reg_step', 'completed'], ['department_id', $dep]])->count();
+
+
+      if($dep != '1'){
+        $date = Systemsetting::where('name','admission_exam_date_midwifery')->first();
+            if ($num <= 400 ) {
+              $date=date_create($date->value);
+            }else {
+              $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));
+            }
+      }else{
+        $date = Systemsetting::where('name','admission_exam_date_nursing')->first();
+           if ($num <= 400 ) {
+              $date=date_create($date->value);
+            }elseif ($num > 400 and $num <= 800) {
+              $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));
+            }elseif ($num > 800 and $num <= 1200) {
+              $date=date('Y-m-d', strtotime($date->value. ' + 2 days'));
+            }else {
+              $date=date('Y-m-d', strtotime($date->value. ' + 3 days'));
+            }
+          }
       //dd($request->course);
       $studentapplicant->update([
         'reg_step' => 'Completed',
         'pic_url' => $pic_url,
-        'department_id' => $request->course
+        'department_id' => $request->course,
+        'date_exam' => $date
       ]);
 
 
