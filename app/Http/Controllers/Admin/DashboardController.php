@@ -16,12 +16,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
+        $fmt = "23:59:59";
+        $dat = date("Y-m-d")." ".$fmt;
         return view('admin.index', [
             'section' => 'dashboard',
             'users' => Studentapplicant::all(),
             'students' => Student::all(),
             'admins' => Admin::all(),
-            'userstoday' => Studentapplicant::where('created_at', date("Y-m-d")),
+            'userstoday' => Studentapplicant::where('created_at', '>=', date("Y-m-d"))->where('created_at', '<', $dat),
             'posts' => Post::all()
         ]);
     }

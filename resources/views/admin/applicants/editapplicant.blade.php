@@ -122,9 +122,13 @@
                                             </div>
                                             <div class="col">
                                               <div class='row form-group'>
-                                              <div col="col-lg-6">
-                                                  <img src="{{asset($student->pic_url)}}" class="pull-center img-responsive" alt="loading" height="100" width="70">
-                                              </div>
+                                                  <div col="col-lg-6">
+                                                    @if($student->pic_url != null)
+                                                      <img src="{{asset($student->pic_url)}}" class="pull-center img-responsive" alt="loading" height="100" width="70">
+                                                    @else
+                                                      <button type="button" class="btn btn-info" name="button">Upload Passport</button>
+                                                    @endif
+                                                  </div>
                                             </div>
 
                                               <div class='row form-group'>
@@ -135,7 +139,7 @@
                                                   <div class='col-lg-6'>
 
                                                       <select onchange="getLga(event)" class="form-control input-sm" name="state_of_origin" id="" required>
-                                                          <option selected value="{{$student->state_of_origin}}">{{$states->find($student->state_of_origin)->name}}</option>
+                                                          <option selected value=""></option>
                                                           @foreach($states as $dep)
                                                               <option value="{{$dep->id}}">{{$dep->name}}</option>
                                                           @endforeach

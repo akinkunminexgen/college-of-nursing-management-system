@@ -70,12 +70,12 @@
                             @foreach($applicant as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$data->cardapplicant->reg_no}}</td>
+                                    <td>{{$data->reg_no}}</td>
                                     <td>{{$data->surname." ".$data->first_name}}</td>
                                     <td>{{$data->email}}</td>
                                     <td>{{$data->phone}}</td>
                                     <td>{{$data->sponsor_phone}}</td>
-                                    <td>{{$data->home_address.", ".$data->address_state}}</td>
+                                    <td>{{$data->home_address}}</td>
                                     <td><span class="badge badge-success">{{$data->state_of_origin}}</span></td>
                                     <td>
                                       @if($data->admission_status == "NO")

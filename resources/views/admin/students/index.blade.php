@@ -122,12 +122,12 @@ $('[data-toggle="popover"]').popover()
         $('#justclear2').empty();
         if(data != false){
 
-        var newurl ="{{route('students.edit', ['student' => 'student'])}}";
-        newurl = newurl.replace("student", data.id);
+        var newurl ="{{route('students.edit', ['studentss' => 'studentss'])}}";
+        newurl = newurl.replace('studentss', data.id);
         var newurl2 ="{{route('students.showresult', ['id' => 'id'])}}";
         newurl2 = newurl2.replace("id", data.id)
         var details = "<a href="+newurl+" title='Edit student Details'>Details</a>";
-        var addscore = "<a href="+newurl2+" title='Edit student Details'>Add Result</a>";
+        var addscore = "<a href="+newurl2+" title='Add student results'>Add Result</a>";
         if (data.is_active = "ACTIVE") {
           var act = "<label class='badge badge-success'>"+data.is_active+"</label>";
         } else {

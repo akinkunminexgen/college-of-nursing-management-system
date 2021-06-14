@@ -19,7 +19,7 @@ class ApplicantController extends Controller
 {
     public function index()
     {
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->paginate(10);
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no')->paginate(10);
         //dd($applicants[0]->cardapplicant);
         return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants]);
     }
@@ -84,7 +84,7 @@ class ApplicantController extends Controller
 
     public function editapplicant(Studentapplicant $studentapplicant)
     {
-      //dd($studentapplicant);
+      //dd($studentapplicant->pic_url);
       return view('admin.applicants.editapplicant', ['section' =>'applicants','sub_section' => 'all', 'student' => $studentapplicant, 'states' => State::all()]);
     }
 

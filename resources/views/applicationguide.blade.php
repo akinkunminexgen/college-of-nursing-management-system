@@ -99,7 +99,7 @@ Admission List
             <h3>GENERAL INFORMATION</h3>
 
         <p>Please note that 52% and 60% are being used as cut-off mark for Oyo State Indigene and Non-Indigene respectively.</p>
-        </div>-->
+        </div>
 
 <p>The underlisted candidates who wrote entrance examination and called for interview into the College of Nursing and Midwifery, Eleyele, Ibadan have been offered admission into Basic General Nursing programme of the Institution.</p>
 
@@ -121,7 +121,7 @@ Admission List
     @endforeach
 
   </tbody>
-</table>
+</table>-->
 
   </div>
   <div class="row">

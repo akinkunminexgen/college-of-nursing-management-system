@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\CloudinaryUpload;
 use App\Models\Studentapplicant;
 use App\Models\Paymentapplicant;
-use App\Models\Systemsetting;
+use App\Models\SystemSetting;
 use App\Models\Department;
 use App\Alert;
 use Session;
