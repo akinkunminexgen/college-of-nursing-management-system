@@ -4,7 +4,7 @@ Portal - Dashboard
 @endsection
 @section('content')
 
-        <div class="col-md-9">
+        <div class="col-md-8">
             <div class="card">
                 <div class="card-header text-center bg-success text-white">Dashboard - Brief Biodata</div>
 
@@ -27,19 +27,15 @@ Portal - Dashboard
                   <div class="row">
                     <div class="col-md-12">
                       @if($student != null)
-                      <strong>Index No : <label class="col-md-8 col-form-label text-md-left  text-primary ml-5">{{ $student->matric_no}}</label></strong>
+                      <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Index No : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-5">{{ $student->matric_no}}</label></strong>
                       @endif
-                    </div>
-                    <div class="col-md-12">
-                      <strong>Fullname : <label class="col-md-8 col-form-label text-md-left  text-primary ml-5">{{ $user->last_name.", ".$user->first_name." ".$user->middle_name }}</label></strong>
-                    </div>
-
-
-                    <div class="col-md-12">
+                    
+                      <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Fullname : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-5">{{ $user->last_name.", ".$user->first_name." ".$user->middle_name }}</label></strong>
+                    
                       @if($payment != null)
-                        <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{substr($payment->reference, 4,3)}}</label></strong>
+                        <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Current Level : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-3">{{$student->level}}</label></strong>
                       @else
-                        <strong>Current Level : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">
+                        <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Current Level : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-3">
                           @if($student->department_id == 3) <!-- to choose post basic midwifery -->
                             @if($student->level == 100)
                               {{'First year'}}
@@ -50,15 +46,12 @@ Portal - Dashboard
                             {{ $student->level }}
                           @endif</label></strong>
                       @endif
-                    </div>
-                    <div class="col-md-12">
-                      <strong>Department : <label class="col-md-8 col-form-label text-md-left  text-primary ml-4">{{$dept->name}}</label></strong>
-                    </div>
-                    <div class="col-md-12">
-                      <strong>State of Origin : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{ $state->name }}</label></strong>
-                    </div>
-                    <div class="col-md-12">
-                      <strong>Phone number : <label class="col-md-8 col-form-label text-md-left  text-primary ml-3">{{ $user->phone }}</label></strong>
+                    
+                      <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Department : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-4">{{$dept->name}}</label></strong>
+                   
+                      <strong><b class="col-sm-4 col-form-label text-md-left ml-5">State of Origin : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-3">{{ $state->name }}</label></strong>
+                    
+                      <strong><b class="col-sm-4 col-form-label text-md-left ml-5">Phone number : </b><label class="col-sm-8 col-form-label text-md-left  text-primary ml-3">{{ $user->phone }}</label></strong>
                     </div>
                   </div>
                   <br>
@@ -71,9 +64,9 @@ Portal - Dashboard
 
                         <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Status : </strong><span class="ml-4 badge badge-info">{{ $late }}</span></label>
 
-                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Closes : </strong><span class="ml-4">{{ $sess->expiry_date }}</span></label>
+                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Registration Closes : </strong><span class="ml-4">{{ date("d-M-Y", strtotime($sess->expiry_date)) }}</span></label>
 
-                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Late Registration Closes : </strong><span class="ml-2">{{$latedate }}</span></label>
+                        <label class="col-md-12 col-form-label text-md-left text-primary"><strong class="text-success">Late Registration Closes : </strong><span class="ml-2">{{date("d-M-Y", strtotime($latedate)) }}</span></label>
                       </div>
                     </div>
                     <div class="col-md-6">

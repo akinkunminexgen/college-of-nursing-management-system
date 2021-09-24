@@ -36,7 +36,7 @@ Application Guide
             </div>
         </div>
         <hr>
-        <div class="row">
+       <!-- <div class="row">
             <div class="col-md-7 admission-form_mr">
               <br>
               <br>
@@ -55,7 +55,7 @@ Application Guide
                      He or She should be at least Seventeen (17) years old on admission.</li>
               </ul>
             </div>
-        </div>
+        </div>-->
 
         <hr>
       <div class="row">
@@ -107,7 +107,7 @@ Application Guide
           </ul>
           <br>-->
 
-            <strong><p class="text-center">Closing Date For Basic General Nursing</p></strong>
+            <strong><p class="text-center">Closing Date</p></strong>
           <p class="text-justify">Sale of forms will commence from Wednesday, 19th May, 2021.  Online application must be completed on or before Friday, 23th July, 2021.</p>
           <ul>
             <li>Date of Entrance Examination (CBT): Monday, 2nd – Friday, 6th August, 2021</li>

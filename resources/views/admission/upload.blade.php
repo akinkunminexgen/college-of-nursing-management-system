@@ -38,11 +38,11 @@ Admission - Upload passport
                 <select class="form-control input-sm" name="course" id="" required>
                    <option selected value="">Select</option>
                    <!--  @foreach($dept as $dep)
-                         <option value="{{$dep->id}}">{{$dep->name}}</option>
-                     @endforeach-->
-                     <option value="1">Basic General Nursing</option>
-                     <option value="3">Post Basic Midwifery</option>
-                 </select>
+                        <option value="{{$dep->id}}">{{$dep->name}}</option>
+                    @endforeach-->
+                    <option value="1">Basic General Nursing</option>
+                    <option value="3">Post Basic Midwifery</option>
+                </select>
             </div>
         </div>
 

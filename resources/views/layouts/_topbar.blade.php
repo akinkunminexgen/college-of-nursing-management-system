@@ -19,15 +19,12 @@
           <div class="col-md-12">
 
               <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-danger">Advertisement for Admission into Basic General Nursing and Post Basic Midwifery Programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2021/2022 Academic Session</b> <hr>
-                <p class="text-success">Applications are hereby invited from suitably qualified candidates for admission into the following programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
-                    <p>1.	Basic General Nursing
-                    <br>
-                    2.	Post-Basic Midwifery</p>
+                <h4 class="alert-heading text-success text-justify"><b class="text-danger">2021/2022 ADMISSION LIST OF THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN</b> <hr>
+                <p class="text-success">The underlitsed candidates who wrote entrance examination and called for interview into the College of Nursing and Midwifery, Eleyele, Ibadan have been offered admission into Basic General Nursing programme of the Institution.</p>
 
-                <br><a href='/admission'> Click here</a> for more information.
+                <br><a href='/shortlist'> Click here</a> for more information.
                 <br>
-               <!-- <a href='admission/login'>Click here</a> to check your result</p> -->
+               <a href='admission/login'>Click here</a> to check your result</p>
                 </h4>
 
                 <!--<strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
@@ -59,7 +56,7 @@
           <hr>-->
 
 
-              </div>
+             
 
 
           </div>

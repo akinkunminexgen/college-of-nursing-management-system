@@ -27,19 +27,22 @@ Application Form Fee
   Kindly be made aware that the specified Email address <a href="#"><b>{{$user->email}}</b></a> belongs to <a href="#"><b>{{$user->metadata}}</b></a>
   <hr>
   @if($setting != null)
+    @if($settings->value >= date("Y-m-d"))
     <p>Click on " Pay Now » " button below to confirm your payment on behalf of the Email address and Name indicated above</p>
+    @endif
   @else
     <p>You have successfully generated a PIN. <a href="{{route('admission.login')}}">click here</a> To complete your application process </p>
   @endif
 </div>
 @if($setting != null)
-<div id="login-overlay" class="modal-dialog">
-  <div class="row">
-    <p class="col-md-12"> <label for=""class="col-sm-6">Payment description :</label>  <span class="badge badge-info col-sm-4">Application Form Fee</span></p>
-    <p class="col-md-12"> <label for="" class="col-sm-6">Amount :</label>  <span class="badge badge-info col-sm-4">=N=__{{$setting}}</span></p>
-    <p class="col-md-12"> <label for=""class="col-sm-6">Bank and Transaction fees :</label>  <span class="badge badge-info col-sm-4">=N=__300</span></p>
-    <p class="col-md-12"> <label for=""class="col-sm-6">Total :</label>  <span class="badge badge-info col-sm-4">=N=__{{$setting + 300}}</span></p>
-  </div>
+    @if($settings->value >= date("Y-m-d"))
+    <div id="login-overlay" class="modal-dialog">
+        <div class="row">
+            <p class="col-md-12"> <label for=""class="col-sm-6">Payment description :</label>  <span class="badge badge-info col-sm-4">Application Form Fee</span></p>
+            <p class="col-md-12"> <label for="" class="col-sm-6">Amount :</label>  <span class="badge badge-info col-sm-4">=N=__{{$setting}}</span></p>
+            <p class="col-md-12"> <label for=""class="col-sm-6">Bank and Transaction fees :</label>  <span class="badge badge-info col-sm-4">=N=__300</span></p>
+            <p class="col-md-12"> <label for=""class="col-sm-6">Total :</label>  <span class="badge badge-info col-sm-4">=N=__{{$setting + 300}}</span></p>
+        </div>
 
   <form method="post" action="{{ route('appformfee.pay') }}" accept-charset="UTF-8" enctype="multipart/form-data">
     @csrf
@@ -58,6 +61,9 @@ Application Form Fee
    <button type="submit" name="submit" class="col-sm-12 btn btn-sm btn-success">Pay Now</button>
  </form>
 </div>
+    @else
+        <b class="badge badge-danger text-center">Admission Form Closed!!!</b>
+    @endif
 @else
 <div id="login-overlay" class="modal-dialog">
   <div class="row">

@@ -122,6 +122,7 @@ class NewsController extends Controller
         } else { // If validation is successful
             $post->title = $request->input('title');
             $post->body = $request->input('content');
+            $post->rich_body = $request->input('richBody');
             $post->save();
 
             $this->response['ok'] = true;

@@ -170,15 +170,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
     Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
 
-    // Events section
-    Route::resource('events', 'EventController',  [
-      'only' => [
-        'index', 'create', 'store', 'edit', 'update'
-      ],
-      'parameters' => [
-        'events' => 'post'
-      ]
-    ]);
+    
 
     // Fees
     Route::resource('fees', 'FeeController');
@@ -243,10 +235,21 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
       'news' => 'post'
     ]
   ]);
+  
+  // Events section
+    Route::resource('events', 'EventController',  [
+      'only' => [
+        'index', 'create', 'store', 'edit', 'update'
+      ],
+      'parameters' => [
+        'events' => 'post'
+      ]
+    ]);
 
   // Students section
   Route::resource('students', 'StudentController');
   Route::post('students/search', 'StudentController@search')->name('students.search');
+  Route::post('students/upload', 'StudentController@uploadPAS')->name('students.upload');
 
   // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');

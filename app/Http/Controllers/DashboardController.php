@@ -30,8 +30,17 @@ class DashboardController extends Controller
         $student = Student::find(session()->get('st_id'));
         //dd($student);
        $user = User::find(Auth::id());
+       
+        //check for which session from Admission no of table student
+      $current_session = 'current_session'.substr($student->admission_no,6,1);
+      if($current_session != 'current_sessionB')
+          $current_session = 'current_sessionA';
+    
+      //Another session value given for Basic midwifery department
+      if($student->department_id == 2)
+        $current_session = 'current_session';
 
-       $session = SystemSetting::where('name','current_session')->first();
+       $session = SystemSetting::where('name', $current_session)->first();
 
        $sess = Fee::where('department_id', session()->get('dept_id'))->first();
        if ($sess !== null) {

@@ -17,10 +17,15 @@ use DB;
 
 class ApplicantController extends Controller
 {
+    
+    public function __construct()
+    {
+      $this->middleware('checkAdminPermissions:super,intermediate');
+    }
     public function index()
     {
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no')->paginate(10);
-        //dd($applicants[0]->cardapplicant);
+       $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no')->paginate(10);
+      //dd($applicants[0]->cardapplicant);
         return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants]);
     }
 
@@ -84,7 +89,7 @@ class ApplicantController extends Controller
 
     public function editapplicant(Studentapplicant $studentapplicant)
     {
-      //dd($studentapplicant->pic_url);
+      //dd($studentapplicant);
       return view('admin.applicants.editapplicant', ['section' =>'applicants','sub_section' => 'all', 'student' => $studentapplicant, 'states' => State::all()]);
     }
 
@@ -323,7 +328,7 @@ class ApplicantController extends Controller
 // create ExaminationList in PDF format
       public function pdfApplicants()
       { ini_set('memory_limit', '2048M');
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('department_id', '=', '1')->orderBy('reg_no')->orderBy('date_exam')->skip(1795)->take(359)->get();
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('department_id', '=', '3')->orderBy('reg_no')->orderBy('date_exam')->skip(0)->take(359)->get();
     //dd($applicants[1145]);
         $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
 

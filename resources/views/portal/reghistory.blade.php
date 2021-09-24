@@ -49,7 +49,7 @@ Portal - Course Registration
                                 <td>{{$value->level." ".$value->semester}}</td>
                                 <td class="text-center">{{$value->total}}</td>
                                 <td class="text-center">{{$value->sum}}</td>
-                                <td>{{date("d-m-y",strtotime($value->created_at))}}</td>
+                                <td>{{date("d-M-Y",strtotime($value->created_at))}}</td>
                                 <td><a href="{{action('RegHistoryController@downloadPDF', [$value->level." ".$value->semester, date("d-m-y",strtotime($value->created_at))])}}"><button type="button" class="btn btn-outline-info btn-sm">PRINT</button></a></td>
                               </tr>
                             @endforeach;

@@ -15,7 +15,7 @@ use App\Models\Post;
 class DashboardController extends Controller
 {
     public function index()
-    {
+    {   
         $fmt = "23:59:59";
         $dat = date("Y-m-d")." ".$fmt;
         return view('admin.index', [

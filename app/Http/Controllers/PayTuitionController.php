@@ -33,14 +33,39 @@ class PayTuitionController extends Controller
         $notification = Alert::alertMe('Registration Closed!!!','info');
         return redirect()->route('portal.dashboard')->with($notification);
       }
-
-      //check for session
-      $session = SystemSetting::where('name','current_session')->first();
+      
       $student =  Student::find(session()->get('st_id'));
+      
+      // to confirm if a student has paid a particular level
+      $payment = $student->payment()->latest('created_at')->first();
+      if ($payment !== null) {
+          $lvl = substr($payment->reference,4,3);
+          if($lvl == $student->level){
+               $notification = Alert::alertMe('Payment has been made for your current Level','info');
+        return redirect()->route('portal.dashboard')->with($notification);
+          }
+          
+      }
+        
+        
+    
+      //check for which session from Admission no of table student
+      $current_session = 'current_session'.substr($student->admission_no,6,1);
+      if($current_session != 'current_sessionB')
+          $current_session = 'current_sessionA';
+    
+      //Another session value given for Basic midwifery department also with generation of payment sub account from the system settings
+      if($student->department_id == 2){
+        $current_session = 'current_session';
+        $subaccount= SystemSetting::where('name', 'BMidwifery_sub_account')->first();
+      }else{
+          $subaccount= SystemSetting::where('name', 'GNursing_sub_account')->first();
+      }
+        
+      $session = SystemSetting::where('name', $current_session)->first();
 
       //check to know what level has been paid through reference field in payment model
-      $payment = $student->payment()->latest('created_at')->first();
-      //$payment = Payment::where('student_id', session()->get('st_id'))->latest('created_at')->select('reference', 'status')->first();
+      //$payment = $student->payment()->latest('created_at')->first();
         $lvl = 100;
       //declare an object to allow choosing full or half payment
       $payType = [
@@ -69,7 +94,8 @@ class PayTuitionController extends Controller
                                       ->with('student', Student::find(session()->get('st_id')))
                                       ->with('level', $lvl)
                                       ->with('payType', $payType)
-                                      ->with('sess', $session);
+                                      ->with('sess', $session)
+                                      ->with('subaccount', $subaccount->value);
     }
 
 
@@ -97,18 +123,12 @@ class PayTuitionController extends Controller
             session()->put('regStatus', 'L');
             switch ($state->name) {
               case 'Oyo':
-                  if($lvl == 100 AND session()->get('dept_id') == 1 AND $stud->created_at >= $newtim)
-                   $total = $amount->indigene - 10000;
-                  else
                    $total = $amount->indigene;
                   
                   return $this->verifyAmount($type, $total, $latepayment->value);
                   break;
 
                 default:
-                    if($lvl == 100 AND session()->get('dept_id') == 1 AND $stud->created_at >= $newtim)
-                  $total = $amount->non_indigene - 10000;
-                  else
                 $total = $amount->non_indigene;
                 return $this->verifyAmount($type, $total, $latepayment->value);
                 break;
@@ -118,18 +138,12 @@ class PayTuitionController extends Controller
           session()->put('regStatus', 'E');
             switch ($state->name) {
               case 'Oyo':
-                  if($lvl == 100 AND session()->get('dept_id') == 1 AND $stud->created_at >= $newtim)
-                  $total = $amount->indigene - 10000;
-                  else
                 $total = $amount->indigene;
                 $late = 0;
                 return $this->verifyAmount($type, $total, $late);
                 break;
 
               default:
-                  if($lvl == 100 AND session()->get('dept_id') == 1 AND $stud->created_at >= $newtim)
-                  $total = $amount->non_indigene - 10000;
-                  else
               $total = $amount->non_indigene;
               $late = 0;
               return $this->verifyAmount($type, $total, $late);

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\CloudinaryUpload;
 
 use App\Models\Student;
+use App\Models\Image;
 use App\Models\State;
 use App\Models\Location;
 use App\Models\Department;
@@ -23,7 +25,7 @@ class StudentController extends Controller
 
     public function __construct()
     {
-      $this->middleware('checkAdminPermissions:super,intermediate')->except(['create', 'store']);
+      $this->middleware('checkAdminPermissions:super,intermediate')->except(['store']);
     }
 
     /**
@@ -85,6 +87,30 @@ class StudentController extends Controller
           return $student;
     }
 
+    //upload passport through ajax
+    public function uploadPAS(Request $request)
+    {
+      if ($request->media != 'undefined'){
+        $validator = Validator::make($request->input(), [
+            'media' => 'image|max:250',
+        ]);
+      }
+      //get user id
+      $id = Student::find($request->stid);
+      $user = User::find($id->user_id);
+
+      $imageData = $this->upload($request->media, 'students', 400, '', 'auto');
+      $result= $user->images()->update([
+           'url' => $imageData['secure_url']
+       ]);
+       $res= Image::where('imageable_id', $id->user_id)->first();
+       if ($result) {
+         return $res->url;
+       }else {
+         return 'false';
+       }
+      //dd($request->media->getClientOriginalName());
+    }
 
 
     public function addresult(Request $request)
@@ -193,7 +219,7 @@ class StudentController extends Controller
 
 
         if ($request->has('pport_upload')){
-            $imageData = $this->upload($request->pport_upload, 'students', 3600, '', 'auto');
+            $imageData = $this->upload($request->pport_upload, 'students', 3600, '', '100');
             $user->images()->create([
                 'url' => $imageData['secure_url']
             ]);

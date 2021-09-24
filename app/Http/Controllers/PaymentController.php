@@ -222,7 +222,7 @@ class PaymentController extends Controller
        ]);
 
 
-       $imageData = $this->upload($student->pic_url, 'students', 3600, '', 'auto');
+       $imageData = $this->upload($student->pic_url, 'students', 400, '', 'auto');
        $user->images()->create([
            'url' => $imageData['secure_url']
        ]);
@@ -271,15 +271,16 @@ class PaymentController extends Controller
  // get the session being paid for and concatenate late payment or early payment
  $getYr =$event->data->metadata->session;
  $getYr = substr($getYr,2,2)."".$event->data->metadata->reg_status;
+ $reference = $getYr."/".$event->data->metadata->lvl."/".$event->data->reference; //adding payment level to the reference
  //determine if the payment was successful or not
  switch ($event->event) {
    case 'charge.success':
-       $chck = Payment::where('student_id', $event->data->metadata->student_id)->first();
+       $chck = Payment::where('reference', $reference)->first();
        if ($chck == null)
        {
       $payment = Payment::create([
         'student_id' => $event->data->metadata->student_id,
-        'reference' => $getYr."/".$event->data->metadata->lvl."/".$event->data->reference, //adding payment level to the reference
+        'reference' => $reference,
         'payment_modes_id' => 1,
         'status' => $event->data->metadata->pay_status,
         'amount' => ($event->data->amount/100) - 300, //getting exact amount from paystack
@@ -298,7 +299,7 @@ class PaymentController extends Controller
    switch ($event->event) {
      case 'charge.success':
      //check whether the payment has been completed
-     $chck = Cardapplicant::where('reg_no', $event->data->metadata->student_id)->first();
+     $chck = Cardapplicant::where('invoice_id', $event->data->metadata->student_id)->first();
     if ($chck == null)
     {
    //generate a rand pin
@@ -447,7 +448,7 @@ if ($event->data->metadata->payment_type == "Acceptance")
        ]);
 
 
-       $imageData = $this->upload($student->pic_url, 'students', 3600, '', 'auto');
+       $imageData = $this->upload($student->pic_url, 'students', 400, '', 'auto');
        $user->images()->create([
            'url' => $imageData['secure_url']
        ]);

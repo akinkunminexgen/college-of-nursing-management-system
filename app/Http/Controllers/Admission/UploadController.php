@@ -14,7 +14,7 @@ use Session;
 
 class UploadController extends Controller
 {
-     use CloudinaryUpload;
+     //use CloudinaryUpload;
 
 
     public function index()
@@ -61,13 +61,13 @@ class UploadController extends Controller
         $featuredpport = $request->pport_upload;
       $featurednewname = time().$featuredpport->getClientOriginalName();
 
-        try {
+        /*try {
              $imageData = $this->upload($featuredpport, 'applicants', 3600, '', 'auto');
            } catch (\Exception $e) {
              $note = $e->getMessage();
              $notification = Alert::alertMe($note, 'info');
              return redirect()->back()->with($notification);
-           }
+           }*/
 
 
       $featuredpport->move('uploads/admissionPassport2', $featurednewname);
@@ -81,14 +81,14 @@ class UploadController extends Controller
 
 
       if($dep != '1'){
-        $date = Systemsetting::where('name','admission_exam_date_midwifery')->first();
+        $date = SystemSetting::where('name','admission_exam_date_midwifery')->first();
             if ($num <= 400 ) {
               $date=date_create($date->value);
             }else {
               $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));
             }
       }else{
-        $date = Systemsetting::where('name','admission_exam_date_nursing')->first();
+        $date = SystemSetting::where('name','admission_exam_date_nursing')->first();
            if ($num <= 400 ) {
               $date=date_create($date->value);
             }elseif ($num > 400 and $num <= 800) {

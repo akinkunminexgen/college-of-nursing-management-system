@@ -51,7 +51,7 @@
             </ul>
         </li>
 
-        @if ($permission_level >= 2)
+        @if ($permission_level >= 1)
         <li class="submenu @if ($section == 'events') active @endif @if (collect(['all', 'create'])->contains($sub_section) & $section == 'events') open @endif">
             <a href="#"><i class="fa fa-bullhorn"></i> <span>Events</span> <i class="arrow fa fa-chevron-right"></i></a>
             <ul>

@@ -79,10 +79,8 @@
   <div style="text-align:center;padding:10px 40px;">
     <br>
     <br>
-    <h4>Note:</h4><p style="text-align: left;"> Keep the scratch card you
-      used appropriately, it will be needed during the Examination
-       and also make sure you bring your registration form along with
-    you. </p>
+    <h4>Note:</h4><p style="text-align: left;"> Keep all the neccessary documents appropriately, All will be needed during the Examination. The Application Slip will be used be used during and after the Examination.
+        </p>
     <p style="clear:both;"></p>
     <br>
     <br>

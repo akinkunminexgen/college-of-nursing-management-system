@@ -49,7 +49,7 @@ Portal - Payment History
                                 <td>{{substr($value->reference,4,3)}}</td>
                                 <td class="text-center">{{$value->amount}}</td>
                                 <td class="text-center">{{$value->status}}</td>
-                                <td>{{date("d-m-y",strtotime($value->created_at))}}</td>
+                                <td>{{date("d-M-Y",strtotime($value->created_at))}}</td>
                                 <td><a href="{{action('PayTuitionController@downloadPDF', [$value->id, date("d-m-y",strtotime($value->created_at))])}}"><button type="button" class="btn btn-outline-info btn-sm">PRINT</button></a></td>
                               </tr>
                             @endforeach;

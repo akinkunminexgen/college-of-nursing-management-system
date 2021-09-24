@@ -14,7 +14,7 @@
       </div>
                 <br>
                 <br>
-      <h4 style="text-decoration: underline;text-align: center; clear:both;">Invoice </h4>
+      <h4 style="text-decoration: underline;text-align: center; clear:both;">Application Slip </h4>
 
     </div>
     <div>
