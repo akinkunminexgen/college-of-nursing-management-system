@@ -64,25 +64,85 @@
                                         <li><div class="cc"><i class="fa fa-bullhorn"></i> <strong>{{ $posts->count() }}</strong> <small>Total Posts</small></div></li>
                                     </ul>
                                 </div>
-                                <div class="col-xs-12 col-sm-8">
-
-                                  <div class="box box-success">
-                                      <div class="box-header with-border">
-                                        <h3 class="box-title">Pie Chart</h3>
-
-                                        <div class="box-tools pull-right">
-                                          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                                          </button>
-                                          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                                        </div>
-                                      </div>
-                                      <div class="box-body">
-                                          <canvas id="myChart" width="400" height="150"></canvas>
-                                      </div>
-                                      <!-- /.box-body -->
-                                    </div>
-
+                                <div class="col-xs-12 col-md-8">
+                                  <div class="widget-box">
+                                                  <div class="widget-title">
+                                                  	<span class="icon pull-right"><i class="fa fa-ellipsis-h"></i></span>
+                                                  	<h5 class="pull-right">Tabs on left</h5>
+                                                      <ul class="nav nav-tabs">
+                                                          <li class="active"><a data-toggle="tab" href="#tab1">School Fees</a></li>
+                                                          <li><a data-toggle="tab" href="#tab2">Admission</a></li>
+                                                      </ul>
+                                                  </div>
+                                                  <div class="widget-content tab-content">
+                                                      <div id="tab1" class="tab-pane active">
+                                                        <div class="widget-content nopadding">
+                                        								<table class="table table-bordered table-striped table-hover">
+                                        									<thead>
+                                        										<tr>
+                                        											<th>Name</th>
+                                        											<th>department</th>
+                                        											<th>Amount Paid</th>
+                                        											<th>Payment Date</th>
+                                        										</tr>
+                                        									</thead>
+                                        									<tbody>
+                                                            @foreach($pay_made as $data)
+                                        										<tr>
+                                        											<td class="text-uppercase"><i class="fa fa-male"></i> {{ $data->student->user->last_name}} {{$data->student->user->first_name}}</td>
+                                        											<td class="text-uppercase">{{$data->student->department->name}}</td>
+                                        											<td class="text-primary"> N{{$data->amount}}</td>
+                                        											<td>{{date("d-M-Y", strtotime($data->created_at))}}</td>
+                                        										</tr>
+                                                            @endforeach
+                                        									</tbody>
+                                        								</table>
+                                        							</div>
+                                                    </div>
+                                                      <div id="tab2" class="tab-pane">
+                                                        <div class="widget-content nopadding">
+                                        								<table class="table table-bordered table-striped table-hover">
+                                        									<thead>
+                                        										<tr>
+                                        											<th>Name</th>
+                                        											<th>Amount Paid</th>
+                                        											<th>Payment Date</th>
+                                        										</tr>
+                                        									</thead>
+                                        									<tbody>
+                                                            @foreach($pay_app as $data)
+                                        										<tr>
+                                        											<td class="text-uppercase"><i class="fa fa-male"></i> {{ $data->studentapplicant->surname}} {{$data->studentapplicant->first_name}}</td>
+                                        											<td class="text-primary"> N{{$data->amount}}</td>
+                                        											<td>{{date("d-M-Y", strtotime($data->created_at))}}</td>
+                                        										</tr>
+                                                            @endforeach
+                                        									</tbody>
+                                        								</table>
+                                        							</div>
+                                                      </div>
+                                                  </div>
+                                              </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-xs-12 col-sm-6">
+                                <div class="box box-success">
+                                    <div class="box-header with-border">
+                                      <h3 class="box-title">Pie Chart</h3>
+
+                                      <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                      </div>
+                                    </div>
+                                    <div class="box-body">
+                                        <canvas id="myChart" width="400" height="150"></canvas>
+                                    </div>
+                                    <!-- /.box-body -->
+                                  </div>
+                              </div>
                             </div>
                         </div>
                     </div>

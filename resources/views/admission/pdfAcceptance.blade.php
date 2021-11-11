@@ -55,7 +55,7 @@
     <p style="clear:both;"></p>
     <br>
     <br>
-    <p style="text-align: center;"><span style="border-top: 2px dotted black;padding: 0px 40px;float:left;">/</span>  <span style="border-top: 2px dotted black;padding: 0px 40px;float:right;">ACCOUNTANT'S SIGNATURE</span></p>
+    <p style="text-align: center;"><span style="padding: 0px 30px;float:left;"><span style="border-bottom: 2px dotted black;">{{date("d/m/Y", strtotime($payment->last()->created_at))}}</span> <br><span style="padding: 0px; font-size: 12px; font-family: Arial, Helvetica, sans-serif;"> (Date) </span> </span>  <span style="border-top: 2px dotted black;padding: 0px 40px;float:right;">ACCOUNTANT'S SIGNATURE</span></p>
   </div>
   </body>
 </html>
