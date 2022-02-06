@@ -17,16 +17,17 @@ use DB;
 
 class ApplicantController extends Controller
 {
-    
+
     public function __construct()
     {
       $this->middleware('checkAdminPermissions:super,intermediate');
     }
     public function index()
     {
-       $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no')->paginate(10);
+      $count = Studentapplicant::all()->count();
+       $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no', 'sponsor_phone')->paginate(10);
       //dd($applicants[0]->cardapplicant);
-        return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants]);
+        return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants, 'count' => $count]);
     }
 
     public function deleteall(Request $request)
@@ -61,8 +62,8 @@ class ApplicantController extends Controller
     public function exportcsv(Request $request)
     {
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-          ->select('reg_no', 'surname', 'first_name', 'middle_name', 'password', 'pic_url', 'gender', 'marital_status',
-          'lga', 'state_of_origin','phone','email','score')->orderBy('reg_no')->where('department_id','2')->get();
+          ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'pic_url', 'gender', 'marital_status',
+          'lga', 'state_of_origin','phone', 'sponsor_phone', 'email','date_exam','score')->orderBy('reg_no')->get();
           // file name for download
           $fileName = "applicants".date('Ymd').".xls";
 
@@ -326,10 +327,12 @@ class ApplicantController extends Controller
       }
 
 // create ExaminationList in PDF format
-      public function pdfApplicants()
+      public function pdfApplicants($page)
       { ini_set('memory_limit', '2048M');
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('department_id', '=', '3')->orderBy('reg_no')->orderBy('date_exam')->skip(0)->take(359)->get();
-    //dd($applicants[1145]);
+        $page = $page * 359;
+        //dd($page);
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->orderBy('reg_no')->orderBy('date_exam')->skip($page)->take(359)->get();
+    //dd($applicants);
         $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
 
         return $pdf->download('ExaminationList.pdf');

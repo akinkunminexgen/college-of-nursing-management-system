@@ -23,6 +23,7 @@ class DashboardController extends Controller
             'section' => 'dashboard',
             'users' => Studentapplicant::all(),
             'students' => Student::all(),
+            'activeStudents' => $students =  Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', 'ACTIVE')->get(),
             'admins' => Admin::all(),
             'userstoday' => Studentapplicant::where('created_at', '>=', date("Y-m-d"))->where('created_at', '<', $dat),
             'pay_made' => Payment::orderByDesc('created_at')->limit(7)->get(),

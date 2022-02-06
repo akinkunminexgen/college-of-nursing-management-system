@@ -82,7 +82,7 @@ class UploadController extends Controller
 
       if($dep != '1'){
         $date = SystemSetting::where('name','admission_exam_date_midwifery')->first();
-            if ($num <= 400 ) {
+            if ($num <= 550 ) {
               $date=date_create($date->value);
             }else {
               $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));

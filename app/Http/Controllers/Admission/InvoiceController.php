@@ -35,7 +35,7 @@ class InvoiceController extends Controller
       try {
                $invoice = Invoice::create([
               'email' => $request->email,
-              'metadata' => $name,
+              'metadata' => strtoupper($name),
               'password' => bcrypt($request->password),
               'phone' => $request->phone,
               'dob' => $request->dob,

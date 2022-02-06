@@ -18,6 +18,10 @@
 
     </div>
     <div>
+      <div style="margin : 15px;border: 1px solid #4CAF50;">
+        <div style="margin-left : 10px;">Applicant Name. : </div>
+        <div style="margin: -23px 0px 0px 210px;">{{$cardapplicant->studentapplicant->surname.", ".$cardapplicant->studentapplicant->first_name}}</div>
+      </div>
 
       <div style="margin : 15px;border: 1px solid #4CAF50;">
         <div style="margin-left : 10px;">Registration No. : </div>

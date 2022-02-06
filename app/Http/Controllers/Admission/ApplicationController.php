@@ -35,7 +35,7 @@ class ApplicationController extends Controller
             $notification = Alert::alertMe($note, 'info');
              return redirect()->back()->with($notification);
            }
-        
+
     }
 
     public function update(Request $request, Studentapplicant $studentapplicant)
@@ -66,13 +66,13 @@ class ApplicationController extends Controller
       $studentapplicant->update([
           'surname' => $request->surname,
           'first_name' => $request->first_name,
-          'middle_name' => $request->middle_name,
+          'middle_name' => strtoupper($request->middle_name),
           'gender' => $request->gender,
           'email' => $request->email,
           'phone' => $request->phone,
           'dob' => $request->dob,
-          'home_address' => $request->home_address,
-          'state' => $request->state,
+          'home_address' => strtoupper($request->home_address),
+          'state' => strtoupper($request->state),
           'lga' => $request->lga,
           'state_of_origin' => $request->state_of_origin,
           'religion' => $request->religion,

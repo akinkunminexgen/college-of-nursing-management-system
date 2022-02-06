@@ -85,7 +85,8 @@ class PaymentController extends Controller
            ]);
            //create registration number
            $id = $card->id;
-           $dep = 'CNM/21B/';
+           //$dep = 'CNM/21B/';
+           $dep = 'BMID/22/';
            if ($id < 10) {
                $txt = sprintf("%s000%u",$dep,$id);
            }
@@ -200,10 +201,11 @@ class PaymentController extends Controller
 
        $rol = 3; // 3 is id for role as a student
          $user->roles()->sync([(int) $rol]);
+         $matric_no="NOT/YET/ISSUED";
 
        $students = $user->student()->create([
          'department_id' => $student->department_id,
-         'matric_no' => $student->cardapplicant->reg_no,
+         'matric_no' => $matric_no,
          'level' => 100,
          'marital_status' => $student->marital_status,
          'admission_no' => $student->cardapplicant->reg_no,
@@ -312,7 +314,8 @@ class PaymentController extends Controller
          ]);
 
          $id = $card->id;
-         $dep = 'CNM/21B/';
+         //$dep = 'CNM/21B/';
+           $dep = 'BMID/22/';
          if ($id < 10) {
              $txt = sprintf("%s000%u",$dep,$id);
          }
@@ -426,10 +429,11 @@ if ($event->data->metadata->payment_type == "Acceptance")
 
        $rol = 3; // 3 is id for role as a student
          $user->roles()->sync([(int) $rol]);
+         $matric_no="NOT/YET/ISSUED";
 
        $students = $user->student()->create([
          'department_id' => $student->department_id,
-         'matric_no' => $student->cardapplicant->reg_no,
+         'matric_no' => $matric_no,
          'level' => 100,
          'marital_status' => $student->marital_status,
          'admission_no' => $student->cardapplicant->reg_no,

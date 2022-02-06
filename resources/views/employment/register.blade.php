@@ -99,7 +99,7 @@
   <h2>Job Application</h2>
 
 
-  <!-- One "tab" for each step in the form: 
+  <!-- One "tab" for each step in the form:
   <div class="tab">
     <div class="alert alert-dark alert-xs text-center" role="alert">
       <h3>  Personal Information </h3>
@@ -302,7 +302,7 @@
           </div>
         </div>
 <!--end of edduucation
-<!-- rreferees section 
+<!-- rreferees section
   <div class="tab">
       <div class="alert alert-dark alert-xs text-center" role="alert">
         <h3>  Referees </h3>

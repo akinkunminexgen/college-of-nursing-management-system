@@ -59,11 +59,11 @@ class ApplicationtwoController extends Controller
 
     $reg_step = 'Second';
     $studentapplicant->update([
-        'sponsor_type' => $request->sponsor_type,
-        'sponsor_name' => $request->sponsor_name,
+        'sponsor_type' => strtoupper($request->sponsor_type),
+        'sponsor_name' => strtoupper($request->sponsor_name),
         'sponsor_phone' => $request->sponsor_phone,
         'sponsor_email' => $request->sponsor_email,
-        'sponsor_add' => $request->sponsor_add,
+        'sponsor_add' => strtoupper($request->sponsor_add),
         'exam_type' => $request->exam_type,
         'exam_no' => $request->exam_no,
         'mathematics' => $request->mathematics,

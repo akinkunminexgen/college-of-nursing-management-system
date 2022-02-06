@@ -39,7 +39,7 @@ class StudentController extends Controller
       /*  $students = Student::orderBy('created_at', 'DESC')
             ->orderBy('updated_at', 'DESC')
             ->paginate(10); */
-        $students =  Student::with('user', 'department', 'result')->paginate(10);
+        $students =  Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', '!=', 'DISABLED')->select('students.*')->paginate(10);
         $dept = Department::all();
         return View('admin.students.index', ['section' => 'students', 'sub_section' => 'all', 'students' => $students, 'dept' => $dept]);
     }
@@ -50,7 +50,7 @@ class StudentController extends Controller
     */
     public function dept($id)
     {
-      $students = Student::with('user')->where('department_id', $id)->paginate(10);
+      $students = Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', '!=', 'DISABLED')->where('department_id', $id)->paginate(10);
       $dept = Department::all();
       return View('admin.students.index2dep', ['section' => 'students', 'sub_section' => 'all', 'students' => $students, 'dept' => $dept]);
     }
@@ -309,6 +309,68 @@ class StudentController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+    *Import Matric number of new student from CSV file
+    */
+
+    public function importMatric(Request $request)
+    {
+        ini_set('memory_limit', '2048M');
+      $this->validate($request,[
+              'file_csv'          => 'required',
+          ]
+        );
+
+        $msg = "";
+        $i = 0;
+        $sql = true;
+        $file = $request->file('file_csv')->getRealPath();
+        $handle = fopen($file, "r");
+        $filename = $request->file_csv->getClientOriginalExtension();
+        if ($file == NULL || $filename !== 'csv') {
+          $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
+            return redirect()->back()->with($notification);
+        }else {
+          while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+            {
+              $reg_no=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
+              //$score =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
+              $matric_no = filter_var($filesop[1], FILTER_SANITIZE_STRING);
+
+              // confirm if the reg no is present
+              $result = Student::where('admission_no', $reg_no)->first();
+              if ($result == null) {
+                if ($reg_no != "") {
+                  $msg.= $reg_no." does not exist in the database at row ".$i."\n";
+                }
+
+              }
+              else{
+                Student::find($result->id)
+                ->update(['matric_no' => $matric_no]);
+
+              $sql = true;
+              }
+              $i++;
+            }
+
+          if ($sql) {
+            if($msg != ""){
+              $message = "imported successfully!!! but '.$msg.'";
+            return redirect()->back()->with('success', $message);
+            }
+            $notification = Alert::alertMe('Imported successfully!!!', 'success');
+              return redirect()->back()->with($notification);
+
+          } else {
+            $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
+            return redirect()->back()->with($notification);
+
+          }
+          }
+
     }
 
 

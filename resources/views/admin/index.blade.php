@@ -13,12 +13,12 @@
       <li>
         <div class="left sparkline_bar_good"><span>2,4,9,7,12,10,12</span>+10%</div>
         <div class="right">
-          <strong>{{ $students->count() }}</strong>
-          Students
+          <strong>{{ $activeStudents->count() }}</strong>
+          Active Students
         </div>
       </li>
       <li>
-        <div class="left sparkline_bar_neutral"><span>20,15,18,14,10,9,9,9</span>0%</div>
+        <div class="left sparkline_bar_neutral"><span>12,10,18,14,4,9,9,{{ $userstoday->count() }}</span>{{number_format(($userstoday->count()/$users->count())*100, 2) }}% today</div>
         <div class="right">
           <strong>{{ $users->count() }}</strong>
           Applicants

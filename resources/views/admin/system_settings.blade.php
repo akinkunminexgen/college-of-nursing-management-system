@@ -43,7 +43,7 @@
                                 </div>
                             @endif
                             <form method="post" action="{{route('settings.update')}}" class="form-horizontal">
-                                <table class="table table-bordered table-striped table-hover">
+                                <table class="table table-bordered table-hover" style="background-color: #a39d9d;font-size:15px;">
                                     <thead>
                                         <tr>
                                             <th>Setting</th>
@@ -109,6 +109,36 @@
                                               <input type="checkbox" name="maintenance" class="custom-control-input" id="customControlAutosizing">
                                               <label class="badge badge-danger">DISABLED</label><span> click to enable maintenace</span>
                                               @endif
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Subaccount (Access)</td>
+                                            <td>
+                                                <input type="text" name="admission_sub_account" value="{{$settings['admission_sub_account']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Nursing Subaccount</td>
+                                            <td>
+                                                <input type="text" name="GNursing_sub_account" value="{{$settings['GNursing_sub_account']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Basic Midwifery Subaccount</td>
+                                            <td>
+                                                <input type="text" name="BMidwifery_sub_account" value="{{$settings['BMidwifery_sub_account']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Current Session A</td>
+                                            <td>
+                                                <input type="text" name="current_sessionA" value="{{$settings['current_sessionA']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Current Session B</td>
+                                            <td>
+                                                <input type="text" name="current_sessionB" value="{{$settings['current_sessionB']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         {{--

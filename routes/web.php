@@ -169,8 +169,8 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
     Route::post('/addresult', 'StudentController@addresult')->name('students.addresult');
 
     Route::put('applicants/addscore/{studentapplicant}', 'ApplicantController@update')->name('applicants.update');
+    Route::get('applicants/downloadpdf/{page}', 'ApplicantController@pdfApplicants')->name('applicants.downloadPDF');
 
-    
 
     // Fees
     Route::resource('fees', 'FeeController');
@@ -198,7 +198,6 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
     Route::get('applicants/confirmteller/{studentapplicant}', 'ApplicantController@tellerindex')->name('applicants.addtelleredit');
     Route::put('applicants/confirmteller/{studentapplicant}', 'ApplicantController@addteller')->name('applicants.addteller');
-    Route::get('applicants/downloadpdf', 'ApplicantController@pdfApplicants')->name('applicants.downloadPDF');
     Route::get('applicants/addresult', 'ApplicantController@showresultpage')->name('applicants.addresult');
     Route::post('applicants/addresult', 'ApplicantController@importresult')->name('applicants.addresultfile');
     Route::post('applicants/payfor', 'ApplicantController@manualpay')->name('applicants.manualpay');
@@ -210,6 +209,9 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
 
     // Roles section
     Route::get('roles', 'RoleController@index');
+
+    // Students section
+    Route::put('students', 'StudentController@importMatric')-> name('students.matricCSV');
 
     // System settings
     Route::get('settings', 'SettingController@index')->name('settings.index');
@@ -235,7 +237,7 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
       'news' => 'post'
     ]
   ]);
-  
+
   // Events section
     Route::resource('events', 'EventController',  [
       'only' => [
@@ -246,10 +248,17 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
       ]
     ]);
 
+    //account sub_section
+    Route::get('accounting/index', 'AccountingController@index')->name('accounting.index');
+    Route::get('accounting/indexadmission', 'AccountingController@indexAdmission')->name('accounting.indexAdmission');
+    Route::post('accounting/index', 'AccountingController@exportcsv')->name('accounting.expSCHFEES');
+    Route::post('accounting/indexadmission', 'AccountingController@exportcsvAdmission')->name('accounting.expADMFEES');
+
   // Students section
   Route::resource('students', 'StudentController');
   Route::post('students/search', 'StudentController@search')->name('students.search');
   Route::post('students/upload', 'StudentController@uploadPAS')->name('students.upload');
+
 
   // Applicants section
   Route::get('applicants/index', 'ApplicantController@index')->name('applicants.index');

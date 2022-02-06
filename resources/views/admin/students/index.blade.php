@@ -15,6 +15,9 @@
             <a href="/admin/students" class="current">Students</a>
         </div>
         <div class="container-fluid">
+          @if(Session::has('success'))
+              <strong style="color: green">* {{ Session::get('success') }}</strong>
+          @endif
           <div class="row">
             <div class="col-xs-6">
               <div class="dropdown">
@@ -93,6 +96,26 @@
                                     <p class="lead">0 students found!</p>
                                 </div>
                             @endif
+
+                            <div class="col-xs-12">
+                              <label class="text text-danger">*Update New Student Matric No*</labe>
+                            </div>
+                            <div class="col-xs-8">
+                              <form class="form-inline" method="post" action="{{ route('students.matricCSV') }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group mx-sm-3 mb-2">
+                                  <label for="inputPassword2" class="sr-only">Excel File</label>
+                                  <input type="hidden" name="_method" value="PUT">
+                                    <input id="name" value="{{ old('file_csv') }}" type="file" placeholder="Upload a csv file" title="" name="file_csv" class="form-control input-sm" required/>
+                                    @error('file_csv')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                  @enderror
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2" title="Import a CSV file which contains two columns of Reg. and Matric No. respectively">Import Excel</button>
+                              </form>
+                            </div>
                         </div>
                     </div>
                 </div>

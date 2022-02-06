@@ -1,3 +1,7 @@
+<?php
+use App\Models\State;
+
+ ?>
 @extends('admin.layout.template')
 
 @section('admin-title')
@@ -29,7 +33,7 @@
                     @enderror
                   </div>
                 <!--   <input class="btn btn-primary mb-2" type="submit" value="Submit">-->
-                 <button type="submit"  id="studentapproved" class="btn btn-primary mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
+                 <button type="submit"  id="studentapproved" class="btn btn-primary btn-sm mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
                 </form>
               </div>
 
@@ -44,7 +48,7 @@
                         </span>
                     @enderror
                   </div>
-                  <button type="submit" class="btn btn-primary" title="search applicant(s) that are yet to make form payment">Search Unapproved applicants</button>
+                  <button type="submit" class="btn btn-primary btn-sm" title="search applicant(s) that are yet to make form payment">Search Unapproved applicants</button>
                 </form>
               </div>
 
@@ -60,13 +64,13 @@
                             <th>Email</th>
                             <th>Phone</th>
                             <th>Sponsor's Phone</th>
-                            <td>Address</td>
+                            <th>Address</th>
                             <th>State of origin</th>
                             <th>Admission status</th>
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody id="justclear">
+                        <tbody id="justclear" style="font-size: 0.7em;">
                             @foreach($applicant as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
@@ -76,7 +80,13 @@
                                     <td>{{$data->phone}}</td>
                                     <td>{{$data->sponsor_phone}}</td>
                                     <td>{{$data->home_address}}</td>
-                                    <td><span class="badge badge-success">{{$data->state_of_origin}}</span></td>
+                                    <td>
+                                      @if($data->state_of_origin != null)
+                                      <span class="badge badge-info">{{State::find($data->state_of_origin)->name}}</span>
+                                      @else
+                                        <span class="badge badge-secondary">...</span>
+                                      @endif
+                                    </td>
                                     <td>
                                       @if($data->admission_status == "NO")
                                         <span class="badge badge-danger" title="No admission">NOT YET</span>
@@ -86,7 +96,7 @@
                                     </td>
                                     <td>
                                       @if (Gate::allows('add-applicant-score'))
-                                      <a href="{{route('applicants.editapplicant', ['studentapplicant' => $data->id])}}" title="Edit student Details">Edit</a> |  <a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-sm" title="add score and admission status">Add Score</a>
+                                      <a href="{{route('applicants.editapplicant', ['studentapplicant' => $data->id])}}" title="Edit student Details">Edit</a> |  <a href="{{route('applicants.edit', ['studentapplicant' => $data->id])}}" class="btn btn-primary btn-xs" title="add score and admission status">Add Score</a>
                                       @endif
                                     </td>
                                 </tr>
@@ -118,7 +128,7 @@
                             </span>
                         @enderror
                       </div>
-                      <button type="submit" class="btn btn-primary mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
+                      <button type="submit" class="btn btn-primary btn-sm mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
                     </form>
                   </div>
                 @endif
@@ -133,11 +143,20 @@
             </div>
 
                 <div class="col-xs-2">
-                  <form class="form-inline" method="get" action="{{route('applicants.downloadPDF')}}" enctype="multipart/form-data">
-                    @csrf
                     <div class="form-group mb-4">
-                    <button type="submit" class="btn btn-success btn-xs mb-2" title="Generate applicant's examination list">Generate PDF</button>
-                  </form>
+                      <div class="btn-group dropup">
+										 <button data-toggle="dropdown" class="btn btn-success btn-xs mb-2 dropdown-toggle" title="Generate applicant's examination list"><i class="fa fa-user icon-white"></i> Generate PDF <span class="caret"></span></button>
+										<ul class="dropdown-menu dropdown-primary">
+                      @php
+                      $ins = ceil($count/359);
+                      @endphp
+                      @for ($i=0; $i < $ins; $i++)
+											<li><a href="{{route('applicants.downloadPDF', ['page' => $i])}}"><i class="fa fa-print"></i> page {{$i+1}}</a></li>
+                      @endfor
+											<li class="divider"></li>
+											<li><a href="#"><i class="i"></i>359 candidates/page</a></li>
+										</ul>
+									</div>
                 </div>
             </div>
         </div>
