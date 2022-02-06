@@ -4,7 +4,7 @@ This is the Laravel app for the Oyo state College of Nursing & Midwifery Student
 
 ## Setup
 - Clone the repository
-`https://github.com/akinkunminexgen/college-of-nursing-management-system`
+`https://github.com/dapobelieve/college-of-nursing-management-system`
 - Install the project's dependencies
 `composer install`
 - Create a `.env` file and copy the contents of the `.env.example` into it. Or run:
@@ -18,7 +18,7 @@ Windows:
 ```shell
 xcopy .env.example .env
 ```
-- Setup your Databse credentials
+- Setup your Databse credentials 
 - Run migration
 `php artisan migrate`
 - Run the databse seeder
