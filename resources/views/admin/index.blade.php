@@ -18,7 +18,8 @@
         </div>
       </li>
       <li>
-        <div class="left sparkline_bar_neutral"><span>{{$usersperday}}{{$userstoday->count() }}</span>{{number_format(($userstoday->count()/$users->count())*100, 2) }}% today</div>
+        <div class="left sparkline_bar_neutral"><span>{{$usersperday}}{{$userstoday->count() }}</span>
+        @if($users->count() != 0){{number_format(($userstoday->count()/$users->count())*100, 2) }}% today @endif</div>
         <div class="right">
           <strong>{{ $users->count() }}</strong>
           Applicants

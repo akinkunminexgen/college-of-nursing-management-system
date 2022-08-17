@@ -89,14 +89,16 @@ class UploadController extends Controller
             }
       }else{
         $date = SystemSetting::where('name','admission_exam_date_nursing')->first();
-           if ($num <= 400 ) {
+           if ($num <= 500 ) {
               $date=date_create($date->value);
-            }elseif ($num > 400 and $num <= 900) {
+            }elseif ($num > 500 and $num <= 1000) {
               $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));
-            }elseif ($num > 900 and $num <= 1400) {
+            }elseif ($num > 1000 and $num <= 1500) {
               $date=date('Y-m-d', strtotime($date->value. ' + 2 days'));
-            }else {
+            }elseif ($num > 1500 and $num <= 2100) {
               $date=date('Y-m-d', strtotime($date->value. ' + 3 days'));
+            }else {
+              $date=date('Y-m-d', strtotime($date->value. ' + 4 days'));
             }
           }
       //dd($request->course);

@@ -96,7 +96,7 @@
                                     <p class="lead">0 students found!</p>
                                 </div>
                             @endif
-
+                            
                             <div class="container">
                             <div class="row">
                               <label class="text text-danger">*Extra care needs to be taken while updating*</labe>
@@ -146,7 +146,7 @@ $('[data-toggle="popover"]').popover()
     }else if($("#sel-val").val() == "matric_no"){
         $("#sel-msg").empty();
         $("#sel-msg").html('it must conatin two columns which is admission no and matric no respectively');
-    }else{
+    }else{ 
     $("#sel-msg").empty();
     }
 });

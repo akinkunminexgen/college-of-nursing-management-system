@@ -27,7 +27,7 @@ class InvoiceController extends Controller
         'last_name' => 'string|required',
         'email' => 'string|required|email|unique:invoices|unique:users',
         'password' => 'required|confirmed|min:6',
-        'phone' => 'required|numeric|min:11|unique:invoices|unique:users',
+        'phone' => 'required|numeric|digits:11|unique:invoices|unique:users',
         'dob' => 'required|before:16 years ago'
       ]);
 

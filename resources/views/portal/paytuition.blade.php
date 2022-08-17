@@ -41,12 +41,13 @@ Portal - Course Registration
                         <!--  <option value="{{$payType['half']}}">{{$payType['half']}}</option>   -->
                           @endif
                         </select>
-
+                         @if($student->department_id != 2 OR $student->level != 100)
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Select Level') }}</strong></label>
                         <select class="form-control col-md-2" id="pay_level" name="pay_level" required>
                           <option value="{{$level}}"> </option>
                           <option value="{{$level}}">{{$level."L"}}</option>
                         </select>
+                        @endif
                       </div>
                     <div class="row">
                         

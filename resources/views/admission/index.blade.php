@@ -30,7 +30,7 @@ Application Guide
                 <h4><strong>Basic General Nursing</strong></h4>
                 <br>
                 <p>
-                  This is a three year (3) programme commencing from 11th April, 2022, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
+                  This is a three year (3) programme commencing from 3rd October, 2022, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
                   </p>
             </div>
             <div class="col-md-5 admission-form_mr">
@@ -118,10 +118,10 @@ Application Guide
           <br>-->
 
             <strong><p class="text-center"><b>Closing Date</b></p></strong>
-          <p class="text-justify">Sale of forms start from Tuesday 15th March, 2022, online application must be completed on or before Friday, 25th March, 2022.</p>
+          <p class="text-justify">Sale of forms start from Monday, 11th July, 2022, online application must be completed on or before Friday, 19th August, 2022.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Monday, 28th– Friday, 1st April, 2022.</li>
-            <li>Date of Interview: Monday, 4th – Friday, 8th April, 2022</li>
+            <li>Date of Entrance Examination (CBT): Monday, 29th August – Friday, 2nd September, 2022.</li>
+            <li>Date of Interview: Monday, 12th – Friday, 16th September, 2022.</li>
             <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
@@ -137,7 +137,7 @@ Application Guide
           <br>Thank You. </b>
         </div>
       </div>
-      <p class="text-center"> <strong>Signed</strong> <br> Z.O Jayeola <br> Ag. Registrar </p>
+      <p class="text-center"> <strong>Signed</strong> <br> Yusuf, F. A (Mrs.) <br> Ag. Registrar </p>
       <div class="row">
         <div class="col-sm-4">
 

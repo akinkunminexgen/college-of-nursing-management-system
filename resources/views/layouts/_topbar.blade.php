@@ -16,50 +16,39 @@
       </div>
       <div class="modal-body">
         <div class="row">
-         <!-- <div class="col-md-12">
+          <div class="col-md-12">
 
               <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-danger">2022 ENTRANCE EXAMINATION RESULT OF BASIC MIDWIFERY INTO THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN AND THE SCHOOL OF BASIC MIDWIFERY, KISHI</b> <hr>
-                <p class="text-success">The underlisted candidates who wrote entrance examination and called for interview into Oyo State College of College Nursing and Midwifery, Eleyele, Ibadan and the School of Basic Midwifery, Kishi have been offered admission into Basic Midwifery programme of the Institution.</p>
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Advertisement for Admission into Basic General Nursing Programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2022/2023 Academic Session</b> <hr>
+                <p class="text-success">Applications are hereby invited from suitably qualified candidates for admission into the Nursing programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
 
-                <br><a href='/shortlist'> Click here</a> for more information.
-                <br>
-               <a href='admission/login'>Click here</a> to check your result</p>
-                </h4>-->
-
-                <!--<strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
-          <p class="text-justify">Sale of forms starts from Thursday 12th November, 2020 online application must be completed on or before 24th January, 2021.</p>
-          <ul>
-            <li>Date of Entrance Examination (CBT): Tuesday, 9th February – Friday, 12th February, 2021.</li>
-            <li>Date of Interview: Tuesday, 23rd  – Friday, 26th  February, 2021. </li>
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
-            <li>Time: 8.00 am prompt</li>
-          </ul>
-          <hr>
-              </div>-->
-
-
-
-           <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary">Advertisement for Admission into Basic General Nursing Programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2022/2023 Academic Session</b> <hr>
-                <p>Applications are hereby invited from suitably qualified candidates for admission into the following programmes of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan. <a href='admission'>Click here</a> for more information</p>
+                <br><!--<a href='/shortlist'> Click here</a> for more information.
+                <br>-->
+               <a href='admission'>Click here</a> to start application</p>
                 </h4>
 
-                <strong><p class="text-center">Closing Date For Basic General Nursing</p></strong>
-          <p class="text-justify">Sale of forms start from Tuesday 15th March, 2022, online application must be completed on or before Friday, 25th March, 2022.</p>
+                <strong><p class="text-center">Closing Date For Basic General Nursing:</p></strong>
+          <p class="text-justify">Sale of forms start from Monday, 11th July, 2022, online application must be completed on or before Friday, 19th August, 2022.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Monday, 28th– Friday, 1st April, 2022.</li>
-            <li>Date of Interview: Monday, 4th – Friday, 8th April, 2022. </li>
+            <li>Date of Entrance Examination (CBT): Monday, 29th August – Friday, 2nd September, 2022.</li>
+            <li>Date of Interview: Monday, 12th – Friday, 16th September, 2022. </li>
             <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
           <hr>
+              </div>
 
 
 
+          <!-- <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary">2022 ENTRANCE EXAMINATION RESULT OF BASIC GENERAL NURSING INTO THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN </b> <hr>
+                <p>The underlisted candidates who wrote entrance examination and called for interview into Oyo State College of College Nursing and Midwifery, Eleyele, Ibadan have been offered admission into Basic General Nursing programme of the Institution. <a href='shortlist'>Click here</a> for more information</p>
+                </h4>
+
+             
 
 
-          </div>
+          </div>-->
 
 
         </div>
@@ -69,6 +58,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 <div class="header-topbar">
     <div class="container">

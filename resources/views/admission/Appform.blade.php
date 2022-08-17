@@ -106,7 +106,7 @@ Application Form (Registration Page)
                                 </div>
                               </form>
                               @else
-                              <b class="badge badge-danger text-center">Admission Form Closed!!!</b>
+                              <b class=" container badge badge-danger text-center">Site under maintenance</b>
                               @endif
                           </div>
                       </div>

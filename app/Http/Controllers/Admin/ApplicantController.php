@@ -101,9 +101,9 @@ class ApplicantController extends Controller
           'first_name' => 'string|required',
           'middle_name' => 'string',
           'gender' => 'required',
-          'phone' => 'required|digits:11',
+          'phone' => 'required|digits:11|unique:users',
           'dob' => 'required|date|before:16 years ago',
-          'email' => 'required|email',
+          'email' => 'required|email|unique:users',
           'home_address' => 'string|required',
           'lga' => 'required',
           'state_of_origin' => 'required',
@@ -145,6 +145,7 @@ class ApplicantController extends Controller
           'biology' => $request->biology,
           'physics' => $request->physics,
           'chemistry' => $request->chemistry,
+          'reg_step' => 'First',
       ]);
         $notification = Alert::alertMe("Student's information updated", 'success');
         return redirect()->route('applicants.index')->with($notification);
@@ -240,7 +241,7 @@ class ApplicantController extends Controller
         if ($id < 1000 and $id > 99) {
             $txt = sprintf("%s0%u",$dep,$id);
         }
-        if ($id > 1000) {
+        if ($id >= 1000) {
             $txt = sprintf("%s%u",$dep,$id);
         }
         return $txt;
@@ -262,11 +263,11 @@ class ApplicantController extends Controller
             //generate a rand pin
                   $pin = (string)rand(1000000000, 9999999999);
 
-            //check if it has pin has been generated
+            //check if pin has been generated
             $card = Cardapplicant::where('invoice_id', $invoice->id)->first();
             if ($card != NULL) {
               $id = $card->id;
-              $dep = 'CNM/22A/';
+              $dep = 'CNM/22B/';
               $txt = $this->formatNum($id, $dep);
 
               $card->update([
@@ -283,8 +284,8 @@ class ApplicantController extends Controller
                 ]);
                 //create registration number
                 $id = $card->id;
-                $dep = 'CNM/22A/';
-                $this->formatNum($id, $dep);
+                $dep = 'CNM/22B/';
+                $txt = $this->formatNum($id, $dep);
 
                 $card->update([
                   'reg_no' => $txt,
