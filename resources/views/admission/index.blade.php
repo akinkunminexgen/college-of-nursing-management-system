@@ -2,6 +2,16 @@
 
 @section('title', strtoupper(config('site.name.short'))." "." | Application Guide")
 
+@section('site.styles')
+<style>
+.printable { display:none; }
+@media only print {
+    .container { display:none !important; };
+    .printable { display:block !important; } ;
+}
+</style>
+@stop
+
 @section('pagename')
 Application Guide
 @stop
@@ -11,7 +21,7 @@ Application Guide
 <!--============================= ADMISSION FORM RULES =============================-->
 <section class="admission-form_rules">
     <div class="container">
-        <!--<div class="row">
+        <div class="row">
             <div class="col-md-7 admission-form_mr">
                 <h2>Admission Requirements</h2>
                 <br>
@@ -20,7 +30,7 @@ Application Guide
                 <h4><strong>Basic General Nursing</strong></h4>
                 <br>
                 <p>
-                  This is a three year (3) programme commencing from 4TH October, 2021, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
+                  This is a three year (3) programme commencing from 11th April, 2022, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
                   </p>
             </div>
             <div class="col-md-5 admission-form_mr">
@@ -35,8 +45,8 @@ Application Guide
                 </ul>
             </div>
         </div>
-        <hr>-->
-        <div class="row">
+        <hr>
+      <!--  <div class="row">
             <div class="col-md-7 admission-form_mr">
               <br>
               <br>
@@ -108,12 +118,11 @@ Application Guide
           <br>-->
 
             <strong><p class="text-center"><b>Closing Date</b></p></strong>
-          <p class="text-justify">Online application must be completed on or before 31 January, 2022.</p>
+          <p class="text-justify">Sale of forms start from Tuesday 15th March, 2022, online application must be completed on or before Friday, 25th March, 2022.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Monday, 7th – Friday, 11th February, 2022</li>
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and the School of Basic Midwifery, Kishi respectively</li>
-            <li>Date of Interview: Monday, 21st – Friday, 25th February, 2022</li>
-            <li>Venue: The School of Basic Midwifery, Kishi</li>
+            <li>Date of Entrance Examination (CBT): Monday, 28th– Friday, 1st April, 2022.</li>
+            <li>Date of Interview: Monday, 4th – Friday, 8th April, 2022</li>
+            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
 
@@ -141,4 +150,16 @@ Application Guide
 </section>
 <!--//END ADMISSION FORM RULES -->
 
+@stop
+
+@section('site.scripts')
+<script type="text/javascript">
+ document.oncontextmenu = new Function("return false");
+
+ $(document).ready(function() {
+ $('body').bind('cut copy paste', function(event) {
+ event.preventDefault();
+ });
+ });
+ </script>
 @stop

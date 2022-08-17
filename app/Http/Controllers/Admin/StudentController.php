@@ -100,16 +100,27 @@ class StudentController extends Controller
       $user = User::find($id->user_id);
 
       $imageData = $this->upload($request->media, 'students', 400, '', 'auto');
+      $res= Image::where('imageable_id', $id->user_id)->first();
+      if ($res == NULL){
+          $result= $user->images()->create([
+           'url' => $imageData['secure_url'],
+           'imageable_id' => $user->id,
+           'imageable_type' => 'App\User'
+       ]);
+       $res= Image::where('imageable_id', $id->user_id)->first();
+      }else{
       $result= $user->images()->update([
            'url' => $imageData['secure_url']
        ]);
        $res= Image::where('imageable_id', $id->user_id)->first();
-       if ($result) {
+
+      //dd($request->media->getClientOriginalName());
+    }
+    if ($result) {
          return $res->url;
        }else {
          return 'false';
        }
-      //dd($request->media->getClientOriginalName());
     }
 
 
@@ -320,56 +331,61 @@ class StudentController extends Controller
         ini_set('memory_limit', '2048M');
       $this->validate($request,[
               'file_csv'          => 'required',
+              'csv_option' => 'required'
           ]
         );
-
-        $msg = "";
-        $i = 0;
-        $sql = true;
-        $file = $request->file('file_csv')->getRealPath();
-        $handle = fopen($file, "r");
-        $filename = $request->file_csv->getClientOriginalExtension();
-        if ($file == NULL || $filename !== 'csv') {
-          $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
-            return redirect()->back()->with($notification);
-        }else {
-          while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
-            {
-              $reg_no=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
-              //$score =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
-              $matric_no = filter_var($filesop[1], FILTER_SANITIZE_STRING);
-
-              // confirm if the reg no is present
-              $result = Student::where('admission_no', $reg_no)->first();
-              if ($result == null) {
-                if ($reg_no != "") {
-                  $msg.= $reg_no." does not exist in the database at row ".$i."\n";
-                }
-
-              }
-              else{
-                Student::find($result->id)
-                ->update(['matric_no' => $matric_no]);
-
+          if ($request->csv_option == "level") {
+            $colquery = 'matric_no';
+            $colquery2 = 'level';
+          }else {
+            $colquery = 'admission_no';
+            $colquery2 = 'matric_no';
+          }
+              $msg = "";
+              $i = 0;
               $sql = true;
-              }
-              $i++;
-            }
+              $file = $request->file('file_csv')->getRealPath();
+              $handle = fopen($file, "r");
+              $filename = $request->file_csv->getClientOriginalExtension();
+              if ($file == NULL || $filename !== 'csv') {
+                $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
+                  return redirect()->back()->with($notification);
+              }else {
+                while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                  {
+                    $col1=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
+                    $col2 = filter_var($filesop[1], FILTER_SANITIZE_STRING);
 
-          if ($sql) {
-            if($msg != ""){
-              $message = "imported successfully!!! but '.$msg.'";
-            return redirect()->back()->with('success', $message);
-            }
-            $notification = Alert::alertMe('Imported successfully!!!', 'success');
-              return redirect()->back()->with($notification);
+                    // confirm if the reg no is present
+                    $result = Student::where($colquery, $col1)->first();
+                    if ($result == null) {
+                      if ($reg_no != "") {
+                        $msg.= $reg_no." does not exist in the database at row ".$i."\n";
+                      }
+                    }
+                    else{
+                      Student::find($result->id)
+                      ->update([$colquery2 => $col2]);
 
-          } else {
-            $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
-            return redirect()->back()->with($notification);
+                    $sql = true;
+                    }
+                    $i++;
+                  }
 
-          }
-          }
+                if ($sql) {
+                  if($msg != ""){
+                    $message = "imported successfully!!! but '.$msg.'";
+                  return redirect()->back()->with('success', $message);
+                  }
+                  $notification = Alert::alertMe('Imported successfully!!!', 'success');
+                    return redirect()->back()->with($notification);
+
+                } else {
+                  $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
+                  return redirect()->back()->with($notification);
+
+                }
+                }
 
     }
 

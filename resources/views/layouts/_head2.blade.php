@@ -22,4 +22,5 @@
     <!-- Main CSS -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
     <link href="{{asset('css/larastyle.css')}}" rel="stylesheet">
+    @yield('site.styles')
 </head>

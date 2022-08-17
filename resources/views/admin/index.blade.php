@@ -18,7 +18,7 @@
         </div>
       </li>
       <li>
-        <div class="left sparkline_bar_neutral"><span>12,10,18,14,4,9,9,{{ $userstoday->count() }}</span>{{number_format(($userstoday->count()/$users->count())*100, 2) }}% today</div>
+        <div class="left sparkline_bar_neutral"><span>{{$usersperday}}{{$userstoday->count() }}</span>{{number_format(($userstoday->count()/$users->count())*100, 2) }}% today</div>
         <div class="right">
           <strong>{{ $users->count() }}</strong>
           Applicants

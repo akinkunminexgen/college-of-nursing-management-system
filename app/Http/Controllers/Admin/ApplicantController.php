@@ -196,6 +196,16 @@ class ApplicantController extends Controller
           //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student]);
           }
           else {
+            if ($student->admission_status == NULL OR $student->admission_status == 'NO') {
+              $student->admission_status='NOT YET';
+            }
+
+            if ($student->state_of_origin != NULL) {
+              $student->state_of_origin = State::find($student->state_of_origin)->name;
+            }else {
+                $student->state_of_origin="NOT YET";
+            }
+
             return $student;
           }
         //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student->reg_no]);
@@ -210,13 +220,30 @@ class ApplicantController extends Controller
           ]);
 
 
-            $student = Invoice::where('email', $request->user)->first();
-            //dd($student);
+            $unapproved = Invoice::where('email', $request->user)->first();
+            $student = Studentapplicant::where('email', $request->user)->first();
 
           if ($student == null) {
-            return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => $student]);
+            return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $unapproved, 'reg_no' => $unapproved]);
           }
-          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => $student, 'reg_no' => NULL]);
+          return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'unapproved', 'applicant' => NULL, 'reg_no' => NULL]);
+      }
+
+      function formatNum($id, $dep)
+      {
+        if ($id < 10) {
+            $txt = sprintf("%s000%u",$dep,$id);
+        }
+        if ($id < 100 and $id > 9) {
+          $txt = sprintf("%s00%u",$dep,$id);
+        }
+        if ($id < 1000 and $id > 99) {
+            $txt = sprintf("%s0%u",$dep,$id);
+        }
+        if ($id > 1000) {
+            $txt = sprintf("%s%u",$dep,$id);
+        }
+        return $txt;
       }
 
       public function manualpay(Request $request)
@@ -232,33 +259,40 @@ class ApplicantController extends Controller
           $student = Studentapplicant::where('email', $request->email)->first();
         //  dd($student);
           if ($student == NULL) {
-
             //generate a rand pin
                   $pin = (string)rand(1000000000, 9999999999);
 
-                 $card = Cardapplicant::create([
-                     'invoice_id' =>  $invoice->id,
-                     'password' => bcrypt($pin),
-                     'pin' => $pin,
-                   ]);
-                   //create registration number
-                   $id = $card->id;
-                   $dep = 'CNM/21B/';
-                   if ($id < 10) {
-                       $txt = sprintf("%s000%u",$dep,$id);
-                   }
-                   if ($id < 100 and $id > 9) {
-                     $txt = sprintf("%s00%u",$dep,$id);
-                   }
-                   if ($id < 1000 and $id > 99) {
-                       $txt = sprintf("%s0%u",$dep,$id);
-                   }
-                   if ($id > 1000) {
-                       $txt = sprintf("%s%u",$dep,$id);
-                   }
-                   $card->update([
-                     'reg_no' => $txt,
-                   ]);
+            //check if it has pin has been generated
+            $card = Cardapplicant::where('invoice_id', $invoice->id)->first();
+            if ($card != NULL) {
+              $id = $card->id;
+              $dep = 'CNM/22A/';
+              $txt = $this->formatNum($id, $dep);
+
+              $card->update([
+                'reg_no' => $txt,
+                'password' => bcrypt($pin),
+                'pin' => $pin,
+              ]);
+
+            }else {
+              $card = Cardapplicant::create([
+                  'invoice_id' =>  $invoice->id,
+                  'password' => bcrypt($pin),
+                  'pin' => $pin,
+                ]);
+                //create registration number
+                $id = $card->id;
+                $dep = 'CNM/22A/';
+                $this->formatNum($id, $dep);
+
+                $card->update([
+                  'reg_no' => $txt,
+                ]);
+            }
+
+
+
 
                   $arr = explode(",", $invoice->metadata);
                   $lastname = $arr[0];

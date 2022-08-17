@@ -39,9 +39,9 @@ Admission - Upload passport
                    <option selected value="">Select</option>
                    <!--  @foreach($dept as $dep)
                         <option value="{{$dep->id}}">{{$dep->name}}</option>
-                    @endforeach
-                    <option value="1">Basic General Nursing</option>-->
-                    <option value="2">Basic Midwifery</option>
+                    @endforeach-->
+                    <option value="1">Basic General Nursing</option>
+                    <!--<option value="2">Basic Midwifery</option>-->
                 </select>
             </div>
         </div>

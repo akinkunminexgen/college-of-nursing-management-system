@@ -20,6 +20,24 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/toastr.min.css') }}" rel="stylesheet">
+    <style>
+
+      .list_tab_show {
+      display: none;
+      }
+
+      @media screen and (max-width: 768px) {
+         .list_tab_show {
+      display: block;
+      }
+
+      #list-tab{
+      display: none;
+      }
+      }
+
+
+    </style>
 </head>
 <body>
     <div id="app">
@@ -52,11 +70,28 @@
                             @endif
                         @else
                             <li class="nav-item dropdown">
+                                @if($section != "")
+                                <div class="list-group list_tab_show"  role="tablist">
+                                    <a class="list-group-item list-group-item-action @if ($section == 'dashboard') active @endif"   href="{{route('portal.dashboard')}}" role="tab" aria-controls="home">Home</a>
+                                    <a class="list-group-item list-group-item-action @if ($section == 'tuition') active @endif"  href="{{route('portal.tuition')}}" role="tab" aria-controls="profile">Pay Tuition</a>
+                                    <a class="list-group-item list-group-item-action @if ($section == 'coursereg') active @endif"   href="{{route('portal.coursereg')}}" role="tab" aria-controls="messages">Course Registration</a>
+                                    <a class="list-group-item list-group-item-action @if ($section == 'tuitionhistory') active @endif"   href="{{route('portal.tuitionhistory')}}" role="tab" aria-controls="settings">Payment History</a>
+                                    <a class="list-group-item list-group-item-action @if ($section == 'reghistory') active @endif"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
+                                    <br>
+                                      <ul>
+                                        <li class="danger"> <a href="#">Demoted Student</a></li>
+                                      </ul>
+                                  </div>
+                                  @endif
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

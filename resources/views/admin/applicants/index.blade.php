@@ -184,7 +184,7 @@ use App\Models\State;
         var newurl="{{route('applicants.editapplicant', ['studentapplicant' => 'studentapplicant'])}}";
         newurl = newurl.replace("studentapplicant", data.id);
         var edit = "<a href="+newurl+" title='Edit student Details'>Edit</a>";
-        var mark = "<tr><td>"+data.id+"</td><td>"+data.reg_no+"</td><td>"+data.surname+"</td><td>"+data.email+"</td><td>"+data.phone+"</td><td>"+data.sponsor_phone+"</td><td>"+data.home_address+"</td><td><span class='badge badge-success'>"+data.state_of_origin+"</span></td><td>NO View</td><td>"+edit+"</td></tr>";
+        var mark = "<tr><td>"+data.id+"</td><td>"+data.reg_no+"</td><td>"+data.surname+"</td><td>"+data.email+"</td><td>"+data.phone+"</td><td>"+data.sponsor_phone+"</td><td>"+data.home_address+"</td><td><span class='badge badge-success'>"+data.state_of_origin+"</span></td><td>"+data.admission_status+"</td><td>"+edit+"</td></tr>";
         $('#justclear').append(mark);
         //alert(data.biology);
       }else{

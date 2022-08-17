@@ -155,7 +155,7 @@ class AccountingController extends Controller
     $finance =Paymentapplicant::leftJoin('studentapplicants', 'studentapplicants.id', '=', 'paymentapplicants.studentapplicant_id')
     ->leftJoin('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->leftJoin('departments', 'studentapplicants.department_id', '=', 'departments.id')
     ->select('cardapplicants.reg_no', 'surname', 'first_name', 'middle_name', 'email', 'phone', 'departments.name as appliedfor', 'paymentapplicants.amount', 'paymentapplicants.reference', 'paymentapplicants.created_at')
-    ->where($textdata1)->orwhereNull('middle_name')->orderBy('paymentapplicants.created_at')->get();
+    ->where($textdata1)->orderBy('paymentapplicants.created_at')->get();
 
     // file name for download
     $fileName = "AdmissionFianaceReport".date('Ymd').".xls";

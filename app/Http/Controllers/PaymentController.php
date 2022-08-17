@@ -85,8 +85,8 @@ class PaymentController extends Controller
            ]);
            //create registration number
            $id = $card->id;
-           //$dep = 'CNM/21B/';
-           $dep = 'BMID/22/';
+           $dep = 'CNM/22A/';
+           //$dep = 'BMID/22/';
            if ($id < 10) {
                $txt = sprintf("%s000%u",$dep,$id);
            }
@@ -314,8 +314,8 @@ class PaymentController extends Controller
          ]);
 
          $id = $card->id;
-         //$dep = 'CNM/21B/';
-           $dep = 'BMID/22/';
+         $dep = 'CNM/22A/';
+           //$dep = 'BMID/22/';
          if ($id < 10) {
              $txt = sprintf("%s000%u",$dep,$id);
          }

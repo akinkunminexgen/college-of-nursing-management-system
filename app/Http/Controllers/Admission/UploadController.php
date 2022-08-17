@@ -91,9 +91,9 @@ class UploadController extends Controller
         $date = SystemSetting::where('name','admission_exam_date_nursing')->first();
            if ($num <= 400 ) {
               $date=date_create($date->value);
-            }elseif ($num > 400 and $num <= 800) {
+            }elseif ($num > 400 and $num <= 900) {
               $date=date('Y-m-d', strtotime($date->value. ' + 1 days'));
-            }elseif ($num > 800 and $num <= 1200) {
+            }elseif ($num > 900 and $num <= 1400) {
               $date=date('Y-m-d', strtotime($date->value. ' + 2 days'));
             }else {
               $date=date('Y-m-d', strtotime($date->value. ' + 3 days'));

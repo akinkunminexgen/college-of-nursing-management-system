@@ -15,6 +15,11 @@ class AuthController extends Controller
             'email' => 'required',
             'password' => 'required',
         ]);
+
+        if (Auth::check()) {
+          session()->flush();
+        }
+
         if(!Auth::attempt(
             [
                 'email' => $request->input('email'),
@@ -31,7 +36,7 @@ class AuthController extends Controller
             }
             //check roles
             $userrole = $request->user()->roles->first();
-            
+
             if ($userrole == NULL) {
                session()->flush();
               return redirect()->back()->with('error', 'Role issue, Contact the Administrator');
@@ -54,6 +59,7 @@ class AuthController extends Controller
     {
         Auth::logout();
         //delete all sessions here
+        session()->flush();
         return redirect()->route('welcome');
     }
 }

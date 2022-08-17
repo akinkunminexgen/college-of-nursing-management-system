@@ -69,7 +69,7 @@ Admission - Form one
                                             Phone</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='phone' placeholder="phone number" class='form-control'  value="{{ $student->phone }}" required>
+                                        <input type='text' name='phone' placeholder="phone number" class='form-control'  value="{{ $student->phone }}" readonly required>
                                     </div>
                                 </div>
 
@@ -199,7 +199,6 @@ Admission - Form one
                                             <option value='single'>Single</option>
                                             <option value='married'>Married</option>
                                             <option value='divorced'>Divorced</option>
-                                            <option value='other'>Other</option>
                                         </select>
                                     </div>
                                 </div>

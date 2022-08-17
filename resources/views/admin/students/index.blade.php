@@ -97,15 +97,22 @@
                                 </div>
                             @endif
 
-                            <div class="col-xs-12">
-                              <label class="text text-danger">*Update New Student Matric No*</labe>
+                            <div class="container">
+                            <div class="row">
+                              <label class="text text-danger">*Extra care needs to be taken while updating*</labe>
                             </div>
-                            <div class="col-xs-8">
+                            <div class="row" style="">
                               <form class="form-inline" method="post" action="{{ route('students.matricCSV') }}" enctype="multipart/form-data">
                                 @csrf
-                                <div class="form-group mx-sm-3 mb-2">
+                                <div class="form-group" style="background-color:#91908c;">
                                   <label for="inputPassword2" class="sr-only">Excel File</label>
                                   <input type="hidden" name="_method" value="PUT">
+                                  <select id="sel-val" class="form-control input-sm" name="csv_option" required>
+                                                        <option selected value="">Select</option>
+                                                        <option value="matric_no">Update Matric No.</option>
+                                                        <option value="level">Upgrade Level</option>
+                                                    </select>
+                                    <label id="sel-msg" class="text-danger"></label>
                                     <input id="name" value="{{ old('file_csv') }}" type="file" placeholder="Upload a csv file" title="" name="file_csv" class="form-control input-sm" required/>
                                     @error('file_csv')
                                       <span class="invalid-feedback" role="alert">
@@ -113,8 +120,9 @@
                                       </span>
                                   @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary mb-2" title="Import a CSV file which contains two columns of Reg. and Matric No. respectively">Import Excel</button>
+                                <button type="submit" class="btn btn-primary" title="Import a CSV file accordingly">Import Excel</button>
                               </form>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -129,6 +137,20 @@
 $(function () {
 $('[data-toggle="popover"]').popover()
 })
+
+
+  $("#sel-val").click(function(){
+    if($("#sel-val").val() == "level"){
+    $("#sel-msg").empty();
+    $("#sel-msg").html('it must contain two columns of matric no and level respectively');
+    }else if($("#sel-val").val() == "matric_no"){
+        $("#sel-msg").empty();
+        $("#sel-msg").html('it must conatin two columns which is admission no and matric no respectively');
+    }else{
+    $("#sel-msg").empty();
+    }
+});
+
 
   $("#studentapproved").click(function(e){
     e.preventDefault();

@@ -18,17 +18,24 @@ class DashboardController extends Controller
     public function index()
     {
         $fmt = "23:59:59";
-        $dat = date("Y-m-d")." ".$fmt;
-        return view('admin.index', [
+        $secdat = date("Y-m-d");
+        $usersperday="";
+        for ($i=6; $i > 0 ; $i--) {
+          $date=date('Y-m-d', strtotime($secdat. ' - '.$i.' days'));
+          $checkusersperday = Studentapplicant::where('created_at', '>=', $date)->where('created_at', '<', $date." ".$fmt)->count();
+          $usersperday .= $checkusersperday.",";
+        }
+          return view('admin.index', [
             'section' => 'dashboard',
             'users' => Studentapplicant::all(),
             'students' => Student::all(),
             'activeStudents' => $students =  Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', 'ACTIVE')->get(),
             'admins' => Admin::all(),
-            'userstoday' => Studentapplicant::where('created_at', '>=', date("Y-m-d"))->where('created_at', '<', $dat),
+            'userstoday' => Studentapplicant::where('created_at', '>=', date("Y-m-d"))->where('created_at', '<', date("Y-m-d")." ".$fmt),
             'pay_made' => Payment::orderByDesc('created_at')->limit(7)->get(),
             'pay_app' => Paymentapplicant::orderByDesc('created_at')->limit(7)->get(),
-            'posts' => Post::all()
+            'posts' => Post::all(),
+            'usersperday' => $usersperday
         ]);
     }
 }

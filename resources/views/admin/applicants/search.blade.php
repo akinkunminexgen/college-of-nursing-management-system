@@ -19,7 +19,7 @@
             <div class="row">
               <div class="col-xs-12">
 
-                    @if($applicant !==null)
+                    @if($applicant != null)
                     @if($tag == 'unapproved')
                     <table class="table table-bordered table-striped table-hover data-table">
                         <thead>
@@ -117,7 +117,7 @@
                           @if($tag == 'approved')
                             <p class="lead">No student with such Email or Reg No.! or<span class="badge badge-warning">Payment not yet confirmed!! Check unapproved applicant</span></p>
                           @else
-                            <p class="lead">No student with such email address! or <span class="badge badge-success">Student should register</span></p>
+                            <p class="lead">No student with such email address! or <span class="badge badge-success">or check approved student <a href="{{route('applicants.index')}}">click here</a></span></p>
                           @endif
                         </div>
                     @endif
