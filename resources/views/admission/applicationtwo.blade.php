@@ -92,6 +92,26 @@ Admission - Form two
                                           RESULT</h3></label>
                                   </div>
                                 </div>
+                                
+                                <div class='row form-group'>
+                                    <div class='col-lg-4'>
+                                        <label>
+                                            Jamb Reg. Number</label>
+                                    </div>
+                                    <div class='col-lg-8'>
+                                        <input type='text' name='jamb_no'  value="{{ old('jamb_no') }}" class='form-control' required title="Provide Jamb registration number" >
+                                    </div>
+                                </div>
+                                
+                                <div class='row form-group'>
+                                    <div class='col-lg-4'>
+                                        <label>
+                                            Jamb score</label>
+                                    </div>
+                                    <div class='col-lg-8'>
+                                        <input type='text' name='jamb_score'  value="{{ old('jamb_score') }}" class='form-control' required title="note: score must be above 200">
+                                    </div>
+                                </div>
 
                                 <div class='row form-group'>
                                     <div class='col-lg-4'>
@@ -114,7 +134,7 @@ Admission - Form two
                                             Exam Number</label>
                                     </div>
                                     <div class='col-lg-8'>
-                                        <input type='text' name='exam_no'  value="{{ old('exam_no') }}" class='form-control' required>
+                                        <input type='text' name='exam_no'  value="{{ old('exam_no') }}" class='form-control' required title="Provide exam registration number">
                                     </div>
                                 </div>
                                 <div class="form-group row">

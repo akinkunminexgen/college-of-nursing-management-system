@@ -45,6 +45,20 @@ Admission - Upload passport
                 </select>
             </div>
         </div>
+        <div class='row form-group'>
+            <div class='col-lg-4'>
+                <label>
+                    Choose your center : ----></label>
+            </div>
+            <div class='col-lg-4'>
+
+                <select class="form-control input-sm" name="campus" id="" required>
+                   <option selected value="">Select</option>
+                    <!--<option value="KISHI">KISHI</option>-->
+                    <option value="IBADAN">IBADAN</option>
+                </select>
+            </div>
+        </div>
 
           <div class="form-group row">
             <label class="col-md-3"><strong>Upload passport:</strong></label>

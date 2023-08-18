@@ -61,7 +61,7 @@ Principal Officers
               <div class="our-teachers-block">
                   <img src="images/registrar.jpg" class="img-fluid teachers-img" alt="#">
                   <div class="teachers-description">
-                      <p><strong>Mr Z.O Jayeola</strong>
+                      <p><strong>Mrs F. A. Yusuf</strong>
                           <br> MPA, BA, NCE
                       </p>
                       <hr>

@@ -41,7 +41,7 @@ Portal - Course Registration
                         <!--  <option value="{{$payType['half']}}">{{$payType['half']}}</option>   -->
                           @endif
                         </select>
-                         @if($student->department_id != 2 OR $student->level != 100)
+                         @if($student->department_id != 3 OR $student->level != 100)
                         <label for="tuition" class="col-md-2 col-form-label text-md-right"><strong>{{ __('Select Level') }}</strong></label>
                         <select class="form-control col-md-2" id="pay_level" name="pay_level" required>
                           <option value="{{$level}}"> </option>
@@ -51,8 +51,8 @@ Portal - Course Registration
                       </div>
                     <div class="row">
                         
-                      <div class="col-md-4 text-justify text-danger">
-                          @if($student->department_id == 2 AND $student->level == 100)<b></b>NOTE: A departmental fee of N7500 has been added to your tuition fee for the newly admitted basic midwifery freshers</b>@endif</div>
+                      <!--<div class="col-md-4 text-justify text-danger">
+                          @if($student->department_id == 2 AND $student->level == 100)<b></b>NOTE: A departmental fee of N7500 has been added to your tuition fee for the newly admitted basic midwifery freshers</b>@endif</div>-->
                       
                       <div class="text-danger col-md-5"><strong id="not_ify"></strong></div>
                     </div>

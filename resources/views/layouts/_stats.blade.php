@@ -33,7 +33,7 @@
                     <img src="{{asset('images/chart-icon_4.png')}}" class="img-fluid" alt="chart_icon">
                 </div>
                 <div class="chart-text">
-                    <p><span class="counter">72</span> Years Exp.</p>
+                    <p><span class="counter">74</span> Years Exp.</p>
                 </div>
             </div>
         </div>

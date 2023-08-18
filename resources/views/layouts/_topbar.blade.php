@@ -18,12 +18,12 @@
         <div class="row">
           <div class="col-md-12">
 
-              <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+           <!--   <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
                 <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Advertisement for Admission into Basic General Nursing Programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2022/2023 Academic Session</b> <hr>
                 <p class="text-success">Applications are hereby invited from suitably qualified candidates for admission into the Nursing programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
 
-                <br><!--<a href='/shortlist'> Click here</a> for more information.
-                <br>-->
+                
+                <br>
                <a href='admission'>Click here</a> to start application</p>
                 </h4>
 
@@ -36,19 +36,29 @@
             <li>Time: 8.00 am prompt</li>
           </ul>
           <hr>
-              </div>
+              </div>-->
 
 
 
-          <!-- <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary">2022 ENTRANCE EXAMINATION RESULT OF BASIC GENERAL NURSING INTO THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN </b> <hr>
-                <p>The underlisted candidates who wrote entrance examination and called for interview into Oyo State College of College Nursing and Midwifery, Eleyele, Ibadan have been offered admission into Basic General Nursing programme of the Institution. <a href='shortlist'>Click here</a> for more information</p>
-                </h4>
-
-             
-
-
-          </div>-->
+          <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary">OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN.<br>
+                        ADMISSION 2023/2024 SESSION<br>
+                        OYSCONME COMPUTER ASSITED SCREENING (CAS)
+                        </b> </h4>
+                <p>Applications are invited from suitably qualified candidates for Computer Assisted Screening (CAS), for admission into the National Diploma (ND) Programme at the Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
+                
+                <h4 class="text-danger">ENTRY REQUIREMENT:</h4>
+                <ul>
+                    <li>JAMB: Candidates must ensure to have scored not less than 200 in the 2023 JAMB Result and also must have chosen OYSCONME as their First Choice of Institution.</li>
+                    <li>WASSCE/NECO (O’ Level) with credits in five (5) subjects including English Language, Mathematics, Biology, Physics and Chemistry at not more than two (2) sittings.</li>
+                </ul>
+                <ul>
+                    <li class="text-success"><a href='admission'>Click here</a> for more information</li>
+                </ul>
+                <br>
+                <h4>APPLICATION</h4>
+                <P class="text-primary">Application starts Wednesday, 19th July 2023 and closes Friday, 18th August, 2023.</P>
+          </div>
 
 
         </div>

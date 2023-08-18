@@ -28,6 +28,11 @@ class DashboardController extends Controller
     public function index()
     {
         $student = Student::find(session()->get('st_id'));
+        
+        if ($student == NULL) {
+               session()->flush();
+              return redirect()->back()->with('error', 'Missing Information, Contact the Administrator');
+            }
         //dd($student);
        $user = User::find(Auth::id());
        

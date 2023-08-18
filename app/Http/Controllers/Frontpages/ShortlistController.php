@@ -12,9 +12,10 @@ class ShortlistController extends Controller
 {
     public function index(){
 
-      $indigene = Studentapplicant::where('admission_status', 'MAYBE')->where('department_id', '=', '1')->orderByDesc('date_interview')->orderByDesc('score')->get();
-      $checkisYES=  Studentapplicant::where('admission_status', 'YES')->where('department_id', '=', '1')->orderByDesc('score')->get();
-      //$checkisYES = null;
-          return view('applicationguide')->with('students', $indigene)->with('checkisYES', $checkisYES);
+      $chck = Studentapplicant::where('admission_status', 'MAYBE')->where('department_id', '=', '2')->orderByDesc('date_interview')->orderByDesc('campus')->get();
+      $checkisYES=  Studentapplicant::where('admission_status', 'YES')->where('department_id', '=', '2')->orderByDesc('score')->get();
+      $distinctdate=  Studentapplicant::where('department_id', '=', '2')->select('date_interview')->orderBy('date_interview')->distinct()->get();
+
+          return view('applicationguide')->with('students', $chck)->with('checkisYES', $checkisYES)->with('distinctdate', $distinctdate);
     }
 }

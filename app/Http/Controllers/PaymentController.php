@@ -72,7 +72,7 @@ class PaymentController extends Controller
      switch ($paymentDetails['data']['status']) {
        case 'success':
         sleep(3);
-       $chck = Cardapplicant::where('invoice_id', $paymentDetails['data']['metadata']['student_id'])->first();
+       /*$chck = Cardapplicant::where('invoice_id', $paymentDetails['data']['metadata']['student_id'])->first();
       if ($chck == null)
       {
      //generate a rand pin
@@ -85,8 +85,8 @@ class PaymentController extends Controller
            ]);
            //create registration number
            $id = $card->id;
-           $dep = 'CNM/22B/';
-           //$dep = 'BMID/22/';
+           $dep = 'CNM/23A/';
+           //$dep = 'BMID/23/';
            if ($id < 10) {
                $txt = sprintf("%s000%u",$dep,$id);
            }
@@ -107,28 +107,7 @@ class PaymentController extends Controller
            $lastname = $arr[0];
            $firstname = $arr[1];
 
-           //create a date for examination
-        /*   $num = $card->id;
-           $arr1 = explode('-',$paymentDetails['data']['metadata']['reg_no']);
-           $dep = $arr1[0];*/
-
-           /*if($dep == 'BMID'){
-                 if ($num <= 2500 ) {
-                   $date=date_create("2021-02-09");
-                 }else {
-                   $date=date_create("2021-02-10");
-                 }
-           }else{
-                if ($num <= 600 ) {
-                   $date=date_create("2021-03-08");
-                 }elseif ($num > 600 and $num <= 1150) {
-                   $date=date_create("2021-03-09");
-                 }elseif ($num > 1150 and $num <= 1986) {
-                   $date=date_create("2021-03-10");
-                 }else {
-                   $date=date_create("2021-03-11");
-                 }
-           }*/
+          
 
            $student = $card->studentapplicant()->create([
               'first_name' => $firstname,
@@ -147,7 +126,7 @@ class PaymentController extends Controller
              ]);
 
 
-         }
+         } */
 
          $notification = Alert::alertMe('Payment successful!!!, Please refresh if any value is not given', 'success');
          return redirect()->route('appformfee.activate')->with('success', 'Payment successful!!!, Please refresh page if any value is not yet given');
@@ -165,75 +144,11 @@ class PaymentController extends Controller
    {  //dd($paymentDetails);
      switch ($paymentDetails['data']['status']) {
        case 'success':
-
-         $ref = "accept/".$paymentDetails['data']['reference'];
-        $chck = Paymentapplicant::where('reference', $ref)->first();
-    if ($chck == null)
-    {
-       $payment = Paymentapplicant::create([
-         'studentapplicant_id' => $paymentDetails['data']['metadata']['student_id'],
-         'reference' => "accept/".$paymentDetails['data']['reference'], //concatenate accept to know whether a student has paid for his/her acceptance fee
-         'payment_modes_id' => 1, // to show it is paid through paystack
-         'status' => 'PAID',
-         'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
-         'created_at' => $paymentDetails['data']['createdAt'],
-       ]);
-
-       //automatically insert students that have paid acceptance fee into the school database
-       $student = studentapplicant::find($paymentDetails['data']['metadata']['student_id']);
-
-
-       $user = User::create([
-         'first_name' => $student->first_name,
-         'middle_name' => $student->middle_name,
-         'last_name' => $student->surname,
-         'sex' => $student->gender,
-         'phone' => $student->phone,
-         'dob' => $student->dob,
-         'state_id' => $student->state_of_origin,
-         'location_id' => $student->lga,
-         'email' => $student->email,
-         'password' => bcrypt($student->phone),
-         'address' =>  $student->home_address,
-         'city' => $student->state,
-       ]);
-
-
-       $rol = 3; // 3 is id for role as a student
-         $user->roles()->sync([(int) $rol]);
-         $matric_no="NOT/YET/ISSUED";
-
-       $students = $user->student()->create([
-         'department_id' => $student->department_id,
-         'matric_no' => $matric_no,
-         'level' => 100,
-         'marital_status' => $student->marital_status,
-         'admission_no' => $student->cardapplicant->reg_no,
-         'sponsors_name' => $student->sponsor_name,
-         'sponsors_phone' => $student->sponsor_phone,
-       ]);
-
-       $result = $students->result()->create([
-         'exam_type' => $student->exam_type,
-         'exam_no' => $student->exam_no,
-         'mathematics' =>  $student->mathematics,
-         'english' =>  $student->english,
-         'chemistry' =>  $student->chemistry,
-         'biology' =>  $student->biology,
-         'physics' =>  $student->physics,
-       ]);
-
-
-       $imageData = $this->upload($student->pic_url, 'students', 400, '', 'auto');
-       $user->images()->create([
-           'url' => $imageData['secure_url']
-       ]);
-
-
+           
          $notification = Alert::alertMe('Payment successful!!!', 'success');
          return redirect()->route('admission.dashboard')->with($notification);
         break;
-    }
+        
        default:
        $notification = Alert::alertMe('something went wrong! Contact the Administrator', 'warning');
        return redirect()->route('admission.dashboard')->with($notification);
@@ -314,8 +229,8 @@ class PaymentController extends Controller
          ]);
 
          $id = $card->id;
-         $dep = 'CNM/22B/';
-           //$dep = 'BMID/22/';
+         $dep = 'CNM/23A/';
+           //$dep = 'BMID/23/';
          if ($id < 10) {
              $txt = sprintf("%s000%u",$dep,$id);
          }
@@ -336,29 +251,6 @@ class PaymentController extends Controller
          $lastname = $arr[0];
          $firstname = $arr[1];
 
-         //create a date for examination
-        /* $num = $card->id;
-           $arr1 = explode('-',$event->data->metadata->reg_no);
-           $dep = $arr1[0];
-
-           if($dep == 'BMID'){
-                 if ($num <= 2500 ) {
-                   $date=date_create("2021-02-09");
-                 }else {
-                   $date=date_create("2021-02-10");
-                 }
-           }else{
-                if ($num <= 600 ) {
-                   $date=date_create("2021-03-08");
-                 }elseif ($num > 600 and $num <= 1150) {
-                   $date=date_create("2021-03-09");
-                 }elseif ($num > 1150 and $num <= 1986) {
-                   $date=date_create("2021-03-10");
-                 }else {
-                   $date=date_create("2021-03-11");
-                 }
-           }*/
-
          $student = $card->studentapplicant()->create([
             'first_name' => $firstname,
             'surname' => $lastname,
@@ -375,7 +267,28 @@ class PaymentController extends Controller
              'created_at' => $event->data->created_at,
            ]);
 
-
+               /* $senderEmail = 'oysconme@oysconme.edu.ng';
+                $senderName = 'OYSCONME';
+                $replyTo = 'oysconme1949@gmail.com';
+                $subject = 'Pin Generated!';
+                $toEmail = $event->data->customer->email;
+                $messageLetter = "Kindly complete your registration with the below information \n";
+                $messageLetter .= "Registration No: ".$txt."\n";
+                $messageLetter .= "Pin: ".$pin."\n";
+                
+                //for headers
+                $senderEmail ="From: ".$senderName."<".$senderEmail.">";
+                $replyTo ="Reply-To: ".$replyTo;
+                
+                  $headers = array($senderEmail,
+                    $replyTo,
+                    "X-Mailer: PHP/" . PHP_VERSION,
+                    'Content-Type:text/html;charset=UTF-8',
+                    );
+                $headers = implode("\r\n", $headers);
+                
+                
+                $send = mail($toEmail, $subject, $messageLetter, $headers);*/
        }
        break;
     }
@@ -386,10 +299,6 @@ class PaymentController extends Controller
 
 if ($event->data->metadata->payment_type == "Acceptance")
    {
-   $txt = $event->data->reference.", ".$event->data->metadata->email."/ ";
-        $fWrite = fopen("akinator.txt","a");
- $wrote = fwrite($fWrite, $txt);
- fclose($fWrite);
      switch ($event->event) {
        case 'charge.success':
            $ref = "accept/".$event->data->reference;

@@ -359,8 +359,9 @@ class StudentController extends Controller
                     // confirm if the reg no is present
                     $result = Student::where($colquery, $col1)->first();
                     if ($result == null) {
-                      if ($reg_no != "") {
-                        $msg.= $reg_no." does not exist in the database at row ".$i."\n";
+                      if ($col1 != "") {
+                          $n=$i+1;
+                        $msg.= $col1." does not exist in the database at row ".$n."\n";
                       }
                     }
                     else{

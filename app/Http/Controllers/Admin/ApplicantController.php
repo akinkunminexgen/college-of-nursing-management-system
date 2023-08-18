@@ -383,10 +383,19 @@ class ApplicantController extends Controller
       public function importresult(Request $request)
       {
           ini_set('memory_limit', '2048M');
-        $this->validate($request,[
-                'file_csv'          => 'required',
-            ]
-          );
+          ini_set('max_execution_time', '600');
+      $this->validate($request,[
+              'file_csv'          => 'required',
+              'csv_option' => 'required'
+          ]
+        );
+          if ($request->csv_option == "ad_score") {
+            $colquery = 'score';
+          }else if ($request->csv_option == "ad_status"){
+            $colquery = 'admission_status';
+          }else {
+            $colquery = 'date_interview';
+          }
 
           $msg = "";
           $i = 0;
@@ -401,8 +410,7 @@ class ApplicantController extends Controller
             while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
               {
                 $reg_no=  filter_var($filesop[0], FILTER_SANITIZE_STRING);
-                //$score =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
-                $status = filter_var($filesop[1], FILTER_SANITIZE_STRING);
+                $col = filter_var($filesop[1], FILTER_SANITIZE_STRING);
 
                 // get the id of the card
                 $result = Cardapplicant::where('reg_no', $reg_no)->first();
@@ -410,8 +418,11 @@ class ApplicantController extends Controller
                     $msg.= $reg_no." does not exist in the database at row ".$i."\n";
                 }
                 else{
+                    if($colquery == 'date_interview'){
+                        $col= date_create($col);
+                    }
                   Studentapplicant::where('cardapplicant_id', $result->id)
-                  ->update(['admission_status' => $status]);
+                  ->update([$colquery => $col]);
 
                 $sql = true;
                 }

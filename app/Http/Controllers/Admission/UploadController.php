@@ -52,7 +52,8 @@ class UploadController extends Controller
     {
       $this->validate($request, [
           'pport_upload' => 'required|image|max:200|dimensions:min_width=100,max_width=200',
-          'course' => 'required'
+          'course' => 'required',
+          'campus' => 'required'
         ],[
           'pport_upload.max' => 'Upload file less than 180kb',
           'pport_upload.dimensions' => 'Upload file should have maximum width of 200px'
@@ -106,6 +107,7 @@ class UploadController extends Controller
         'reg_step' => 'Completed',
         'pic_url' => $pic_url,
         'department_id' => $request->course,
+        'campus' => $request->campus,
         'date_exam' => $date
       ]);
 

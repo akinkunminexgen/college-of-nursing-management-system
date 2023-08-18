@@ -231,12 +231,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   // News section
   Route::resource('news', 'NewsController',  [
     'only' => [
-      'index', 'create', 'store', 'edit', 'update'
+      'index', 'create', 'store', 'edit', 'update', 'destroy'
     ],
     'parameters' => [
       'news' => 'post'
     ]
   ]);
+  Route::put('news/{update}', 'NewsController@update')->name('news.update');
+  Route::get('news/delete/{post}', 'NewsController@destroy')->name('news.destroy');
 
   // Events section
     Route::resource('events', 'EventController',  [
