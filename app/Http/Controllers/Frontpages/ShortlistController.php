@@ -12,7 +12,7 @@ class ShortlistController extends Controller
 {
     public function index(){
 
-      $chck = Studentapplicant::where('admission_status', 'MAYBE')->where('department_id', '=', '2')->orderByDesc('date_interview')->orderByDesc('campus')->get();
+      $chck = Studentapplicant::where('admission_status', 'MAYBE')->where('department_id', '=', '2')->orderByDesc('date_interview')->orderByDesc('campus')->orderBy('id')->get();
       $checkisYES=  Studentapplicant::where('admission_status', 'YES')->where('department_id', '=', '2')->orderByDesc('score')->get();
       $distinctdate=  Studentapplicant::where('department_id', '=', '2')->select('date_interview')->orderBy('date_interview')->distinct()->get();
 

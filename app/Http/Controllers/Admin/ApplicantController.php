@@ -13,10 +13,19 @@ use App\Models\State;
 use App\Alert;
 use PDF;
 use DB;
+use Paystack;
+use Session;
+use App\User;
+use App\Models\Payment;
+use App\Models\Result;
+use App\Models\Student;
+use App\Models\SystemSetting;
+use App\Http\Traits\CloudinaryUpload;
 
 
 class ApplicantController extends Controller
 {
+use CloudinaryUpload;
 
     public function __construct()
     {
@@ -63,7 +72,7 @@ class ApplicantController extends Controller
     {
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
           ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'pic_url', 'gender', 'marital_status',
-          'lga', 'state_of_origin','phone', 'sponsor_phone', 'email','date_exam','score')->orderBy('reg_no')->get();
+          'lga', 'state_of_origin','phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->orderBy('reg_no')->get();
           // file name for download
           $fileName = "applicants".date('Ymd').".xls";
 
@@ -255,6 +264,8 @@ class ApplicantController extends Controller
           'id' => 'required',
           'amount' => 'required|numeric'
           ]);
+          
+          $reg_no = SystemSetting::where('name','registration_number')->select('value')->first();
 
           $invoice = Invoice::find($request->id);
           $student = Studentapplicant::where('email', $request->email)->first();
@@ -267,7 +278,7 @@ class ApplicantController extends Controller
             $card = Cardapplicant::where('invoice_id', $invoice->id)->first();
             if ($card != NULL) {
               $id = $card->id;
-              $dep = 'CNM/22B/';
+              $dep = $reg_no->value;
               $txt = $this->formatNum($id, $dep);
 
               $card->update([
@@ -284,7 +295,7 @@ class ApplicantController extends Controller
                 ]);
                 //create registration number
                 $id = $card->id;
-                $dep = 'CNM/22B/';
+                $dep = $reg_no->value;
                 $txt = $this->formatNum($id, $dep);
 
                 $card->update([
@@ -414,6 +425,7 @@ class ApplicantController extends Controller
 
                 // get the id of the card
                 $result = Cardapplicant::where('reg_no', $reg_no)->first();
+                //$result = Studentapplicant::where('jamb_no', $reg_no)->first();
                 if ($result == null) {
                     $msg.= $reg_no." does not exist in the database at row ".$i."\n";
                 }
@@ -423,6 +435,58 @@ class ApplicantController extends Controller
                     }
                   Studentapplicant::where('cardapplicant_id', $result->id)
                   ->update([$colquery => $col]);
+                  /* Studentapplicant::where('id', $result->id)
+                  ->update([$colquery => $col]);
+                  
+                  
+                 $student = studentapplicant::find($result->id);
+                    
+                           $user = User::create([
+                             'first_name' => $student->first_name,
+                             'middle_name' => $student->middle_name,
+                             'last_name' => $student->surname,
+                             'sex' => $student->gender,
+                             'phone' => $student->phone,
+                             'dob' => $student->dob,
+                             'state_id' => $student->state_of_origin,
+                             'location_id' => $student->lga,
+                             'email' => $student->email,
+                             'password' => bcrypt($student->phone),
+                             'address' =>  $student->home_address,
+                             'city' => $student->state,
+                           ]);
+                    
+                    
+                           $rol = 3; // 3 is id for role as a student
+                             $user->roles()->sync([(int) $rol]);
+                             $matric_no="NOT/YET/ISSUED";
+                    
+                           $students = $user->student()->create([
+                             'department_id' => $student->department_id,
+                             'matric_no' => $matric_no,
+                             'level' => 100,
+                             'marital_status' => $student->marital_status,
+                             'admission_no' => $student->cardapplicant->reg_no,
+                             'sponsors_name' => $student->sponsor_name,
+                             'sponsors_phone' => $student->sponsor_phone,
+                           ]);
+                    
+                           $result = $students->result()->create([
+                             'exam_type' => $student->exam_type,
+                             'exam_no' => $student->exam_no,
+                             'mathematics' =>  $student->mathematics,
+                             'english' =>  $student->english,
+                             'chemistry' =>  $student->chemistry,
+                             'biology' =>  $student->biology,
+                             'physics' =>  $student->physics,
+                           ]);
+                    
+                    
+                           $imageData = $this->upload($student->pic_url, 'students', 400, '', 'auto');
+                           $user->images()->create([
+                               'url' => $imageData['secure_url']
+                           ]);*/
+                  
 
                 $sql = true;
                 }

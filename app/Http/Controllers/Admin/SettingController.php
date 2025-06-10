@@ -42,7 +42,8 @@ class SettingController extends Controller
             'admission_payment_fee' => 'required|numeric',
             'acceptance_payment_fee' => 'required|numeric',
             'admission_exam_date_nursing' => 'required|date_format:Y-m-d',
-            'admission_exam_date_midwifery' => 'required|date_format:Y-m-d'
+            'admission_exam_date_midwifery' => 'required|date_format:Y-m-d',
+            'registration_number' => 'required'
         ]);
 
 //dd($request->maintenance);

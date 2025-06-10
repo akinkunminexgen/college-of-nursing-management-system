@@ -40,7 +40,8 @@ class PayTuitionController extends Controller
       $payment = $student->payment()->latest('created_at')->first();
       if ($payment !== null) {
           $lvl = substr($payment->reference,4,3);
-          if($lvl == $student->level){
+          
+          if($lvl == $student->level AND $payment->status == "PAID"){
                $notification = Alert::alertMe('Payment has been made for your current Level','info');
         return redirect()->route('portal.dashboard')->with($notification);
           }
@@ -65,7 +66,6 @@ class PayTuitionController extends Controller
       $session = SystemSetting::where('name', $current_session)->first();
 
       //check to know what level has been paid through reference field in payment model
-      //$payment = $student->payment()->latest('created_at')->first();
         $lvl = 100;
       //declare an object to allow choosing full or half payment
       $payType = [

@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Paystack;
 use Session;
-use  App\User;
+use App\User;
 use App\Models\Payment;
 use App\Models\Result;
 use App\Models\Student;
 use App\Models\Studentapplicant;
 use App\Models\Paymentapplicant;
+use App\Models\SystemSetting;
 use App\Models\Cardapplicant;
 use App\Http\Traits\CloudinaryUpload;
 use App\Alert;
@@ -48,10 +49,25 @@ class PaymentController extends Controller
      //Payment of school fees (PORTAL)
      if ($paymentDetails['data']['metadata']['payment_type'] == "Portal")
      {
+      $getYr =$paymentDetails['data']['metadata']['session'];
+       $getYr = substr($getYr,2,2)."".$paymentDetails['data']['metadata']['reg_status'];
+       $reference = $getYr."/".$paymentDetails['data']['metadata']['lvl']."/".$paymentDetails['data']['reference']; //adding payment level to the reference
+       //determine if the payment was successful or not
      //determine if the payment was successful or not
      switch ($paymentDetails['data']['status']) {
        case 'success':
-
+               $chck = Payment::where('reference', $reference)->first();
+               if ($chck == null)
+               {
+              $payment = Payment::create([
+                'student_id' => $paymentDetails['data']['metadata']['student_id'],
+                'reference' => $reference,
+                'payment_modes_id' => 1,
+                'status' => $paymentDetails['data']['metadata']['pay_status'],
+                'amount' => ($paymentDetails['data']['amount']/100) - 300, //getting exact amount from paystack
+                'created_at' => $paymentDetails['data']['created_at'],
+              ]);
+            }
 
           $notification = Alert::alertMe('Payment successful!!!', 'success');
           return redirect('/portal/dashboard')->with($notification);
@@ -206,13 +222,17 @@ class PaymentController extends Controller
 
      break;
        }
+       $fWrite = fopen("akinator.txt","a");
+         $wrote = fwrite($fWrite, $reference);
+         fclose($fWrite);
  }
 }
 
  //admission payment
  if ($event->data->metadata->payment_type == "Admission")
  {
-   //dd($paymentDetails);
+     
+   $reg_no = SystemSetting::where('name','registration_number')->select('value')->first();
    switch ($event->event) {
      case 'charge.success':
      //check whether the payment has been completed
@@ -229,7 +249,7 @@ class PaymentController extends Controller
          ]);
 
          $id = $card->id;
-         $dep = 'CNM/23A/';
+         $dep = $reg_no->value;
            //$dep = 'BMID/23/';
          if ($id < 10) {
              $txt = sprintf("%s000%u",$dep,$id);
@@ -365,6 +385,10 @@ if ($event->data->metadata->payment_type == "Acceptance")
        $user->images()->create([
            'url' => $imageData['secure_url']
        ]);
+       
+       $fWrite = fopen("akinator.txt","a");
+         $wrote = fwrite($fWrite, $txt);
+         fclose($fWrite);
 
     }
         break;

@@ -18,6 +18,7 @@ use App\Models\Result;
 use App\Alert;
 use App\User;
 use Carbon\Carbon;
+use DateTime;
 
 class StudentController extends Controller
 {
@@ -334,6 +335,177 @@ class StudentController extends Controller
               'csv_option' => 'required'
           ]
         );
+        if ($request->csv_option == "reg_student") {
+          // code...just to register students
+
+
+
+                    $msg = "";
+                    $i = 0;
+                    $sql = true;
+                    $file = $request->file('file_csv')->getRealPath();
+                    $handle = fopen($file, "r");
+                    $filename = $request->file_csv->getClientOriginalExtension();
+                    if ($file == NULL || $filename !== 'csv') {
+                      $notification = Alert::alertMe('Please select a CSV file to import', 'warning');
+                        return redirect()->back()->with($notification);
+                    }else {
+                      while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                        {
+                          $col0 =  filter_var($filesop[0], FILTER_SANITIZE_STRING);
+                          $col1 =  filter_var($filesop[1], FILTER_SANITIZE_STRING);
+                          $col2 =  filter_var($filesop[2], FILTER_SANITIZE_STRING);
+                          $col3 =  filter_var($filesop[3], FILTER_SANITIZE_STRING);
+                          $col4 =  filter_var($filesop[4], FILTER_SANITIZE_STRING);
+                          $col5 =  filter_var($filesop[5], FILTER_SANITIZE_STRING);
+                          $col6 =  filter_var($filesop[6], FILTER_SANITIZE_STRING);
+                          $col7 =  filter_var($filesop[7], FILTER_SANITIZE_STRING);
+                          $col8 =  filter_var($filesop[8], FILTER_SANITIZE_STRING);
+                          $col9 =  filter_var($filesop[9], FILTER_SANITIZE_STRING);
+                          $col10 =  filter_var($filesop[10], FILTER_SANITIZE_STRING);
+                          $col11 =  filter_var($filesop[11], FILTER_SANITIZE_STRING);
+                          $col12 =  filter_var($filesop[12], FILTER_SANITIZE_STRING);
+                          $col13 =  filter_var($filesop[13], FILTER_SANITIZE_STRING);
+                          $col14 =  filter_var($filesop[14], FILTER_SANITIZE_STRING);
+                          $col15 =  filter_var($filesop[15], FILTER_SANITIZE_STRING);
+                          $col16 =  filter_var($filesop[16], FILTER_SANITIZE_STRING);
+                        //  $col17 =  filter_var($filesop[17], FILTER_SANITIZE_STRING);
+
+                        if (!isset($col16)) {
+                          $col16= $col9;
+                        }
+
+                        if (!isset($col15)) {
+                          $col15= 'information Needed!!!';
+                        }
+
+                        if (!isset($col14)) {
+                          $col14= 'information Needed!!!';
+                        }
+
+                        //validate Email
+                        $col8 = trim($col8);
+                        if (!filter_var($col8, FILTER_VALIDATE_EMAIL)) {
+                              $n=$i+1;
+                                $msg.= $col8." is an invalid email address ".$n."\r\n";
+                                $message = "'.$msg.'";
+                              return redirect()->back()->with('success', $message);
+                              exit();
+                              }
+
+                          // confirm if the reg no is present
+                          $result = User::where('email', $col8)->first();
+                          if (!$result == null) {
+                            if ($col1 != "") {
+                                $n=$i+1;
+                              $msg.= $col8."  exists in the database at row ".$n."\r\n";
+                            }
+                          }
+                          else{
+                            // check for state
+                            $state_id = explode(" ",$col12);
+                            $idS = $state_id[0];
+                            if(isset($state_id[1]) AND $state_id[1] == 'river'){
+                              $idS = $state_id[0]." ".$state_id[1];
+                            }
+
+                            $lga_id = explode(" ",$col13);
+                            $idL0 = $lga_id[0];
+                            $idL2 = "";
+                            $idL3 = "";
+                            if (isset($lga_id[1]) AND $lga_id[1] != NULL) {
+                              $idL2 = " ".$lga_id[1];
+
+                              if (strtolower($idL0) ==='oyo' AND strtolower($idL2) === ' west') {
+                                $idL2 = "";
+                              }
+                            }
+
+                            if (isset($lga_id[2]) AND $lga_id[2] != NULL) {
+                              $idL3 = "-".$lga_id[2];
+
+                              if (strtolower($idL3) == '-local' OR strtolower($idL3) == '-local-government') {
+                                $idL3 = "";
+                              }
+                            }
+
+                            if (strtolower($idL2) == ' local' OR strtolower($idL2) == ' local-government') {
+                              $idL2 = "";
+                              $idL3 = "";
+                            }
+                            $idL = $idL0."".$idL2."".$idL3;
+
+                          $col12 =  State::where('name', $idS)->first();
+                          $col13 = Location::where('state_id', $col12->id)->where('lga', 'LIKE', $idL.'%')->first();
+                          //dd($idL);
+
+                          $date = new DateTime($col11);
+
+                                $user = User::create([
+                                  'first_name' => $col0,
+                                  'middle_name' => $col1,
+                                  'last_name' => $col2,
+                                  'sex' => $col7,
+                                  'phone' => $col9,
+                                  'dob' => $date,
+                                  'state_id' => $col12->id,
+                                  'location_id' => $col13->id,
+                                  'email' => $col8,
+                                  'password' => bcrypt($col9),
+                                  'address' =>  $col14,
+                                ]);
+
+
+                                $rol = 3; // 3 is id for role as a student
+                                  $user->roles()->sync([(int) $rol]);
+                                  $matric_no=$col6;
+
+                                $students = $user->student()->create([
+                                  'department_id' => $col3,
+                                  'matric_no' => $col6,
+                                  'level' => $col4,
+                                  'marital_status' => $col10,
+                                  'admission_no' => $col6,
+                                  'sponsors_name' => $col15,
+                                  'sponsors_phone' => $col16,
+                                ]);
+
+
+                              /*  $imageData = $this->upload($col17, 'students', 400, '', 'auto');
+                                $user->images()->create([
+                                    'url' => $imageData['secure_url']
+                                ]);*/
+
+                          $sql = true;
+                          }
+                          $i++;
+                        }
+
+                      if ($sql) {
+                        if($msg != ""){
+                          $message = "imported successfully!!! but '.$msg.'";
+                        return redirect()->back()->with('success', $message);
+                        }
+                        $notification = Alert::alertMe('Imported successfully!!!', 'success');
+                          return redirect()->back()->with($notification);
+
+                      } else {
+                        $notification = Alert::alertMe('Sorry! There is some problem in the import file', 'warning');
+                        return redirect()->back()->with($notification);
+
+                      }
+                      }
+
+
+
+
+
+            // end
+
+
+        }else {
+          // code...
+
           if ($request->csv_option == "level") {
             $colquery = 'matric_no';
             $colquery2 = 'level';
@@ -389,6 +561,6 @@ class StudentController extends Controller
                 }
 
     }
-
+  }
 
 }
