@@ -21,7 +21,7 @@ Application Guide
 <!--============================= ADMISSION FORM RULES =============================-->
 <section class="admission-form_rules">
     <div class="container">
-        <div class="row">
+        <!--<div class="row">
             <div class="col-md-7 admission-form_mr">
                 <h2>Admission Requirements</h2>
                 <br>
@@ -30,7 +30,7 @@ Application Guide
                 <h4><strong>Basic General Nursing</strong></h4>
                 <br>
                 <p>
-                  This is a three year (3) programme commencing from October, 2023, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
+                  This is a four year (4) programme commencing from October, 2024, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as General Nurses and be eligible for registration with NMCN as Registered Nurses (RN).
                   </p>
             </div>
             <div class="col-md-5 admission-form_mr">
@@ -45,16 +45,16 @@ Application Guide
                        He or She should be at least Seventeen (17) years old on admission.</li>
                 </ul>
             </div>
-        </div>
+        </div>-->
         <hr>
-       <!--<div class="row">
+       <div class="row">
             <div class="col-md-7 admission-form_mr">
               <br>
               <br>
               <br>
                 <h4><strong>Basic Midwifery</strong></h4>
                 <br>
-                <p>This is a three year (3) programme commencing from March, 2023, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as Midwives and be eligible for registration with NMCN as Registered Midwife (RM).</p>
+                <p>This is a three year (3) programme commencing from April, 2024, after which candidates will be presented for both the College and the Nursing and Midwifery Council of Nigeria (NMCN) Final Qualifying Examinations to qualify as Midwives and be eligible for registration with NMCN as Registered Midwife (RM).</p>
             </div>
             <div class="col-md-5 admission-form_mr">
               <ul class="admission-form_listed">
@@ -66,10 +66,10 @@ Application Guide
                      He or She should be at least Seventeen (17) years old on admission.</li>
               </ul>
             </div>
-        </div>-->
+        </div>
 
-      <!--  <hr>
-      <div class="row">
+      <hr>
+      <!--<div class="row">
           <div class="col-md-7 admission-form_mr">
             <br>
             <br>
@@ -89,44 +89,45 @@ Application Guide
                   Nigeria Examination may also apply.</li>
             </ul>
           </div>
-      </div>
-        <hr>-->
+      </div>-->
+        <hr>
         <div class="row">
           <div class="col-md-12">
               <strong><p class="text-center"><b>Method of Application</b></p></strong>
-            <p class="text-justify">Interested candidates are to follow the underlisted process for online application through the college website: www.oysconme.edu.ng</p>
+            <p class="text-justify">Interested candidates are to follow the underlisted process for online application through the college website: <a href="/">www.oysconme.edu.ng</a></p>
             <ul>
-              <li>Online payment with the sum of Ten Thousand (N10,000.00) via this <a href="/admission/appform">link</a> where application form fee is expected to be made.</li>
+              <li>Online payment with the sum of Fifteen Thousand (N20,500.00) via this <a href="/admission/appform">link</a> where application form fee is expected to be made.</li>
               <li>Pin generated after payment should be printed out</li>
               <li>After generating the pin, a <a href="#">link</a> will direct you to the page where you complete your application</li>
               <li>Photocard must be printed out by the applicant, which is expected to be brought to the College for endorsement</li>
               <li>Alternatively, you may wish to come to the College ICT Centre with your ATM card for their online payment, if you find the process cumbersome. </li>
             </ul>
-            <p class="text-justify">A sum of non-refundable fee of Ten Thousand Naira (₦10,000.00) to be paid by candidates for the Computer Assisted Screening. The fee covers Two Thousand Naira (₦2,000.00) for Post UTME, Seven Thousand Naira (₦7,000.00) for verification of SSCE, WAEC or NECO as applicable per sitting and One Thousand Naira (₦1,000.00) for online payment transaction.</p>            
+            <!--<p class="text-justify">A sum of non-refundable fee of Ten Thousand Naira (₦10,000.00) to be paid by candidates for the Computer Assisted Screening. The fee covers Two Thousand Naira (₦2,000.00) for Post UTME, Seven Thousand Naira (₦7,000.00) for verification of SSCE, WAEC or NECO as applicable per sitting and One Thousand Naira (₦1,000.00) for online payment transaction.</p>  -->          
           </div>
         </div>
 
       <div class="row">
         <div class="col-md-12">
 
-             <!--<strong><p class="text-center">Closing Date For Basic Midwifery:</p></strong>
-          <p class="text-justify">Sale of forms starts from Thursday 12th November, 2020 online application must be completed on or before 24th January, 2021.</p>
+            <strong><p class="text-center">Closing Date For Basic Midwifery</p></strong>
+          <p class="text-justify">Online application must be completed on or before Friday 10th January 2025.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Monday, 2nd – Friday, 6th August, 2021</li>
-            <li>Date of Interview: Monday, 23rd – Friday, 27th August, 2021</li>
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
+            <li>Date of Entrance Examination (CBT): Tuesday 21st to Thursday 23rd January 2025.</li>
+            <!--<li>Date of Interview: Monday, 29th April and Tuesday, 30th April, 2024</li>-->
+            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and KISHI</li>
             <li>Time: 8.00 am prompt</li>
+            <li>Resumption Date: as fixed by Nursing and Midwifery Council slated for Monday 3rd March 2025.</li>
           </ul>
-          <br>-->
+          <br>
 
-            <strong><p class="text-center"><b>COMPUTER ASSISTED SCREENING (CAS)</b></p></strong>
+           <!-- <strong><p class="text-center"><b>COMPUTER ASSISTED SCREENING (CAS)</b></p></strong>
          <p class="text-justify">Computer Assisted Screening date is:</p>
           <ul>
-            <li>Date: From Monday, 21st August to Friday, 25th August, 2023</li>
+            <li>Date: From Monday, 28th August to Thursday, 31st August, 2023</li>
             <li>Venue: OYSCONME Premises</li>
             <li>Time: 8.00 am prompt</li>
           </ul>
-        <p>Successful candidates would be required to pay a non-refundable Acceptance Fee of Forty Thousand Naira (₦40,000.00) only.</p>
+        <p>Successful candidates would be required to pay a non-refundable Acceptance Fee of Forty Thousand Naira (₦40,000.00) only.</p>-->
 
          
          <h3>Please note: </h3>
@@ -144,7 +145,7 @@ Application Guide
           </ul>
         </div>
       </div>
-      <p class="text-center"> <strong>Signed</strong> <br> Yusuf, F. A (Mrs.) <br> Ag. Registrar </p>
+      <p class="text-center"> <strong>Signed</strong> <br> Raji, T. A (Mr.) <br> Ag. Registrar </p>
       <div class="row">
         <div class="col-sm-4">
 

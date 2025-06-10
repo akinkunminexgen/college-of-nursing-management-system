@@ -16,35 +16,40 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-12">
+           <div class="col-md-12">
 
-           <!--   <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Advertisement for Admission into Basic General Nursing Programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan for 2022/2023 Academic Session</b> <hr>
-                <p class="text-success">Applications are hereby invited from suitably qualified candidates for admission into the Nursing programme of Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
+           <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Admission update into the Oyo State College of Nursing Sciences and School of Basic Midwifery, Kishi for year 2025/2026 Academic Session.</b> <hr></h4>
+                <p class="text-success"></p>
 
                 
                 <br>
-               <a href='admission'>Click here</a> to start application</p>
-                </h4>
+               <a href='/admission/login'>Click here</a> to check status</p>
 
-                <strong><p class="text-center">Closing Date For Basic General Nursing:</p></strong>
-          <p class="text-justify">Sale of forms start from Monday, 11th July, 2022, online application must be completed on or before Friday, 19th August, 2022.</p>
+               <strong><p class="text-center"> Candidates who applied for admission into the Oyo State College of Nursing Sciences and School of Basic Midwifery, Kishi for year 2025/2026 Academic Session, should login to their portals for their admission status. 
+               <!--Closing Date For Basic Midwifery form : -->
+               </p></strong>
           <ul>
-            <li>Date of Entrance Examination (CBT): Monday, 29th August – Friday, 2nd September, 2022.</li>
-            <li>Date of Interview: Monday, 12th – Friday, 16th September, 2022. </li>
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
+               <li>All payments should be made online through their portal on on before Friday 4th April, 2025 otherwise, the offer may be withdrawn</li>
+         <!-- <li>Sales start from: Monday 4th November 2024 to Friday 10th January 2025</li> -->
+          <!--  <li>Date of Entrance Examination (CBT): Tuesday 21st to Thursday 23rd January 2025</li>
+            <li>Date of Interview: Tuesday 4th to Thursday 6th February 2025</li>
+            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and KISHI</li>
             <li>Time: 8.00 am prompt</li>
-          </ul>
+            <li>Resumption date as fixed by Nursing and Midwifery Council slated for Monday 3rd March 2025.</li>
+          </ul> -->
           <hr>
-              </div>-->
+              </div>
+
+<!--just to put link to the news on you can clear when the time is right
 
 
 
           <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
                 <h4 class="alert-heading text-success text-justify"><b class="text-primary">OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN.<br>
-                        ADMISSION 2023/2024 SESSION<br>
+                        ADMISSION 2024/2025 SESSION<br>
                         OYSCONME COMPUTER ASSITED SCREENING (CAS)
-                        </b> </h4>
+                        </b> <br></h4>
                 <p>Applications are invited from suitably qualified candidates for Computer Assisted Screening (CAS), for admission into the National Diploma (ND) Programme at the Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
                 
                 <h4 class="text-danger">ENTRY REQUIREMENT:</h4>
@@ -55,10 +60,7 @@
                 <ul>
                     <li class="text-success"><a href='admission'>Click here</a> for more information</li>
                 </ul>
-                <br>
-                <h4>APPLICATION</h4>
-                <P class="text-primary">Application starts Wednesday, 19th July 2023 and closes Friday, 18th August, 2023.</P>
-          </div>
+          </div>-->
 
 
         </div>

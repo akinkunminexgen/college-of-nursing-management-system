@@ -62,7 +62,7 @@ Admission - Dashboard
           </div>
 
           <div class="col-sm-12 text-danger">
-              <b>Note: You are mandated to pay your school fees on or before 21st of march, 2020</b>
+              <b>Note: You are mandated to pay your school fees on or before the date in your admission letter</b>
           </div>
         @else
           <div class="col-xs-4">
@@ -74,7 +74,7 @@ Admission - Dashboard
           </div>
 
             <div id="demo" class="collapse">
-              <form method="post" action="{{ route('payacceptance') }}" accept-charset="UTF-8" enctype="multipart/form-data">
+              <form method="post" action="{{ route('payadmission') }}" accept-charset="UTF-8" enctype="multipart/form-data">
                 @csrf
 
                 <div class="col-md-12">

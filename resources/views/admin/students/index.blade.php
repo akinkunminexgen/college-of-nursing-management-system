@@ -96,7 +96,7 @@
                                     <p class="lead">0 students found!</p>
                                 </div>
                             @endif
-                            
+
                             <div class="container">
                             <div class="row">
                               <label class="text text-danger">*Extra care needs to be taken while updating*</labe>
@@ -111,6 +111,7 @@
                                                         <option selected value="">Select</option>
                                                         <option value="matric_no">Update Matric No.</option>
                                                         <option value="level">Upgrade Level</option>
+                                                        <option value="reg_student">Register Student</option>
                                                     </select>
                                     <label id="sel-msg" class="text-danger"></label>
                                     <input id="name" value="{{ old('file_csv') }}" type="file" placeholder="Upload a csv file" title="" name="file_csv" class="form-control input-sm" required/>
@@ -146,7 +147,10 @@ $('[data-toggle="popover"]').popover()
     }else if($("#sel-val").val() == "matric_no"){
         $("#sel-msg").empty();
         $("#sel-msg").html('it must conatin two columns which is admission no and matric no respectively');
-    }else{ 
+    }else if($("#sel-val").val() == "reg_student"){
+        $("#sel-msg").empty();
+        $("#sel-msg").html('this must contain student details');
+    }else{
     $("#sel-msg").empty();
     }
 });

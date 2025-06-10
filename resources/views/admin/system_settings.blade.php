@@ -58,6 +58,12 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td>Reg. No starts (e.g CNM/21B/)</td>
+                                            <td>
+                                                <input type="text" name="registration_number" value="{{$settings['registration_number']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td>Admission Open Date</td>
                                             <td>
                                                 <input type="date" name="admission_open_date" value="{{$settings['admission_open_date']}}" class="form-control" required>

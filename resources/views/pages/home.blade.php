@@ -122,7 +122,7 @@
                                 <div class="col-sm-4"> <img src="{{$latestNews[$i + $j]->images[0]->url}}" height="80" width="130" class="img-fluid" alt="event-img"></div><!-- // end .col-sm-3 -->
                               @endif<!-- // end .col-sm-3 -->
                                 <div class="col-sm-8"> <h3>{{$latestNews[$i + $j]->title}}</h3>
-                                <span>{{$latestNews[$i + $k]->created_at}}</span>
+                                <span>{{$latestNews[$i + $j]->created_at}}</span>
                                 <p>{{substr($latestNews[$i + $j]->body,0,100)}}..</p>
                                 <a href="{{route('latestNews', ['id'=>$latestNews[$i + $j]->id, 'info'=>$latestNews[$i + $j]->title])}}">Read More</a>
                               </div><!-- // end .col-sm-7 -->

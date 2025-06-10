@@ -122,7 +122,7 @@
                     <a class="list-group-item list-group-item-action @if ($section == 'reghistory') active @endif" id="list-settings-list"  href="{{route('portal.reghistory')}}" role="tab" aria-controls="settings">Registration History</a>
                     <br>
                       <ul>
-                        <li class="danger"> <a href="#">Demoted Student</a></li>
+                        <!--<li class="danger"> <a href="#">Demoted Student</a></li>-->
                       </ul>
                   </div>
                 </div>

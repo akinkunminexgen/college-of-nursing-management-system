@@ -52,7 +52,7 @@ Route::get('payapplication', 'PayapplicationController@index')->name('payapplica
 
 Route::post('payapplication', 'PayapplicationController@index')->name('payapplication.pay');
 
-Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
+Route::post('/pay', 'PaymentController@redirectToGateway')->name('payadmission');
 
 Route::get('printout', 'PrintformController@index')->name('printout.index');
 
@@ -64,7 +64,7 @@ Route::get('printacceptance', 'DashboardController@acceptancePDF')->name('printf
 
 Route::get('printscore', 'DashboardController@scorePDF')->name('printform.score');
 
-Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payacceptance');
+/*Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payacceptance');*/
 });
 
 

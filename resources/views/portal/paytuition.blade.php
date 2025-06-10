@@ -38,7 +38,7 @@ Portal - Course Registration
                           <option value="{{$payType['half']}}">{{$payType['half']}}</option>
                           @else
                           <option value="{{$payType['full']}}">{{$payType['full']}}</option>
-                        <!--  <option value="{{$payType['half']}}">{{$payType['half']}}</option>   -->
+                          <option value="{{$payType['half']}}">{{$payType['half']}}</option>   
                           @endif
                         </select>
                          @if($student->department_id != 3 OR $student->level != 100)
