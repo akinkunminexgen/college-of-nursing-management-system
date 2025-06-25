@@ -78,9 +78,9 @@ class ApplicationController extends Controller
           'phone' => $request->phone,
           'dob' => $request->dob,
           'home_address' => strtoupper($request->home_address),
-          'state' => strtoupper($request->state),
-          'lga' => $request->lga,
-          'state_of_origin' => $request->state_of_origin,
+          'city' => strtoupper($request->state),
+          'location_id' => $request->lga,
+          'state_id' => $request->state_of_origin,
           'religion' => $request->religion,
           'marital_status' => $request->marital_status,
           'reg_step' => $reg_step

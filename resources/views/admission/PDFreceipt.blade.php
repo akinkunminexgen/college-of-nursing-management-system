@@ -3,8 +3,21 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <style>
+    body {
+      background-image: url("{{ asset('images/Oysconmefaded.png') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .content {
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.8); /* optional white overlay */
+    }
+  </style>
   </head>
-  <body style='background-image:url("images/oysconmelogo.png");'>
+  <body>
 
     <div>
       <div>
@@ -27,7 +40,7 @@
         <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;"></span> <span style="text-decoration: underline;padding-left:15px;"> Level:  @if($payment->payment_modes_id == 1)Online/{{$payment->reference}} @else Teller/{{$payment->reference}} @endif</span><span style="text-decoration: underline;padding-left:15px;">Date: {{$payment->created_at}}</span></p>
 
     </div>
-    <div style="text-align:center;padding:10px 40px;">
+    <div style="text-align:center;padding:10px 40px;" class="content">
       <hr>
     <div class="container">
       <div class="row">

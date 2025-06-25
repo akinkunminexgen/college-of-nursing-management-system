@@ -39,7 +39,7 @@
                     <a href="#registerform" class="flip-link to-register blue"></a>
                 </div>
                 <div class="pull-right">
-                    <a href="#recoverform" class="flip-link to-recover grey">Forgot password?</a>
+                    <a href="{{ route('password.request') }}" class="flip-link to-recover grey">Forgot password?</a>
                 </div>
                 <input type="submit" class="btn btn-block btn-primary btn-default" value="Login" />
             </div>

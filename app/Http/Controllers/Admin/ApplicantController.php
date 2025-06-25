@@ -21,7 +21,7 @@ use App\Models\Result;
 use App\Models\Student;
 use App\Models\SystemSetting;
 use App\Http\Traits\CloudinaryUpload;
-
+use Carbon\Carbon;
 
 class ApplicantController extends Controller
 {
@@ -34,8 +34,10 @@ use CloudinaryUpload;
     public function index()
     {
       $count = Studentapplicant::all()->count();
-       $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->select('studentapplicants.id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_of_origin', 'admission_status', 'reg_no', 'sponsor_phone')->paginate(10);
-      //dd($applicants[0]->cardapplicant);
+       $applicants=  Studentapplicant::with(['state', 'cardapplicant'])
+    ->select('id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_id', 'admission_status', 'sponsor_phone', 'cardapplicant_id')
+    ->paginate(10);
+      //dd($applicants);
         return view('admin.applicants.index', ['section' =>'applicants','sub_section' => 'all', 'applicant' => $applicants, 'count' => $count]);
     }
 
@@ -72,7 +74,7 @@ use CloudinaryUpload;
     {
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
           ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'pic_url', 'gender', 'marital_status',
-          'lga', 'state_of_origin','phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->orderBy('reg_no')->get();
+          'lga', 'state_id','phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->orderBy('reg_no')->get();
           // file name for download
           $fileName = "applicants".date('Ymd').".xls";
 
@@ -99,7 +101,6 @@ use CloudinaryUpload;
 
     public function editapplicant(Studentapplicant $studentapplicant)
     {
-      //dd($studentapplicant);
       return view('admin.applicants.editapplicant', ['section' =>'applicants','sub_section' => 'all', 'student' => $studentapplicant, 'states' => State::all()]);
     }
 
@@ -143,7 +144,7 @@ use CloudinaryUpload;
         'dob' => $request->dob,
         'home_address' => $request->home_address,
         'lga' => $request->lga,
-        'state_of_origin' => $request->state_of_origin,
+        'state_id' => $request->state_of_origin,
         'religion' => $request->religion,
           'sponsor_name' => $request->sponsor_name,
           'sponsor_phone' => $request->sponsor_phone,
@@ -196,29 +197,20 @@ use CloudinaryUpload;
               $variable = 'cardapplicants.reg_no';
             }
 
-          //$student = Cardapplicant::with('studentapplicant')->where('reg_no', $request->user)->first();
-          $student = Studentapplicant::select('studentapplicants.id', 'reg_no', 'admission_status', 'email', 'phone', 'home_address', 'first_name', 'sponsor_phone', 'surname', 'state_of_origin', 'pic_url')
+
+          $student = Studentapplicant::with('state')
           ->join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
+          ->select('studentapplicants.id', 'reg_no', 'admission_status', 'email', 'phone', 'home_address', 'first_name', 'sponsor_phone', 'surname', 'state_id', 'pic_url')
           ->where($variable, $request->user)->first();
-          //dd($student);
           if ($student == null) {
             return $student;
-          //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student]);
           }
           else {
             if ($student->admission_status == NULL OR $student->admission_status == 'NO') {
               $student->admission_status='NOT YET';
             }
-
-            if ($student->state_of_origin != NULL) {
-              $student->state_of_origin = State::find($student->state_of_origin)->name;
-            }else {
-                $student->state_of_origin="NOT YET";
-            }
-
             return $student;
           }
-        //  return view('admin.applicants.search',['section' =>'applicants','sub_section' => 'all', 'tag' => 'approved', 'applicant' => $student, 'reg_no' => $student->reg_no]);
       }
 
 
@@ -376,11 +368,10 @@ use CloudinaryUpload;
       public function pdfApplicants($page)
       { ini_set('memory_limit', '2048M');
         $page = $page * 359;
-        //dd($page);
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->orderBy('reg_no')->orderBy('date_exam')->skip($page)->take(359)->get();
-    //dd($applicants);
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('cardapplicants.is_closed', '0')->orderBy('date_exam')->skip($page)->take(359)->get();
+        
         $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
-
+        //dd($applicants[0]);
         return $pdf->download('ExaminationList.pdf');
       }
 
@@ -400,7 +391,10 @@ use CloudinaryUpload;
               'csv_option' => 'required'
           ]
         );
-          if ($request->csv_option == "ad_score") {
+        
+        
+        
+         if ($request->csv_option == "ad_score") {
             $colquery = 'score';
           }else if ($request->csv_option == "ad_status"){
             $colquery = 'admission_status';

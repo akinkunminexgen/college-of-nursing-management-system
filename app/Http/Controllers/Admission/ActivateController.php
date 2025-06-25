@@ -14,31 +14,40 @@ class ActivateController extends Controller
 {
   public function index()
   {
-    if (!session()->has('appAuth')) {
-      return redirect()->route('invoice.activate')->with('error', 'please login');
+    $authId = session('appAuth');
+    $invoice = $authId ? Invoice::find($authId) : null;
+    
+    if (!$authId || !$invoice) {
+        return redirect()
+            ->route('invoice.activate')
+            ->with('error', 'Please log in to continue.');
     }
 
-    $invoice = Invoice::find(session()->get('appAuth'));
-    $card= $invoice->cardapplicant;
-    $settings = SystemSetting::where('name', 'admission_close_date')->first();
+    $card = $invoice->cardapplicant;
+    $admissionCloseSetting = SystemSetting::where('name', 'admission_close_date')->first();
+    //dd($card);
+    //$paymentFee = null;
+    //$subAccount = null;
 
-  //  $card = Cardapplicant::where('reg_no', $invoice->reg_no)->first();
-    if ($card == null) {
-      $system = SystemSetting::where('name','admission_payment_fee')->orWhere('name','admission_sub_account')->get();
-      //dd($system[0]->value);
-      return view('admission.Appformfee')->with('user', $invoice)
-                                        ->with('setting', $system[0]->value)
-                                        ->with('subaccount', $system[1]->value)
-                                        ->with('settings', $settings)
-                                        ->with('card', null);
-    }
+    //if (is_null($card)) {
+        $systemSettings = SystemSetting::whereIn('name', [
+            'admission_payment_fee',
+            'admission_sub_account'
+        ])->get()->keyBy('name');
 
-    return view('admission.Appformfee')->with('user', $invoice)
-                                      ->with('setting', null)
-                                      ->with('settings', $settings)
-                                      ->with('card', $card);
-    //dd($card->studentapplicant->paymentapplicant()->first());
+        $paymentFee = $systemSettings['admission_payment_fee']->value ?? null;
+        $subAccount = $systemSettings['admission_sub_account']->value ?? null;
+    //}
 
+    // return with consolidated data
+    return view('admission.Appformfee', [
+        'user' => $invoice,
+        'payment' => $paymentFee,
+        'subaccount' => $subAccount,
+        'settings' => $admissionCloseSetting,
+        'card' => $card,
+        'rounds' => $card->count()
+    ]);
 
   }
 

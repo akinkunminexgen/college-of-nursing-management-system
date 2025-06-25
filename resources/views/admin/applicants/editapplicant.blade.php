@@ -60,22 +60,22 @@
 
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Gender:</label>
-                                                    <div class='col-sm-6'>
+                                                   <div class='col-sm-6'>
                                                         <select class='form-control custom-select' name='gender' required>
-                                                            <option selected='{{$student->gender}}' value=''></option>
-                                                            <option value='MALE'>MALE</option>
-                                                            <option value='FEMALE'>FEMALE</option>
+                                                            <option value='' {{ $student->gender == '' ? 'selected' : '' }}></option>
+                                                            <option value='MALE' {{ $student->gender == 'MALE' ? 'selected' : '' }}>MALE</option>
+                                                            <option value='FEMALE' {{ $student->gender == 'FEMALE' ? 'selected' : '' }}>FEMALE</option>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Religion:</label>
-                                                    <div class='col-sm-6'>
+                                                                                                    </div>
+                                                                                                    <div class="form-group">
+                                                                                                        <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Religion:</label>
+                                                                                                        <div class='col-sm-6'>
                                                         <select class='form-control custom-select' name='religion' required>
-                                                            <option selected='{{$student->religion}}' value=''></option>
-                                                            <option value='Christianity'>CHRISTIANITY</option>
-                                                            <option value='Islam'>ISLAM</option>
-                                                            <option value='Other'>OTHER</option>
+                                                            <option value='' {{ $student->religion == '' ? 'selected' : '' }}></option>
+                                                            <option value='Christianity' {{ $student->religion == 'Christianity' ? 'selected' : '' }}>CHRISTIANITY</option>
+                                                            <option value='Islam' {{ $student->religion == 'Islam' ? 'selected' : '' }}>ISLAM</option>
+                                                            <option value='Other' {{ $student->religion == 'Other' ? 'selected' : '' }}>OTHER</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -131,54 +131,79 @@
                                                   </div>
                                             </div>
 
-                                              <div class='row form-group'>
-                                                  <div class='col-lg-2'>
-                                                      <label>
-                                                          State of Origin</label>
-                                                  </div>
-                                                  <div class='col-lg-6'>
+                                            <div class='row form-group'>
+                                                <div class='col-lg-2'>
+                                                    <label>State of Origin</label>
+                                                </div>
+                                                <div class='col-lg-6'>
+                                                    <select onchange="if(this.value) getLga(event)" class="form-control input-sm" name="state_of_origin"   id="getState" required>
+                                                        <option value="" {{ $student->state->name == '' ? 'selected' : '' }}></option>
+                                                        @foreach($states as $dep)
+                                                            <option value="{{ $dep->id }}" {{ $student->state->id == $dep->id ? 'selected' : '' }}>
+                                                                {{ $dep->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
 
-                                                      <select onchange="getLga(event)" class="form-control input-sm" name="state_of_origin" id="" required>
-                                                          <option selected value=""></option>
-                                                          @foreach($states as $dep)
-                                                              <option value="{{$dep->id}}">{{$dep->name}}</option>
-                                                          @endforeach
-                                                      </select>
-                                                  </div>
-                                              </div>
 
                                               <div class='row form-group'>
-                                                    <div class='col-lg-2'>
-                                                        <label>
-                                                            LGA</label>
-                                                    </div>
-                                                    <div class='col-lg-6'>
-                                                        <div class='form-group'>
-                                                            <select class="form-control input-sm" required placeholder="local government area" name="lga" id="lga"></select>
-                                                        </div>
+                                                <div class='col-lg-2'>
+                                                    <label>LGA</label>
+                                                </div>
+                                                <div class='col-lg-6'>
+                                                    <div class='form-group'>
+                                                        <input type="hidden" id="preselected_lga" value="{{ $student->location_id ?? '' }}">
+                                                        <select class="form-control input-sm" required name="lga" id="lga">
+                                                            @if($student->location)
+                                                                <option selected value="{{ $student->location_id }}">{{ $student->location->lga ?? '' }}</option>
+                                                            @else
+                                                                <option value="">Select LGA</option>
+                                                            @endif
+                                                        </select>
                                                     </div>
                                                 </div>
+                                            </div>
                                                 <script>
-                                                    function getLga(event)
-                                                    {
+                                                    function getLga(event) {
                                                         event.preventDefault();
-                                                        let stateId = event.target.value;
-                                                        fetch(`/api/get-location/${stateId}`, {
-                                                            method: 'GET'
-                                                        })
+                                                        const stateId = event.target.value;
+                                                        const preselectedLgaId = document.getElementById('preselected_lga').value;
+                                                
+                                                        if (!stateId) return;
+                                                
+                                                        fetch(`/api/get-location/${stateId}`)
                                                             .then(response => response.json())
                                                             .then(data => {
-                                                                let select = document.getElementById('lga');
-                                                                select.innerHTML = "";
+                                                                const select = document.getElementById('lga');
+                                                                select.innerHTML = '<option value="">Select LGA</option>'; // reset
+                                                
                                                                 data.forEach((ele) => {
-                                                                    let op = document.createElement('option');
-                                                                    op.appendChild(document.createTextNode(ele.lga));
-                                                                    op.setAttribute('value', ele.id);
-                                                                    select.insertAdjacentElement('beforeend', op);
-                                                                })
+                                                                    const op = document.createElement('option');
+                                                                    op.value = ele.id;
+                                                                    op.textContent = ele.lga;
+                                                                    
+                                                                    if (ele.id == preselectedLgaId) {
+                                                                            op.selected = true;
+                                                                        }
+                                                                    select.appendChild(op);
+                                                                });
+                                                            })
+                                                            .catch(error => {
+                                                                console.error("Failed to load LGAs:", error);
                                                             });
                                                     }
+                                                    
+                                                    window.addEventListener('DOMContentLoaded', function () {
+                                                        const select = document.getElementById('getState');
+                                                        if (select.value) {
+                                                            const event = new Event('change', { bubbles: true });
+                                                            select.dispatchEvent(event);
+                                                        }
+                                                    });
                                                 </script>
+
 
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">Address:</label>
@@ -190,7 +215,7 @@
                                                 <div class="form-group">
                                                     <label for="name" class="col-sm-3 col-md-3 col-lg-2 control-label">city</label>
                                                     <div class="col-sm-9 col-md-6 col-lg-6">
-                                                        <input name="city" value="{{$student->state}}" type="text" class="form-control input-sm" />
+                                                        <input name="city" value="{{$student->city}}" type="text" class="form-control input-sm" />
                                                     </div>
                                                 </div>
                                                 <input type="hidden" name="_method" value="PUT">

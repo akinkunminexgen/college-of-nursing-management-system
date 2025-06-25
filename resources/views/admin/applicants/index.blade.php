@@ -74,25 +74,22 @@ use App\Models\State;
                             @foreach($applicant as $data)
                                 <tr>
                                     <td>{{$loop->index + 1}}</td>
-                                    <td>{{$data->reg_no}}</td>
+                                    <td>{{$data->cardapplicant->reg_no}}</td>
                                     <td>{{$data->surname." ".$data->first_name}}</td>
                                     <td>{{$data->email}}</td>
                                     <td>{{$data->phone}}</td>
                                     <td>{{$data->sponsor_phone}}</td>
                                     <td>{{$data->home_address}}</td>
                                     <td>
-                                      @if($data->state_of_origin != null)
-                                      <span class="badge badge-info">{{State::find($data->state_of_origin)->name}}</span>
-                                      @else
-                                        <span class="badge badge-secondary">...</span>
-                                      @endif
+                                      <span class="badge {{ $data->state ? 'badge-info' : 'badge-secondary' }}">
+                                        {{ $data->state->name ?? '...' }}
+                                    </span>
                                     </td>
                                     <td>
-                                      @if($data->admission_status == "NO")
-                                        <span class="badge badge-danger" title="No admission">NOT YET</span>
-                                      @else
-                                        <span class="badge badge-success" title="Admitted">{{$data->admission_status}}</span>
-                                      @endif
+                                      <span class="badge {{ $data->admission_status === 'NO' ? 'badge-danger' : 'badge-success' }}"
+                                          title="{{ $data->admission_status === 'NO' ? 'No admission' : 'Admitted' }}">
+                                        {{ $data->admission_status === 'NO' ? 'NOT YET' : $data->admission_status }}
+                                    </span>
                                     </td>
                                     <td>
                                       @if (Gate::allows('add-applicant-score'))
@@ -184,7 +181,7 @@ use App\Models\State;
         var newurl="{{route('applicants.editapplicant', ['studentapplicant' => 'studentapplicant'])}}";
         newurl = newurl.replace("studentapplicant", data.id);
         var edit = "<a href="+newurl+" title='Edit student Details'>Edit</a>";
-        var mark = "<tr><td>"+data.id+"</td><td>"+data.reg_no+"</td><td>"+data.surname+"</td><td>"+data.email+"</td><td>"+data.phone+"</td><td>"+data.sponsor_phone+"</td><td>"+data.home_address+"</td><td><span class='badge badge-success'>"+data.state_of_origin+"</span></td><td>"+data.admission_status+"</td><td>"+edit+"</td></tr>";
+        var mark = "<tr><td>"+data.id+"</td><td>"+data.reg_no+"</td><td>"+data.surname+"</td><td>"+data.email+"</td><td>"+data.phone+"</td><td>"+data.sponsor_phone+"</td><td>"+data.home_address+"</td><td><span class='badge badge-success'>"+data.state.name+"</span></td><td>"+data.admission_status+"</td><td>"+edit+"</td></tr>";
         $('#justclear').append(mark);
         //alert(data.biology);
       }else{

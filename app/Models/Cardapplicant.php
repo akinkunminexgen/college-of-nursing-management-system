@@ -8,6 +8,9 @@ use App\Models\Studentapplicant;
 class Cardapplicant extends Model
 {
   protected $fillable = ['reg_no', 'password', 'pin', 'invoice_id'];
+  protected $casts = [
+    'is_closed' => 'boolean',
+];
 
   public function studentapplicant()
   {

@@ -3,6 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+     <style>
+    body {
+      background-image: url("{{ asset('images/Oysconmefaded.png') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .content {
+      padding: 30px;
+      background-color: rgba(255, 255, 255, 0.8); /* optional white overlay */
+    }
+  </style>
   </head>
   <body>
 
@@ -18,7 +31,7 @@
       <h4 style="text-decoration: underline;text-align: center; clear:both;">Registration Form</h4>
 
     </div>
-    <div >
+    <div class="content">
 
       <div>
         <div >
@@ -54,7 +67,7 @@
 
           <div style="margin : 15px;border: 1px solid #4CAF50;">
             <div style="margin-left : 10px;">Address : </div>
-            <div style="margin: -23px 0px 0px 210px;"> {{$student->home_address.", ".$student->state}}</div>
+            <div style="margin: -23px 0px 0px 210px;"> {{$student->home_address.", ".$student->city}}</div>
           </div>
 
           <div style="margin : 15px;border: 1px solid #4CAF50;">

@@ -22,5 +22,14 @@
     <!-- Main CSS -->
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
       <link href="{{asset('css/larastyle.css')}}" rel="stylesheet">
+      <script type="application/ld+json">
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Oyo State College of Nursing and Midwifery",
+              "url": "https://oysconme.edu.ng",
+              "logo": "https://oysconme.edu.ng/images/Oysconmetrans.png"
+            }
+            </script>
       @yield('site.styles')
 </head>

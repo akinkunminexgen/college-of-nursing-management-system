@@ -236,8 +236,9 @@ class PaymentController extends Controller
    switch ($event->event) {
      case 'charge.success':
      //check whether the payment has been completed
-     $chck = Cardapplicant::where('invoice_id', $event->data->metadata->student_id)->first();
-    if ($chck == null)
+     $chck = Cardapplicant::where('invoice_id', $event->data->metadata->student_id)->count();
+     $rounds = $chck <= $event->data->metadata->rounds ? true : false;
+    if ($rounds)
     {
    //generate a rand pin
          $pin = (string)rand(1000000000, 9999999999);
@@ -287,28 +288,6 @@ class PaymentController extends Controller
              'created_at' => $event->data->created_at,
            ]);
 
-               /* $senderEmail = 'oysconme@oysconme.edu.ng';
-                $senderName = 'OYSCONME';
-                $replyTo = 'oysconme1949@gmail.com';
-                $subject = 'Pin Generated!';
-                $toEmail = $event->data->customer->email;
-                $messageLetter = "Kindly complete your registration with the below information \n";
-                $messageLetter .= "Registration No: ".$txt."\n";
-                $messageLetter .= "Pin: ".$pin."\n";
-                
-                //for headers
-                $senderEmail ="From: ".$senderName."<".$senderEmail.">";
-                $replyTo ="Reply-To: ".$replyTo;
-                
-                  $headers = array($senderEmail,
-                    $replyTo,
-                    "X-Mailer: PHP/" . PHP_VERSION,
-                    'Content-Type:text/html;charset=UTF-8',
-                    );
-                $headers = implode("\r\n", $headers);
-                
-                
-                $send = mail($toEmail, $subject, $messageLetter, $headers);*/
        }
        break;
     }

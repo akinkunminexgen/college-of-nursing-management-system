@@ -50,7 +50,7 @@ class PrintformController extends Controller
 
     $payment = $student->paymentapplicant;
 
-    $state = State::find($student->state_of_origin);
+    $state = $student->state;
 
     $dob = date('d-m-Y', strtotime($student->dob));
 

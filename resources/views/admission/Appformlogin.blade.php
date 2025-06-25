@@ -48,7 +48,7 @@ Application Form Login Page
 
                                                     <label for="username" class="control-label">Password</label>
                                                     <input type="password" class="form-control form-control-sm" name="password"  required placeholder="provide password">
-                                                    <span class="help-block"></span>
+                                                    <a href="{{ route('invoice.password.request') }}" class="flip-link to-recover grey">Forgot password?</a>
 
                                                 </div>
                                               </div>

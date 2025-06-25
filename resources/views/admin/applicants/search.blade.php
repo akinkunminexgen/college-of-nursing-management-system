@@ -89,7 +89,7 @@
                                     <td>{{$applicant->phone}}</td>
                                     <td>{{$applicant->sponsor_phone}}</td>
                                     <td>{{$applicant->home_address.", ".$applicant->address_state}}</td>
-                                    <td><span class="badge badge-success">{{$applicant->state_of_origin}}</span></td>
+                                    <td><span class="badge badge-success">{{$applicant->state->name ?? "NOT YET"}}</span></td>
                                     @if($applicant->admission_status == "NO")
                                     <td><span class="badge badge-danger" title="No admission">NOT YET</span></td>
                                     @else

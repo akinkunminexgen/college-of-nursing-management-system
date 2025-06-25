@@ -21,7 +21,7 @@ Application Guide
 <!--============================= ADMISSION FORM RULES =============================-->
 <section class="admission-form_rules">
     <div class="container">
-        <!--<div class="row">
+        <div class="row">
             <div class="col-md-7 admission-form_mr">
                 <h2>Admission Requirements</h2>
                 <br>
@@ -41,11 +41,11 @@ Application Guide
                     <li>1.	JAMB: Candidates must have scored not less than 200 in the JAMB Result choosing OYSCONME as their Choice of Institution.</li>
                     <li>2.	Possess WAEC/SSCE/GCE or NECO/SSCE/GCE with at least five (5) credits at more than
                       two (2) sittings in English Language, Mathematics, Physics, Chemistry and Biology</li>
-                    <li>3.	Only individuals with required credit passes at not more than two (2) sittings form the same examination body may apply.
+                    <li>3.	Only individuals with required credit passes, not more than two (2) sittings form the same examination body may apply.
                        He or She should be at least Seventeen (17) years old on admission.</li>
                 </ul>
             </div>
-        </div>-->
+        </div>
         <hr>
        <div class="row">
             <div class="col-md-7 admission-form_mr">

@@ -128,6 +128,8 @@
                 </div>
                 @endif
           @yield('content')
+          </div>
+          </div>
         </main>
     </div>
   <script src="{{ asset('js/jquery.min.js') }}"></script>

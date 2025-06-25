@@ -43,7 +43,13 @@ class SettingController extends Controller
             'acceptance_payment_fee' => 'required|numeric',
             'admission_exam_date_nursing' => 'required|date_format:Y-m-d',
             'admission_exam_date_midwifery' => 'required|date_format:Y-m-d',
-            'registration_number' => 'required'
+            'registration_number' => 'required',
+            'Support_Email' => 'required|email',
+            'Domain_Email' => [
+                                'required',
+                                'email',
+                                'regex:/^[\w\.\-]+@oysconme\.edu\.ng$/i'
+                            ],
         ]);
 
 //dd($request->maintenance);

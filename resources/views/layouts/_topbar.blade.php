@@ -19,25 +19,19 @@
            <div class="col-md-12">
 
            <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Admission update into the Oyo State College of Nursing Sciences and School of Basic Midwifery, Kishi for year 2025/2026 Academic Session.</b> <hr></h4>
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Commencement of the sales of form for the conduct of Post UTME into the National Diploma in Nursing for the year 2025/2026 Academic Session.</b> <hr></h4>
                 <p class="text-success"></p>
 
                 
                 <br>
-               <a href='/admission/login'>Click here</a> to check status</p>
+               <a href='/admission/appform'>Click here</a> to buy form</p>
 
-               <strong><p class="text-center"> Candidates who applied for admission into the Oyo State College of Nursing Sciences and School of Basic Midwifery, Kishi for year 2025/2026 Academic Session, should login to their portals for their admission status. 
-               <!--Closing Date For Basic Midwifery form : -->
-               </p></strong>
           <ul>
-               <li>All payments should be made online through their portal on on before Friday 4th April, 2025 otherwise, the offer may be withdrawn</li>
-         <!-- <li>Sales start from: Monday 4th November 2024 to Friday 10th January 2025</li> -->
-          <!--  <li>Date of Entrance Examination (CBT): Tuesday 21st to Thursday 23rd January 2025</li>
-            <li>Date of Interview: Tuesday 4th to Thursday 6th February 2025</li>
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and KISHI</li>
-            <li>Time: 8.00 am prompt</li>
-            <li>Resumption date as fixed by Nursing and Midwifery Council slated for Monday 3rd March 2025.</li>
-          </ul> -->
+               
+         <li>Sales start from: June 15, 2025 till 5th September 2025</li>
+          <li>Conduct of Screening Exercise from Tuesday, 16th September to 18th September, 2025</li>
+            <li>Resumption Date: 6th October, 2025</li>
+          </ul>
           <hr>
               </div>
 

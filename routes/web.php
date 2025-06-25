@@ -1,7 +1,17 @@
 <?php
-
+use App\Http\Controllers\Auth\InvoiceForgotPasswordController;
 
 Auth::routes();
+
+Auth::routes(['reset' => true]);
+
+// Forgot password
+Route::get('invoice/password/reset', 'InvoiceForgotPasswordController@showLinkRequestForm')->name('invoice.password.request');
+Route::post('invoice/password/email', 'InvoiceForgotPasswordController@sendResetLinkEmail')->name('invoice.password.email');
+
+// Reset password
+Route::get('invoice/password/reset/{token}', 'InvoiceResetPasswordController@showResetForm')->name('invoice.password.reset');
+Route::post('invoice/password/reset', 'InvoiceResetPasswordController@reset')->name('invoice.password.update');
 
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
@@ -75,6 +85,10 @@ Route::get('/logout', 'Auth\AuthController@logout')->name('site.logout');
 
 Route::get('/', 'Frontpages\WelcomeController@index')->name('welcome');
 
+Route::get('/maintenance', function () {
+    return view('layouts/_maintenance');
+});
+
 Route::get('about', 'Frontpages\AboutController@index')->name('about');
 
 Route::get('latest-news/{id}/{info}', 'Frontpages\LatestNewsController@index')->name('latestNews');
@@ -84,6 +98,8 @@ Route::get('/speech',function () {return view('speech');});
 Route::get('/sitemap',function () {return view('sitemap');});
 
 Route::get('/contact', 'Frontpages\ContactController@index')->name('contact');
+
+Route::get('/contact-emessage', 'Frontpages\ContactController@eMessage')->name('contactMessage');
 
 Route::post('/contact', 'Frontpages\ContactController@sendMail')->name('contact');
 

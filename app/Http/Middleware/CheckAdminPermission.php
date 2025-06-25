@@ -22,7 +22,6 @@ class CheckAdminPermission
                 $notification = Alert::alertMe('you are not permitted to make this change', 'error');
                 return redirect()->route('dashboard.home')->with($notification);
             }
-
             return $next($request);
         }
 

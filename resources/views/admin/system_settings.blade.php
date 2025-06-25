@@ -14,12 +14,12 @@
             <a href="/admin" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
             <a href="/admin/students" class="current">system Settings</a>
         </div>
-        <div class="container-fluid">
+        <div class="container">
             {{-- @include('admin.layout.stats') --}}
             <br />
 
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-lg-12 text-center">
                     <div class="widget-box">
                         <div class="widget-title">
                             <span class="icon">
@@ -28,14 +28,18 @@
                             <h5>System settings</h5>
                         </div>
                         <div class="widget-content nopadding">
-                            <span>
+                            
                                 @foreach($errors->all() as $error)
+                                <span>
                                     <strong style="color: red">*{{ $error }}</strong> <br>
+                                    </span>
                                 @endforeach
                                 @if(Session::has('error'))
+                                <span>
                                     <strong style="color: red">* {{ Session::get('error') }}</strong> <br>
+                                    </span>
                                 @endif
-                            </span>
+                            
                             @if(Session::has('success'))
                                 <div class="alert alert-info">
                                     {{Session::get('success')}}
@@ -43,7 +47,7 @@
                                 </div>
                             @endif
                             <form method="post" action="{{route('settings.update')}}" class="form-horizontal">
-                                <table class="table table-bordered table-hover" style="background-color: #a39d9d;font-size:15px;">
+                                <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
                                     <thead>
                                         <tr>
                                             <th>Setting</th>
@@ -145,6 +149,18 @@
                                             <td>Current Session B</td>
                                             <td>
                                                 <input type="text" name="current_sessionB" value="{{$settings['current_sessionB']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Support Email Address</td>
+                                            <td>
+                                                <input type="text" name="Support_Email" value="{{$settings['Support_Email']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sender's Domain Email</td>
+                                            <td>
+                                                <input type="text" name="Domain_Email" value="{{$settings['Domain_Email']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         {{--
