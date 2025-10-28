@@ -95,12 +95,17 @@ class AccountingController extends Controller
 
     $flag = false;
       foreach($finance as $row) {
+           $values = array_map('trim', array_values($row->getOriginal()));
+           $reference = explode("/",$row->reference);
+           $level = $reference[1] ?? "";
           if(!$flag){
               // display column names as first row
-              echo implode("\t", array_keys($row->getOriginal())) . "\n";
+              echo implode("\t", array_keys($row->getOriginal()));
+              echo "\t".'level' . "\n";
               $flag = true;
           }
-          echo implode("\t", array_values($row->getOriginal())) . "\n";
+          echo implode("\t", $values);
+          echo "\t".$level. "\n";
       }
       exit;
       $notification = Alert::alertMe('Exporting!!!', 'Success');

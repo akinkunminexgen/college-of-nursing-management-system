@@ -25,18 +25,21 @@ class ActivateController extends Controller
 
     $card = $invoice->cardapplicant;
     $admissionCloseSetting = SystemSetting::where('name', 'admission_close_date')->first();
-    //dd($card);
-    //$paymentFee = null;
-    //$subAccount = null;
+    $allClosed = collect($card)->every(function ($val) {
+        return $val->is_closed;
+    });
+    $allClosed = $card->isEmpty() ? false : $allClosed;
 
     //if (is_null($card)) {
         $systemSettings = SystemSetting::whereIn('name', [
             'admission_payment_fee',
-            'admission_sub_account'
+            'admission_sub_account',
+            'NursingCouncil_account',
         ])->get()->keyBy('name');
 
         $paymentFee = $systemSettings['admission_payment_fee']->value ?? null;
         $subAccount = $systemSettings['admission_sub_account']->value ?? null;
+        $nursingCouncilAccount = $systemSettings['NursingCouncil_account']->value ?? null;
     //}
 
     // return with consolidated data
@@ -44,7 +47,9 @@ class ActivateController extends Controller
         'user' => $invoice,
         'payment' => $paymentFee,
         'subaccount' => $subAccount,
+        'nursingCouncil' => $nursingCouncilAccount,
         'settings' => $admissionCloseSetting,
+        'allClosed' => $allClosed,
         'card' => $card,
         'rounds' => $card->count()
     ]);

@@ -51,6 +51,7 @@ Portal - Payment History
                                 <td class="text-center">{{$value->status}}</td>
                                 <td>{{date("d-M-Y",strtotime($value->created_at))}}</td>
                                 <td><a href="{{action('PayTuitionController@downloadPDF', [$value->id, date("d-m-y",strtotime($value->created_at))])}}"><button type="button" class="btn btn-outline-info btn-sm">PRINT</button></a></td>
+                                <td><a href="{{action('PayTuitionController@examClearancePDF', [$value->id, date("d-m-y",strtotime($value->created_at))])}}"><button type="button" class="btn btn-outline-info btn-sm">Exam Card</button></a></td>
                               </tr>
                             @endforeach;
                           </tbody>

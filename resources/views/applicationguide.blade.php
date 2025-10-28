@@ -96,8 +96,8 @@ $dt_ = 1;
         
 @else
 <!--For Admission List -->
-<h3><b>2025 ENTRANCE EXAMINATION RESULT OF BASIC GENERAL NURSING INTO THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN AND <!--THE SCHOOL OF BASIC MIDWIFERY, KISHI--></b></h3>
-<p>1) The underlisted candidates who wrote entrance examination and called for interview into Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and <!--the School of Basic Midwifery, Kishi--> have been offered admission into General Nursing programme of the Institution.</p>
+<h3><b>2025 ENTRANCE EXAMINATION LIST OF POST BASIC NURSING INTO THE OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN AND <!--THE SCHOOL OF BASIC MIDWIFERY, KISHI--></b></h3>
+<p>1) The underlisted candidates who wrote entrance examination and called for interview into Oyo State College of Nursing and Midwifery, Eleyele, Ibadan <!--the School of Basic Midwifery, Kishi--> have been offered admission into Post Basic Nursing programme of the Institution.</p>
 <?php $key1= 1;
         $key2=1;?>
 
@@ -128,17 +128,18 @@ $dt_ = 1;
 
 
   <div class="row">
-    <p class="text-justify"><strong>2) Successful candidates on the list are to report at the office of the Registrar, Oyo State College of Nursing and Midwifery, Eleyele, Ibadan from 8:00am to 4:00pm to collect their admission letter(s), but must have paid the sum of Fifty Thousand Naira (N50,000:00) only as Acceptance Fee through the College website. Do not pay to any Bank Account, check here to login for payment. <a href="{{asset('admission/login')}}">click here</a> to login for payment </strong></p>
+    <p class="text-justify"><strong>2) Successful candidates on the list are to report at the office of the Registrar, Oyo State College of Nursing and Midwifery, Eleyele, Ibadan from 8:00am to 4:00pm to collect their admission letter(s), but must have paid the sum of Fifty Thousand Naira (N50,000:00) only as Acceptance Fee through the College website on or before 15th August, 2025. Do not pay to any Bank Account, check here to login for payment. <a href="{{asset('admission/login')}}">click here</a> to login for payment </strong></p>
       <p><strong>3) Process of the online acceptance payment is as follows:</strong></p>
       <ul>
 
         <li>Your registration and pin number will be used to login to pay the Acceptance Fee</li>
         <li>Once you make the online payment, make sure you print out the Acceptance Payment Receipt</li>
         <li>Acceptance payment receipt will be used to collect Admission Letter(s) from the office of the Registrar</li>
+        <li>You are to make the payment of N20,000 for medicals at the accounts department</li>
       </ul>
       
-      <p><strong>4) PLEASE NOTE THAT ANY CANDIDATE WHO FAIL TO PAY THE ACCEPTANCE FEE BEFORE FRIDAY, 4TH  APR, 2025 WILL FORFEIT THE ADMISSION.</strong></p>
-      <p><strong>5) THE RESUMPTION DATE FOR THE BASIC MIDWIFERY PROGRAMME IS MONDAY, 24TH MARCH 2025.</strong></p>
+     <!-- <p><strong>4) PLEASE NOTE THAT ANY CANDIDATE WHO FAIL TO PAY THE ACCEPTANCE FEE BEFORE FRIDAY, 4TH  APR, 2025 WILL FORFEIT THE ADMISSION.</strong></p> -->
+      <p><strong>5) THE RESUMPTION DATE FOR THE PROGRAMME IS IMMEDIATE.</strong></p>
 
     <p class="text-justify">  <strong>7) Details of the School Fee will be reflected in the document attached to Admission Letter for each candidate</strong></p>
 

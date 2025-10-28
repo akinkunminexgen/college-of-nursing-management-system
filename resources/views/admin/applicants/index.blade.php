@@ -21,10 +21,10 @@ use App\Models\State;
         <div class="container-fluid">
             <br />
             <div class="row">
-              <div class="col-xs-6">
+              <div class="col-xs-12 col-md-6">
                 <form class="form-inline">
                   @csrf
-                  <div class="form-group mx-sm-3 mb-2">
+                  <div class="col-md-6 col-xs-8">
                     <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Email/Reg No." required>
                     @error('user')
                         <span class="invalid-feedback" role="alert">
@@ -33,14 +33,17 @@ use App\Models\State;
                     @enderror
                   </div>
                 <!--   <input class="btn btn-primary mb-2" type="submit" value="Submit">-->
-                 <button type="submit"  id="studentapproved" class="btn btn-primary btn-sm mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
+                <div class="col-md-6 col-xs-4">
+                    <button type="submit"  id="studentapproved" class="btn btn-primary btn-sm mb-2" title="Search applicant(s) that have successfully made form payment">Search Approved applicants</button>
+                </div>
+                 
                 </form>
               </div>
 
-              <div class="col-xs-6">
+              <div class="col-xs-12 col-md-6">
                 <form class="form-inline" method="get" action="{{route('applicants.searchunapproved')}}" enctype="multipart/form-data">
                   @csrf
-                  <div class="form-group mx-sm-3 mb-2">
+                  <div class="col-md-6 col-xs-8">
                     <input type="text" class="form-control  @error('user') is-invalid @enderror" value="{{ old('user') }}" name="user" placeholder="Search by Email/Reg No." required>
                     @error('user')
                         <span class="invalid-feedback" role="alert">
@@ -48,11 +51,14 @@ use App\Models\State;
                         </span>
                     @enderror
                   </div>
-                  <button type="submit" class="btn btn-primary btn-sm" title="search applicant(s) that are yet to make form payment">Search Unapproved applicants</button>
+                  <div class="col-md-6 col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-sm" title="search applicant(s) that are yet to make form payment">Search Unapproved applicants</button>
+                </div>
+                  
                 </form>
               </div>
 
-                <div class="col-xs-12">
+                <div class="col-xs-12 py-5">
 
                     @if($applicant->count())
                     <table id="clear2" class="table table-bordered table-striped table-hover data-table">
@@ -112,35 +118,38 @@ use App\Models\State;
                   <div class="col-xs-12">
                     <label class="text text-danger">*Do not delete until admission process is finished*</labe>
                   </div>
-                  <div class="col-xs-8">
-                    <form class="form-inline" method="post" action="{{ route('applicants.deleteall') }}" enctype="multipart/form-data">
-                      @csrf
-                      <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Password</label>
-                        <input type="hidden" name="_method" value="PUT">
-                        <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" placeholder="Provide Password" required>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                  <div class='row'>
+                      <div class="col-md-6 col-xs-12">
+                        <form class="form-inline" method="post" action="{{ route('applicants.deleteall') }}" enctype="multipart/form-data">
+                          @csrf
+                          <div class=" mx-sm-3 mb-2 col-md-6 col-xs-8">
+                            <label for="inputPassword2" class="sr-only">Password</label>
+                            <input type="hidden" name="_method" value="PUT">
+                            <input type="password" class="form-control  @error('password') is-invalid @enderror" value="{{ old('password') }}" name="password" placeholder="Provide Password" required>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                          </div>
+                          <div class="col-md-4 col-xs-2"><button type="submit" class="btn btn-primary btn-sm mb-2" title="Delete all applicants in the database">Truncate DataTable</button></div>
+                        </form>
                       </div>
-                      <button type="submit" class="btn btn-primary btn-sm mb-2" title="Delete all applicants in the database">Truncate DataTable</button>
-                    </form>
-                  </div>
+                  
+                  
                 @endif
 
-                <div class="col-xs-2">
+                <div class="col-xs-6 col-md-3 mb-4">
                   <form class="form-inline" method="post" action="{{route('applicants.exportcsv')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group mb-4">
+                    <div class=" mb-4">
                     <button type="submit" class="btn btn-success btn-xs mb-2" title="Export approved applicants information">Export excel file</button>
                   </form>
                 </div>
             </div>
 
-                <div class="col-xs-2">
-                    <div class="form-group mb-4">
+                <div class="col-xs-6 col-md-3 mb-4">
+                    <div class="mb-4">
                       <div class="btn-group dropup">
 										 <button data-toggle="dropdown" class="btn btn-success btn-xs mb-2 dropdown-toggle" title="Generate applicant's examination list"><i class="fa fa-user icon-white"></i> Generate PDF <span class="caret"></span></button>
 										<ul class="dropdown-menu dropdown-primary">
@@ -155,6 +164,7 @@ use App\Models\State;
 										</ul>
 									</div>
                 </div>
+            </div>
             </div>
         </div>
     </div>

@@ -326,12 +326,12 @@ if ($event->data->metadata->payment_type == "Acceptance")
          'sex' => $student->gender,
          'phone' => $student->phone,
          'dob' => $student->dob,
-         'state_id' => $student->state_of_origin,
-         'location_id' => $student->lga,
+         'state_id' => $student->state_id,
+         'location_id' => $student->location_id,
          'email' => $student->email,
          'password' => bcrypt($student->phone),
          'address' =>  $student->home_address,
-         'city' => $student->state,
+         'city' => $student->city,
        ]);
 
 

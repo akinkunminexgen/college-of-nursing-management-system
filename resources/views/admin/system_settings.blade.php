@@ -47,20 +47,16 @@
                                 </div>
                             @endif
                             <form method="post" action="{{route('settings.update')}}" class="form-horizontal">
-                                <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                    
+                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
                                     <thead>
                                         <tr>
-                                            <th>Setting</th>
-                                            <th>Value</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Current Session</td>
-                                            <td>
-                                                <input type="text" name="current_session" value="{{$settings['current_session']}}" class="form-control" required>
-                                            </td>
-                                        </tr>
+                                        
                                         <tr>
                                             <td>Reg. No starts (e.g CNM/21B/)</td>
                                             <td>
@@ -109,7 +105,21 @@
                                                 <input type="date" name="admission_exam_date_midwifery" value="{{$settings['admission_exam_date_midwifery']}}" class="form-control" required>
                                             </td>
                                         </tr>
+                                        
+                                        
                                         <tr>
+                                            <td>Departmental Fee</td>
+                                            <td>
+                                                <input type="text" name="Departmental_fee" value="{{$settings['Departmental_fee']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Faculty Fee</td>
+                                            <td>
+                                                <input type="text" name="Faculty_fee" value="{{$settings['Faculty_fee']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                         <tr>
                                             <td>Maintenance</td>
                                             <td>
                                               @if($settings['maintenance'] == 'YES')
@@ -121,8 +131,44 @@
                                               @endif
                                             </td>
                                         </tr>
+                                
+                                        {{--
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <input type="text" name="" value="{{$settings['']}}" class="form-control">
+                                                </td>
+                                            </tr>
+                                        --}}
+                                    </tbody>
+                                </table>
+                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
+                                    <thead>
                                         <tr>
-                                            <td>Admission Subaccount (Access)</td>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Current Session</td>
+                                            <td>
+                                                <input type="text" name="current_session" value="{{$settings['current_session']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                       <tr>
+                                            <td>Current Session A</td>
+                                            <td>
+                                                <input type="text" name="current_sessionA" value="{{$settings['current_sessionA']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Current Session B</td>
+                                            <td>
+                                                <input type="text" name="current_sessionB" value="{{$settings['current_sessionB']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admission Subaccount</td>
                                             <td>
                                                 <input type="text" name="admission_sub_account" value="{{$settings['admission_sub_account']}}" class="form-control" required>
                                             </td>
@@ -140,17 +186,25 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Current Session A</td>
+                                            <td>Nursing Council Subaccount</td>
                                             <td>
-                                                <input type="text" name="current_sessionA" value="{{$settings['current_sessionA']}}" class="form-control" required>
+                                                <input type="text" name="NursingCouncil_account" value="{{$settings['NursingCouncil_account']}}" class="form-control" required>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Current Session B</td>
+                                            <td>Departmental Subaccount</td>
                                             <td>
-                                                <input type="text" name="current_sessionB" value="{{$settings['current_sessionB']}}" class="form-control" required>
+                                                <input type="text" name="Departmental_account" value="{{$settings['Departmental_account']}}" class="form-control" required>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Faculty Subaccount</td>
+                                            <td>
+                                                <input type="text" name="Faculty_account" value="{{$settings['Faculty_account']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                        
                                         <tr>
                                             <td>Support Email Address</td>
                                             <td>
@@ -163,16 +217,11 @@
                                                 <input type="text" name="Domain_Email" value="{{$settings['Domain_Email']}}" class="form-control" required>
                                             </td>
                                         </tr>
-                                        {{--
-                                            <tr>
-                                                <td></td>
-                                                <td>
-                                                    <input type="text" name="" value="{{$settings['']}}" class="form-control">
-                                                </td>
-                                            </tr>
-                                        --}}
+                                        
                                     </tbody>
                                 </table>
+                                </div>
+                                
                                 <button type="submit" class="btn btn-primary">Update Settings</button>
                                 {{ csrf_field() }}
                                 {{ method_field('PUT') }}

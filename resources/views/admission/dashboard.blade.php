@@ -88,13 +88,13 @@ Admission - Dashboard
                   <input type="hidden" name="amount" value='{{($amount + $charges )* 100}}'>
                   <input type="hidden" name="quantity" value="">
                    @if($student->department_id == 2)
-                            <input type="hidden" name="subaccount" value="ACCT_lxktcyq27vklld1"> <!--Wema bank-->
+                            <input type="hidden" name="subaccount" value="{{$midwiferySubaccount}}"> <!--Wema bank-->
                           @else
-                            <input type="hidden" name="subaccount" value="ACCT_90wcdxusucx3hm0"> <!--Access bank-->
+                            <input type="hidden" name="subaccount" value="{{$nursingSubaccount}}"> <!--Wema bank2-->
                          @endif
                   <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'payment_type'=> 'Acceptance', 'email'=> $student->email])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                   <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-                  <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+                  <!--<input type="hidden" name="key" value="{{ config('paystack.secretKey') }}">--> {{-- required --}}
                   {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
                    <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}

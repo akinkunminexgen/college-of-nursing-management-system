@@ -78,7 +78,7 @@ class UploadController extends Controller
       // 1 represent general nursing department
       $dep = $request->course;
       //check for the number of students who has completed thier application
-      $num = Studentapplicant::where([['reg_step', 'completed'], ['department_id', $dep]])->count();
+      $num = Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where([['reg_step', 'completed'], ['department_id', $dep], ['cardapplicants.is_closed', false]])->count();
 
 
       if($dep != '1'){

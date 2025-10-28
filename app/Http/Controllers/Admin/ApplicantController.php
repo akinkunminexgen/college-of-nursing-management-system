@@ -33,7 +33,7 @@ use CloudinaryUpload;
     }
     public function index()
     {
-      $count = Studentapplicant::all()->count();
+      $count = Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('cardapplicants.is_closed', false)->count();
        $applicants=  Studentapplicant::with(['state', 'cardapplicant'])
     ->select('id', 'surname', 'first_name', 'email', 'phone', 'sponsor_name', 'home_address', 'state_id', 'admission_status', 'sponsor_phone', 'cardapplicant_id')
     ->paginate(10);
@@ -73,8 +73,9 @@ use CloudinaryUpload;
     public function exportcsv(Request $request)
     {
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
-          ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'pic_url', 'gender', 'marital_status',
-          'lga', 'state_id','phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->orderBy('reg_no')->get();
+          ->leftJoin('states', 'states.id', '=', 'studentapplicants.state_id')->leftJoin('locations', 'locations.id', '=', 'studentapplicants.location_id')
+          ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'dob','pic_url', 'gender', 'marital_status', 'studentapplicants.state_id', 'states.name as state_name',
+          'location_id', 'locations.lga', 'phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->where('cardapplicants.is_closed', false)->orderBy('reg_no')->get();
           // file name for download
           $fileName = "applicants".date('Ymd').".xls";
 
@@ -368,7 +369,7 @@ use CloudinaryUpload;
       public function pdfApplicants($page)
       { ini_set('memory_limit', '2048M');
         $page = $page * 359;
-        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('cardapplicants.is_closed', '0')->orderBy('date_exam')->skip($page)->take(359)->get();
+        $applicants= Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('cardapplicants.is_closed', false)->orderBy('date_exam')->skip($page)->take(359)->get();
         
         $pdf = PDF::loadView('admin/applicants/downloadpdf', compact('applicants'));
         //dd($applicants[0]);

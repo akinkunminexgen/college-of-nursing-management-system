@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\server.php||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:server.php||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,27 +27,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "server.php",
-              "DocumentMoniker": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\server.php",
-              "RelativeDocumentMoniker": "server.php",
-              "ToolTip": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\server.php",
-              "RelativeToolTip": "server.php",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002338|",
-              "WhenOpened": "2025-06-10T18:42:36.024Z",
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-06-25T19:52:45.782Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\package.json",
-              "RelativeDocumentMoniker": "package.json",
-              "ToolTip": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\package.json",
-              "RelativeToolTip": "package.json",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-10T18:42:19.84Z",
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\Dockerfile",
+              "RelativeDocumentMoniker": "Dockerfile",
+              "ToolTip": "C:\\Users\\Harkinkunmi\\Desktop\\Programming_learning_path\\college-of-nursing-management-system\\Dockerfile",
+              "RelativeToolTip": "Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-06-25T19:48:17.795Z",
               "EditorCaption": ""
             }
           ]

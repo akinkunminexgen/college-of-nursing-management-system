@@ -3,26 +3,49 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-  </head>
-  <body style='background-image:url("images/oysconmelogo.png");'>
+    <style>
+    body {
+      background-image: url("{{ asset('images/Oysconmefaded.png') }}");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-    <div>
-      <div>
+    .content {
+      padding: 1px 0 100px 0;
+      background-color: rgba(255, 255, 255, 0.8); /* optional white overlay */
+    }
+    
+    .header::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  </style>
+  </head>
+  <body>
+
+    <div class="header">
         <div style="float:left; "><img src="images/Oysconmetrans.png" height="100" width ="100" alt="logo"></div>
       <h3 style="text-align: center; margin-right:45px;padding:0 100px;">OYO STATE COLLEGE OF NURSING AND MIDWIFERY,<br> ELEYELE IBADAN
                 OYO STATE.</h3>
         <div style="float:right; margin-top:-100px;"><img src="{{$user->images[0]->url}}" height="100" width ="100" alt="logo"></div>
-      </div>
+    </div>
                 <br>
                 <br>
                 <br>
-      <h4 style="text-decoration: underline;text-align: center; clear:both;"> Tuition Fee Receipt,</h4>
+     
+
+    <div class="content">
+        <div>
+            
+             <h4 style="text-decoration: underline;text-align: center; clear:both;"> Tuition Fee Receipt,</h4>
     <!--  <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Session:</span> <span style="text-decoration: underline;padding-left:15px;">Semester:  </span><span style="text-decoration: underline;padding-left:15px;">Date: {{$dated}}</span></p>
     -->  <p style="text-align: center;"><span style="text-decoration: underline;padding-left:2px;">Matric No: {{" ".$student->matric_no}}</span><strong><span style="text-decoration: underline;padding-left:15px;">Fullname: {{$user->last_name.", ".$user->first_name." ".$user->middle_name}}</span></strong></p>
         <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">Session: 20{{$session}}/20{{$session + 1}}</span> <span style="text-decoration: underline;padding-left:15px;">Level: {{substr($payment->reference,4,3)}}</span><span style="text-decoration: underline;padding-left:15px;">Date: {{$dated}}</span></p>
         <p style="text-align: center;"><span style="text-decoration: underline;padding-left:15px;">State of Origin: {{$origin->name}}</span> <span style="text-decoration: underline;padding-left:15px;">Late payment charges: {{$late}} </span></p>
 
-    </div>
+        </div>
     <div style="text-align:center;padding:10px 40px;">
       <hr>
     <div class="container">
@@ -75,6 +98,7 @@
     <p style="clear:both;"></p>
     <br>
     <br>
+  </div>
   </div>
   </body>
 </html>

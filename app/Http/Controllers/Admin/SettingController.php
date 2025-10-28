@@ -50,6 +50,8 @@ class SettingController extends Controller
                                 'email',
                                 'regex:/^[\w\.\-]+@oysconme\.edu\.ng$/i'
                             ],
+            'Departmental_fee' => 'required|numeric',
+            'Faculty_fee' => 'required|numeric'
         ]);
 
 //dd($request->maintenance);

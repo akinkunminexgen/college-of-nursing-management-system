@@ -54,15 +54,15 @@ class DashboardController extends Controller
         //dd(json_encode($paymentPerMonth));
           return view('admin.index', [
             'section' => 'dashboard',
-            'users' => Studentapplicant::all(),
-            'students' => Student::all(),
-            'activeStudents' => $students =  Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', 'ACTIVE')->get(),
-            'admins' => Admin::all(),
-            'userstoday' => Studentapplicant::where('created_at', '>=', Carbon::today('GMT+1'))->where('created_at', '<', Carbon::today('GMT+1')->addDays(1)->startOfDay()),
+            'users' => Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')->where('cardapplicants.is_closed', false)->count(),
+            'students' => Student::count(),
+            'activeStudents' => $students =  Student::join('users', 'users.id', '=', 'students.user_id')->where('is_active', 'ACTIVE')->count(),
+            'admins' => Admin::count(),
+            'userstoday' => Studentapplicant::where('created_at', '>=', Carbon::today('GMT+1'))->where('created_at', '<', Carbon::today('GMT+1')->addDays(1)->startOfDay())->count(),
             'pay_made' => Payment::orderByDesc('created_at')->limit(7)->get(),
             'pay_app' => Paymentapplicant::orderByDesc('created_at')->limit(7)->get(),
-            'posts' => Post::all(),
-            'usersperday' => $perDay.",",
+            'posts' => Post::count(),
+            'usersperday' => $perDay,
             'paymentPerMonth' => json_encode($paymentPerMonth)
         ]);
     }

@@ -1,18 +1,25 @@
 <?php
 use App\Http\Controllers\Auth\InvoiceForgotPasswordController;
+use App\Http\Controllers\Auth\InvoiceResetPasswordController;
 
 Auth::routes();
 
 Auth::routes(['reset' => true]);
 
-// Forgot password
-Route::get('invoice/password/reset', 'InvoiceForgotPasswordController@showLinkRequestForm')->name('invoice.password.request');
-Route::post('invoice/password/email', 'InvoiceForgotPasswordController@sendResetLinkEmail')->name('invoice.password.email');
+Route::prefix('invoice')->group(function () {
+    Route::get('password/reset', [InvoiceForgotPasswordController::class, 'showLinkRequestForm'])->name('invoice.password.request');
+    Route::post('password/email', [InvoiceForgotPasswordController::class, 'sendResetLinkEmail'])->name('invoice.password.email');
 
-// Reset password
-Route::get('invoice/password/reset/{token}', 'InvoiceResetPasswordController@showResetForm')->name('invoice.password.reset');
-Route::post('invoice/password/reset', 'InvoiceResetPasswordController@reset')->name('invoice.password.update');
+    Route::get('password/reset/{token}', [InvoiceResetPasswordController::class, 'showResetForm'])->name('invoice.password.reset');
+    Route::post('password/reset', [InvoiceResetPasswordController::class, 'reset'])->name('invoice.password.update');
+});
 
+Route::get('/clear-cache', function() {
+    Artisan::call('config:clear');
+    Artisan::call('route:clear');
+    Artisan::call('view:clear');
+    return 'Cleared!';
+});
 
 Route::group(['prefix' => '/admission', 'namespace' => 'Admission'], function () {
 Route::get('login', 'LoginController@index')->name('admission.login');
@@ -62,7 +69,7 @@ Route::get('payapplication', 'PayapplicationController@index')->name('payapplica
 
 Route::post('payapplication', 'PayapplicationController@index')->name('payapplication.pay');
 
-Route::post('/pay', 'PaymentController@redirectToGateway')->name('payadmission');
+Route::post('/pay', 'Payment2Controller@redirectToGateway')->name('payadmission');
 
 Route::get('printout', 'PrintformController@index')->name('printout.index');
 
@@ -146,6 +153,8 @@ Route::group(['middleware' => ['role:STUDENT']], function(){
       Route::get('portal/downloadPDF/{sem}/{date}','RegHistoryController@downloadPDF')->name('portal.showhistory');
 
       Route::get('portal/paydownloadPDF/{id}/{date}','PayTuitionController@downloadPDF')->name('portal.showpayhistory');
+      
+      Route::get('portal/examClearance/{id}/{date}','PayTuitionController@examClearancePDF')->name('portal.examCard');
 
       Route::get('portal/checkpage', 'CheckpageController@index')->name('portal.checkpage');
 
@@ -286,5 +295,6 @@ Route::group(['prefix' => '/admin', 'namespace' => 'Admin', 'middleware' => 'rol
   Route::post('applicants/index', 'ApplicantController@exportcsv')->name('applicants.exportcsv');
   Route::get('editapplicant/{studentapplicant}', 'ApplicantController@editapplicant')->name('applicants.editapplicant');
   Route::put('editapplicant/{studentapplicant}', 'ApplicantController@updateapplicant')->name('applicants.updateapplicant');
+  
 
 });

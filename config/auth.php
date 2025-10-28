@@ -46,10 +46,6 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
-        'invoice' => [
-            'driver' => 'session',
-            'provider' => 'invoices',
-        ],
     ],
 
     /*

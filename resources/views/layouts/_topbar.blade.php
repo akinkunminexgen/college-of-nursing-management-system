@@ -19,19 +19,19 @@
            <div class="col-md-12">
 
            <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Commencement of the sales of form for the conduct of Post UTME into the National Diploma in Nursing for the year 2025/2026 Academic Session.</b> <hr></h4>
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Admitted students into the college are hereby advised to proceed to pay the acceptance fee to secure their spot. Visit this  <a href='https://eportal.oysconme.edu.ng/'>LINK</a>  to login and make payment. Contact the college ICT for assistance. <!--Commencement of the sales of form for the conduct of Post UTME into the National Diploma in Nursing for the year 2025/2026 Academic Session. Closing date: September 5, 2025.--></b> <hr></h4>
                 <p class="text-success"></p>
 
                 
                 <br>
-               <a href='/admission/appform'>Click here</a> to buy form</p>
+              <!-- <a href='/admission/appform'>Click here</a> to buy form</p> -->
 
           <ul>
                
-         <li>Sales start from: June 15, 2025 till 5th September 2025</li>
+      <!--   <li>Sales start from: June 15, 2025 till 5th September 2025</li>
           <li>Conduct of Screening Exercise from Tuesday, 16th September to 18th September, 2025</li>
             <li>Resumption Date: 6th October, 2025</li>
-          </ul>
+          </ul> -->
           <hr>
               </div>
 

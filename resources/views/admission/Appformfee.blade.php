@@ -46,11 +46,12 @@ Application Form Fee
             </button>
             </div>
       </div>
-      @if($val->is_closed)
+    @endforeach
+    @if($allClosed)
         <div class="col-sm-2"> </div>
           <div class="col-sm-5">
             <div class="couse" style="background-color:#c3d4a9; color:white; padding: 10px">
-                    <h4>New Application</h4>
+                    <h4>New Application.</h4>
                     <div class="star-rating">
                         <i class="fa fa-hourglass-start" aria-hidden="true"></i>
                         <i class="fa fa-hourglass-start" aria-hidden="true"></i>
@@ -62,7 +63,6 @@ Application Form Fee
                 </div>
           </div>
       @endif
-    @endforeach
     @if($card->isEmpty())
         <div class="col-sm-4"> </div>
           <div class="col-sm-5">
@@ -122,10 +122,18 @@ Application Form Fee
               <input type="hidden" name="orderID" value="">
               <input type="hidden" name="amount" value='{{($payment + 300 )* 100}}'>
               <input type="hidden" name="quantity" value="1">
-              <input type="hidden" name="subaccount" value='{{$subaccount}}'> <!--ACCESS-->
+              <input type="hidden" id="splitData" name="split" value="{{ json_encode([
+                                                                                  'type' => 'flat',
+                                                                                  'bearer_type' => 'subaccount',
+                                                                                  'bearer_subaccount' => $subaccount,
+                                                                                  'subaccounts' => [
+                                                                                      ['subaccount' => $subaccount, 'share' => (($payment + 300 )-200) * 100],
+                                                                                      ['subaccount' => $nursingCouncil, 'share' => 200*100],
+                                                                                  ],
+                                                                              ]) }}">
               <input type="hidden" name="metadata" value="{{json_encode($array = ['student_id' => $user->id, 'payment_type'=> 'Admission', 'Appname' => $user->metadata, 'phone' => $user->phone, 'dob' => $user->dob, 'rounds' => $rounds])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
               <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-              <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+              <!--<input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> --> {{-- required --}}
               {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
             
                <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}

@@ -6,6 +6,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Auth\Passwords\CanResetPassword as CanResetPasswordTrait;
+use Illuminate\Auth\Notifications\ResetPassword;
 
 class Invoice extends Authenticatable implements CanResetPassword
 {
@@ -16,5 +17,10 @@ class Invoice extends Authenticatable implements CanResetPassword
     public function cardapplicant()
     {
         return $this->hasMany('App\Models\Cardapplicant');
+    }
+    
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\InvoiceResetPasswordNotification($token));
     }
 }

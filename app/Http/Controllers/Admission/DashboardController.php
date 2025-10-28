@@ -30,12 +30,23 @@ class DashboardController extends Controller
               }
               //create a session for student id
               session()->put('studapp_id', $student->id);
-              //get acceptance fee
-              $amount = SystemSetting::where('name','acceptance_payment_fee')->select('value')->first();
+
+              //get acceptance fee and subaccounts
+              $settings = SystemSetting::whereIn('name', [
+                                                  'BMidwifery_sub_account',
+                                                  'GNursing_sub_account',
+                                                  'acceptance_payment_fee',
+                                                  ])->get()->keyBy('name');
               //set bank charges to 300 naira
               $charges = 300;
               //dd($student->Paymentapplicant->last()->reference);
-              return View('admission.dashboard',['section'=>'dashboard', 'student' => $student, 'amount' => $amount->value, 'charges' => $charges]);
+              return View('admission.dashboard',['section'=>'dashboard', 
+                                                  'student' => $student, 
+                                                  'amount' => $settings['acceptance_payment_fee']->value ?? null,
+                                                  'nursingSubaccount' => $settings['GNursing_sub_account']->value ?? null,
+                                                  'midwiferySubaccount' => $settings['BMidwifery_sub_account']->value ?? null,
+                                                  'charges' => $charges,
+                                                ]);
         } catch (\Exception $e) {
             session()->flush();
              $note = 'Please contact the admin, an error has occured';

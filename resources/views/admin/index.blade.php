@@ -11,17 +11,16 @@
     <h1>Dashboard</h1>
     <ul class="mini-stats box-3">
       <li>
-        <div class="left sparkline_bar_good"><span>2,4,9,7,12,10,12</span>+10%</div>
+        <div class="left sparkline_bar_good"><span>2,2,2,2,2</span>+0%</div>
         <div class="right">
-          <strong>{{ $activeStudents->count() }}</strong>
+          <strong>{{ $activeStudents }}</strong>
           Active Students
         </div>
       </li>
       <li>
-        <div class="left sparkline_bar_neutral"><span>{{$usersperday}}{{$userstoday->count() }}</span>
-        @if($users->count() != 0){{number_format(($userstoday->count()/$users->count())*100, 2) }}% today @endif</div>
+        <div class="left sparkline_bar_neutral"><span>{{$usersperday}}</span>+@if($users != 0){{number_format(($userstoday/$users)*100, 2) }}% today @endif</div>
         <div class="right">
-          <strong>{{ $users->count() }}</strong>
+          <strong>{{ $users }}</strong>
           Applicants
         </div>
       </li>
@@ -56,13 +55,13 @@
                             <div class="row">
                                 <div class="col-xs-12 col-sm-4">
                                     <ul class="site-stats">
-                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $users->count() }}</strong> <small>Total number of applications</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $users }}</strong> <small>Total number of applications</small></div></li>
                                         <li class="divider"></li>
-                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $userstoday->count() }}</strong> <small>Total number of applications today</small></div></li>
-                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $students->count() }}</strong> <small>Total Students</small></div></li>
-                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $admins->count() }}</strong> <small>Total Admins</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $userstoday }}</strong> <small>Total number of applications today</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $students }}</strong> <small>Total Students</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-group"></i> <strong>{{ $admins }}</strong> <small>Total Admins</small></div></li>
                                         <li class="divider"></li>
-                                        <li><div class="cc"><i class="fa fa-bullhorn"></i> <strong>{{ $posts->count() }}</strong> <small>Total Posts</small></div></li>
+                                        <li><div class="cc"><i class="fa fa-bullhorn"></i> <strong>{{ $posts }}</strong> <small>Total Posts</small></div></li>
                                     </ul>
                                     <input type="hidden" id="getMonthStat" value="{{ $paymentPerMonth }}" >
                                 </div>

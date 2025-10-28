@@ -70,13 +70,22 @@ Portal - Course Registration
                             <input type="hidden" name="orderID" value="345">
                             <input type="hidden" name="amount" id="pdata2">
                             <input type="hidden" name="quantity" value="3">
+                            <input type="hidden" id="toGetActualSubaccount" name="notimportant" value="{{$subaccount}}">
                             
                             <input type="hidden" name="first_name" value="{{$user->first_name}}">
                             <input type="hidden" name="last_name" value="{{$user->last_name}}">
-                            <input type="hidden" name="subaccount" value="{{$subaccount}}">
+                            <input type="hidden" id="splitData" name="split" value="{{ json_encode([
+                                                                                  'type' => 'flat',
+                                                                                  'bearer_type' => 'subaccount',
+                                                                                  'bearer_subaccount' => $subaccount,
+                                                                                  'subaccounts' => [
+                                                                                      ['subaccount' => $departmentSubaccount, 'share' => $departmentFee],
+                                                                                      ['subaccount' => $facultySubaccount, 'share' => $facultyFee],
+                                                                                  ],
+                                                                              ]) }}">
                             <input type="hidden" id="metadata" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
                             <input type="hidden" name="reference" value="{{ Paystack::genTranxRef() }}"> {{-- required --}}
-                            <input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> {{-- required --}}
+                            <!--<input type="hidden" name="key" value="{{ config('paystack.secretKey') }}"> --> {{-- required --}}
                             {{ csrf_field() }} {{-- works only when using laravel 5.1, 5.2 --}}
 
                              <input type="hidden" name="_token" value="{{ csrf_token() }}"> {{-- employ this in place of csrf_field only in laravel 5.0 --}}
@@ -124,12 +133,28 @@ $(document).ready(function(e){
               $('#not_ify').html('You are about to make "'+valueP+'" payment with bank charges of 300');
 
               var obj =$('#metadata').val();
+              var objSplit =$('#splitData').val();
               obj = JSON.parse(obj);
               obj.pay_status = results.pay_status;
               obj.reg_status = results.reg_status;
               obj.lvl = results.lvl
               obj = JSON.stringify(obj);
               $('#metadata').val(obj);
+
+              var objSplit =$('#splitData').val();
+              var actualaccount =$('#toGetActualSubaccount').val();
+              objSplit = JSON.parse(objSplit);
+              if (!Array.isArray(objSplit.subaccounts)) {
+                  objSplit.subaccounts = [];
+              }
+
+              objSplit.subaccounts.push({
+                  subaccount: actualaccount,
+                  share: (results.residue + 300)+"00"
+              });
+              objSplit = JSON.stringify(objSplit);
+              $('#splitData').val(objSplit);
+              console.log(objSplit);
           }
         });
 

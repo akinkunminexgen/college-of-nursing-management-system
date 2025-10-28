@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel58_app
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: laravel58_mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: oysconme.edu.ng
+      MYSQL_DATABASE: oysconm1_development
+      MYSQL_USER: oysconm1_akin
+      MYSQL_PASSWORD: Letmeknowyou1*
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
