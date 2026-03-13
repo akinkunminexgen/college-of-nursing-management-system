@@ -70,10 +70,12 @@ class PayTuitionController extends Controller
       }
 
       $settings = SystemSetting::whereIn('name', [
-          'Departmental_Account',
-          'Faculty_Account',
-          'Departmental_Fee',
-          'Faculty_Fee'
+          'Departmental_account',
+          'Faculty_account',
+          'SUG_account',
+          'Departmental_fee',
+          'Faculty_fee',
+          'SUG_fee'
           ])->get()->keyBy('name');
 
       // Assign settings to variables
@@ -82,6 +84,9 @@ class PayTuitionController extends Controller
                               : "0";
       $Faculty_Fee        = isset($settings['Faculty_fee'])
                           ? (string)((int)$settings['Faculty_fee']->value) . "00"
+                          : "0";
+    $SUG_Fee        = isset($settings['SUG_fee'])
+                          ? (string)((int)$settings['SUG_fee']->value) . "00"
                           : "0";
 
       $session = SystemSetting::where('name', $current_session)->first();
@@ -104,7 +109,7 @@ class PayTuitionController extends Controller
               }else {
                 $lvl = $lvl + 100;
               }
-        if ($lvl > 300) {
+        if ($lvl > 400) {
           $lvl = "";
         }
       }else {
@@ -119,8 +124,11 @@ class PayTuitionController extends Controller
                                       ->with('subaccount', $subaccount->value)
                                       ->with('departmentSubaccount', $settings['Departmental_account']->value ?? null)
                                       ->with('facultySubaccount', $settings['Faculty_account']->value ?? null)
+                                      ->with('SUGSubaccount', $settings['SUG_account']->value ?? null)
                                       ->with('departmentFee', (int)$Department_Fee)
-                                      ->with('facultyFee', (int)$Faculty_Fee);
+                                      ->with('facultyFee', (int)$Faculty_Fee)
+                                      ->with('SUGFee', (int)$SUG_Fee)
+                                      ;
 
     }
 
@@ -135,15 +143,18 @@ class PayTuitionController extends Controller
       
       $settings = SystemSetting::whereIn('name', [
           'late_payment_fee',
-          'Departmental_Fee',
-          'Faculty_Fee'
+          'Departmental_fee',
+          'Faculty_fee',
+          'SUG_fee'
           ])->get()->keyBy('name');
 
       $objSettings = (object)[
         'late_payment_fee' => (int)($settings['late_payment_fee']->value ?? 0),
         'Departmental_Fee' => (int)($settings['Departmental_fee']->value ?? 0),
-        'Faculty_Fee'      => (int)($settings['Faculty_fee']->value ?? 0),
+        'Faculty_Fee' => (int)($settings['Faculty_fee']->value ?? 0),
+        'SUG_Fee' => (int)($settings['SUG_fee']->value ?? 0)
       ];
+      
       //to check for late payment
       $n = date("Y/m/d");
       $date1 = new DateTime($n);
@@ -180,7 +191,7 @@ class PayTuitionController extends Controller
 
               default:
               $total = $amount->non_indigene;
-              $$objSettings->late_payment_fee = 0;
+              $objSettings->late_payment_fee = 0;
               return $this->verifyAmount($type, $total, $objSettings);
               break;
         }
@@ -189,28 +200,38 @@ class PayTuitionController extends Controller
 
     public function verifyAmount($check, $amount, $objSet)
     {
-      if ($check == "half") {
-        session()->put('pay_status', 'HALF PAID');
-        if(session()->has('pay_full')){
-          session()->put('pay_status', 'PAID');
-        }
-        return json_encode($obj = [
-          "amount" =>($amount/2)+ $objSet->late_payment_fee,
-          "residue" => (($amount/2) - $objSet->Faculty_Fee) - $objSet->Departmental_Fee,
-          "pay_status" => session()->get('pay_status'),
-          "reg_status" => session()->get('regStatus'),
-          "lvl" => session()->get('lvl')
+        $isHalf = ($check === "half");
+
+        // Determine pay status
+        $payStatus = $isHalf 
+            ? (session()->has('pay_full') ? 'PAID' : 'HALF PAID')
+            : 'PAID';
+        
+        session()->put('pay_status', $payStatus);
+        
+        // Amount
+        $amountToPay = $isHalf
+            ? ($amount / 2)
+            : $amount;
+        
+        $amountToPay += $objSet->late_payment_fee;
+        
+        // Residue
+        $facultyFee   = $isHalf ? $objSet->Faculty_Fee / 2 : $objSet->Faculty_Fee;
+        $deptFee      = $isHalf ? $objSet->Departmental_Fee / 2 : $objSet->Departmental_Fee;
+        $sugFee       = $isHalf ? $objSet->SUG_Fee / 2 : $objSet->SUG_Fee;
+        
+        $residue = $amountToPay - ($facultyFee + $deptFee + $sugFee);
+        
+        return json_encode([
+            "amount"      => $amountToPay,
+            "isItHalf"    => $isHalf,
+            "residue"     => $residue,
+            "pay_status"  => $payStatus,
+            "reg_status"  => session()->get('regStatus'),
+            "lvl"         => session()->get('lvl')
         ]);
-      }else{
-        session()->put('pay_status', 'PAID');
-        return json_encode($obj = [
-          "amount" => $amount + $objSet->late_payment_fee,
-          "residue" => (($amount) - $objSet->Faculty_Fee) - $objSet->Departmental_Fee,
-          "pay_status" => session()->get('pay_status'),
-          "reg_status" => session()->get('regStatus'),
-          "lvl" => session()->get('lvl')
-        ]);
-      }
+
     }
 
     public function index4History()

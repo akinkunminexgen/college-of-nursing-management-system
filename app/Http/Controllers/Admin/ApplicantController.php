@@ -74,7 +74,8 @@ use CloudinaryUpload;
     {
           $student =Studentapplicant::join('cardapplicants', 'cardapplicants.id', '=', 'studentapplicants.cardapplicant_id')
           ->leftJoin('states', 'states.id', '=', 'studentapplicants.state_id')->leftJoin('locations', 'locations.id', '=', 'studentapplicants.location_id')
-          ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'dob','pic_url', 'gender', 'marital_status', 'studentapplicants.state_id', 'states.name as state_name',
+          ->leftJoin('departments', 'departments.id', '=', 'studentapplicants.department_id')
+          ->select('reg_no', 'surname', 'first_name', 'middle_name','pin', 'password', 'dob','pic_url', 'gender', 'marital_status','studentapplicants.department_id as DeptId', 'departments.name as Dept', 'studentapplicants.state_id', 'states.name as state_name',
           'location_id', 'locations.lga', 'phone', 'sponsor_phone', 'email','date_exam','campus', 'jamb_no', 'score')->where('cardapplicants.is_closed', false)->orderBy('reg_no')->get();
           // file name for download
           $fileName = "applicants".date('Ymd').".xls";

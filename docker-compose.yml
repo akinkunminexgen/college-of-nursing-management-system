@@ -19,12 +19,14 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: oysconme.edu.ng
-      MYSQL_DATABASE: oysconm1_development
-      MYSQL_USER: oysconm1_akin
-      MYSQL_PASSWORD: Letmeknowyou1*
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - dbdata:/var/lib/mysql
+      #this is to mount the docker folder (which is a directory here(./docker/mysql-init)) into the container
+      - ./docker/mysql-init:/docker-entrypoint-initdb.d
 
 volumes:
   dbdata:
