@@ -45,6 +45,14 @@ class PaymentController extends Controller
  public function handleGatewayCallback()
  {
      $paymentDetails = Paystack::getPaymentData();
+     
+     //ignore from schoolTry
+     if (!isset($paymentDetails['data']['metadata']['payment_type'])){
+          $fWrite = fopen("akinatorSchoolTry.txt","a");
+         $wrote = fwrite($fWrite, $paymentDetails['data']);
+         fclose($fWrite);
+         exit();
+     }
 
      //Payment of school fees (PORTAL)
      if ($paymentDetails['data']['metadata']['payment_type'] == "Portal")
@@ -197,6 +205,14 @@ class PaymentController extends Controller
  $event = json_decode($input);
  /*$txt = $event->event." and ". $event->data->metadata->reg_no;
  $txt.= "\r\n";*/
+ 
+ //ignore from schoolTry
+     if (!isset($event->data->metadata->payment_type)){
+          $fWrite = fopen("akinatorSchoolTry.txt","a");
+         $wrote = fwrite($fWrite, $event->data);
+         fclose($fWrite);
+         exit();
+     }
 
 //for tuition fee
  if ($event->data->metadata->payment_type == "Portal")
@@ -364,10 +380,6 @@ if ($event->data->metadata->payment_type == "Acceptance")
        $user->images()->create([
            'url' => $imageData['secure_url']
        ]);
-       
-       $fWrite = fopen("akinator.txt","a");
-         $wrote = fwrite($fWrite, $txt);
-         fclose($fWrite);
 
     }
         break;

@@ -17,19 +17,32 @@
       <div class="modal-body">
         <div class="row">
            <div class="col-md-12">
+               <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary">OYO STATE COLLEGE OF NURSING AND MIDWIFERY, ELEYELE, IBADAN.<br>
+                        ADMISSION 2025/2026 SESSION<br>
+                        </b> <br></h4>
+                <p>Applications are invited from suitably qualified candidates for admission into the Post Basic Nursing Programme at the Oyo State College of Nursing and Midwifery, Eleyele, Ibadan.</p>
+                
+                <h4 class="text-danger">ENTRY REQUIREMENT:</h4>
+                <ul>
+                    <li> Candidates must be a Registered Midwife (RM) or Dental Nurse with the Nursing and Midwifery Council of Nigeria.</li>
+                    <li>WASSCE/NECO (O’ Level) with credits in five (5) subjects including English Language, Mathematics, Biology, Physics and Chemistry at not more than two (2) sittings.</li>
+                </ul>
+                <ul>
+                    <li class="text-success"><a href='admission'>Click here</a> for more information</li>
 
-           <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
-                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Admitted students into the college are hereby advised to proceed to pay the acceptance fee to secure their spot. Visit this  <a href='https://eportal.oysconme.edu.ng/'>LINK</a>  to login and make payment. Contact the college ICT for assistance. <!--Commencement of the sales of form for the conduct of Post UTME into the National Diploma in Nursing for the year 2025/2026 Academic Session. Closing date: September 5, 2025.--></b> <hr></h4>
+          <!-- <div class="alert alert-secondary alert-dismissible fade show text-black" role="alert">
+                <h4 class="alert-heading text-success text-justify"><b class="text-primary text-uppercase">Admitted students into the college are hereby advised to proceed to pay the acceptance fee to secure their spot. Visit this  <a href='https://eportal.oysconme.edu.ng/'>LINK</a>  to login and make payment. Contact the college ICT for assistance. --> <!--Commencement of the sales of form for the conduct of Post UTME into the National Diploma in Nursing for the year 2025/2026 Academic Session. Closing date: September 5, 2025.--></b> <hr></h4>
                 <p class="text-success"></p>
 
-                
-                <br>
+             <!--  <p>  <a href='/login'>Click here</a> <h4>to Pay School Fees</h4> <p>Login with your registered email and Phone number as password</p> 
+                <br> -->
               <!-- <a href='/admission/appform'>Click here</a> to buy form</p> -->
 
           <ul>
                
-      <!--   <li>Sales start from: June 15, 2025 till 5th September 2025</li>
-          <li>Conduct of Screening Exercise from Tuesday, 16th September to 18th September, 2025</li>
+         <li>Sales start from: Wednesday 4th March, 2026 till 13th April 2026</li>
+         <!-- <li>Conduct of Screening Exercise from Tuesday, 16th September to 18th September, 2025</li>
             <li>Resumption Date: 6th October, 2025</li>
           </ul> -->
           <hr>

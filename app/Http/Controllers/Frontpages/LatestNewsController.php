@@ -10,11 +10,12 @@ class LatestNewsController extends Controller
 {
     public function index($id, $info){
       $latestNews = Post::find($id);
-      $locate = NULL;
-      if($latestNews->images->first() !== NULL)
-          {
-              $locate = $latestNews->images->first();
-          }
+
+    if (!$latestNews) {
+        abort(404, 'News not found');
+    }
+
+    $locate = optional($latestNews->images)->first();
       return view('latest-news')->with('latestNews', $latestNews)->with('locate', $locate);
     }
 }

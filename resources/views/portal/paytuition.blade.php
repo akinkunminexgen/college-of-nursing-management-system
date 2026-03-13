@@ -81,6 +81,7 @@ Portal - Course Registration
                                                                                   'subaccounts' => [
                                                                                       ['subaccount' => $departmentSubaccount, 'share' => $departmentFee],
                                                                                       ['subaccount' => $facultySubaccount, 'share' => $facultyFee],
+                                                                                      ['subaccount' => $SUGSubaccount, 'share' => $SUGFee],
                                                                                   ],
                                                                               ]) }}">
                             <input type="hidden" id="metadata" name="metadata" value="{{json_encode($array = ['student_id' => $student->id, 'matric_no' => $student->matric_no, 'session' => $sess->value, 'payment_type'=> 'Portal'])}}"> {{-- For other necessary things you want to add to your payload. it is optional though --}}
@@ -147,11 +148,28 @@ $(document).ready(function(e){
               if (!Array.isArray(objSplit.subaccounts)) {
                   objSplit.subaccounts = [];
               }
+              
+              
 
-              objSplit.subaccounts.push({
-                  subaccount: actualaccount,
-                  share: (results.residue + 300)+"00"
-              });
+              const exists = objSplit.subaccounts.some(
+                  (ami) => ami.subaccount === actualaccount
+                );
+                
+                if (!exists) {
+                    if (results.isItHalf) {
+                      objSplit.subaccounts = objSplit.subaccounts.map((ami) => ({
+                        ...ami,
+                        share: String(parseInt(ami.share / 2)),
+                      }));
+                    }
+                  objSplit.subaccounts = [
+                    ...objSplit.subaccounts,
+                    {
+                      subaccount: actualaccount,
+                      share: (results.residue + 300) + "00"
+                    }
+                  ];
+                }
               objSplit = JSON.stringify(objSplit);
               $('#splitData').val(objSplit);
               console.log(objSplit);

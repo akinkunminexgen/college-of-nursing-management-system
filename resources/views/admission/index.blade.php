@@ -69,14 +69,14 @@ Application Guide
         </div>
 
       <hr>
-      <!--<div class="row">
+      <div class="row">
           <div class="col-md-7 admission-form_mr">
             <br>
             <br>
             <br>
-              <h4><strong>Post Basic Midwifery</strong></h4>
+              <h4><strong>Post Basic Nursing</strong></h4>
               <br>
-              <p>This is an eighteen (18) months programme commencing in September, 2021. </p>
+              <p>This is an eighteen (18) months programme. </p>
           </div>
           <div class="col-md-5 admission-form_mr">
             <ul class="admission-form_listed">
@@ -84,19 +84,19 @@ Application Guide
                 <p>Applicant must:</p>
                 <li>1.	Possess WAEC/SSCE/GCE or NECO/SSCE/GCE with at least five (5) credits at not
                    more than two (2) sittings in English Language, Mathematics, Physics, Chemistry and Biology.</li>
-                <li>2.	Be a Registered Nurse (RN) with the Nursing and Midwifery Council of Nigeria.
+                <li>2.	Be a Registered Midwife (RM) or Dental Nurse with the Nursing and Midwifery Council of Nigeria.
                   Applicants awaiting the result of Nursing and Midwifery Council of
                   Nigeria Examination may also apply.</li>
             </ul>
           </div>
-      </div>-->
+      </div>
         <hr>
         <div class="row">
           <div class="col-md-12">
               <strong><p class="text-center"><b>Method of Application</b></p></strong>
             <p class="text-justify">Interested candidates are to follow the underlisted process for online application through the college website: <a href="/">www.oysconme.edu.ng</a></p>
             <ul>
-              <li>Online payment with the sum of Fifteen Thousand (N20,500.00) via this <a href="/admission/appform">link</a> where application form fee is expected to be made.</li>
+              <li>Online payment with the sum of Thirty Five Thousand Two Hundred (N35,200.00) via this <a href="/admission/appform">link</a> where application form fee is expected to be made.</li>
               <li>Pin generated after payment should be printed out</li>
               <li>After generating the pin, a <a href="#">link</a> will direct you to the page where you complete your application</li>
               <li>Photocard must be printed out by the applicant, which is expected to be brought to the College for endorsement</li>
@@ -109,14 +109,14 @@ Application Guide
       <div class="row">
         <div class="col-md-12">
 
-            <strong><p class="text-center">Closing Date For Basic Midwifery</p></strong>
-          <p class="text-justify">Online application must be completed on or before Friday 10th January 2025.</p>
+            <strong><p class="text-center">Closing Date</p></strong>
+          <p class="text-justify">Online application must be completed on or before Monday 13th April 2026.</p>
           <ul>
-            <li>Date of Entrance Examination (CBT): Tuesday 21st to Thursday 23rd January 2025.</li>
+            <!-- <li>Date of Entrance Examination (CBT): Tuesday 21st to Thursday 23rd January 2025.</li>-->
             <!--<li>Date of Interview: Monday, 29th April and Tuesday, 30th April, 2024</li>-->
-            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan and KISHI</li>
+            <li>Venue: Oyo State College of Nursing and Midwifery, Eleyele, Ibadan</li>
             <li>Time: 8.00 am prompt</li>
-            <li>Resumption Date: as fixed by Nursing and Midwifery Council slated for Monday 3rd March 2025.</li>
+            <li>Resumption Date: as fixed by Nursing and Midwifery Council.</li>
           </ul>
           <br>
 

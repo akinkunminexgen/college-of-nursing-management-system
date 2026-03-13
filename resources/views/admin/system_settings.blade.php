@@ -49,7 +49,7 @@
                             <form method="post" action="{{route('settings.update')}}" class="form-horizontal">
                                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                                     
-                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
+                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:12px; color:white">
                                     <thead>
                                         <tr>
                                             
@@ -57,12 +57,7 @@
                                     </thead>
                                     <tbody>
                                         
-                                        <tr>
-                                            <td>Reg. No starts (e.g CNM/21B/)</td>
-                                            <td>
-                                                <input type="text" name="registration_number" value="{{$settings['registration_number']}}" class="form-control" required>
-                                            </td>
-                                        </tr>
+                                       
                                         <tr>
                                             <td>Admission Open Date</td>
                                             <td>
@@ -105,7 +100,12 @@
                                                 <input type="date" name="admission_exam_date_midwifery" value="{{$settings['admission_exam_date_midwifery']}}" class="form-control" required>
                                             </td>
                                         </tr>
-                                        
+                                        <tr>
+                                            <td>SUG Fee</td>
+                                            <td>
+                                                <input type="text" name="SUG_fee" value="{{$settings['SUG_fee']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
                                         
                                         <tr>
                                             <td>Departmental Fee</td>
@@ -119,12 +119,24 @@
                                                 <input type="text" name="Faculty_fee" value="{{$settings['Faculty_fee']}}" class="form-control" required>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>Support Email Address</td>
+                                            <td>
+                                                <input type="text" name="Support_Email" value="{{$settings['Support_Email']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sender's Domain Email</td>
+                                            <td>
+                                                <input type="text" name="Domain_Email" value="{{$settings['Domain_Email']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
                                          <tr>
                                             <td>Maintenance</td>
                                             <td>
                                               @if($settings['maintenance'] == 'YES')
                                               <input type="checkbox" name="maintenance" class="custom-control-input"  checked id="customControlAutosizing">
-                                              <label class="badge badge-success">ENABLED</label><span> unclick to disable maintenace</span>
+                                              <label class="badge badge-success ">ENABLED</label><span> unclick to disable maintenace</span>
                                               @else
                                               <input type="checkbox" name="maintenance" class="custom-control-input" id="customControlAutosizing">
                                               <label class="badge badge-danger">DISABLED</label><span> click to enable maintenace</span>
@@ -142,13 +154,19 @@
                                         --}}
                                     </tbody>
                                 </table>
-                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:13px; color:white">
+                                    <table class="settings-table" style="background-color: #3F3B3B;font-size:12px; color:white">
                                     <thead>
                                         <tr>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
+                                         <tr>
+                                            <td>Reg. No starts (e.g CNM/21B/)</td>
+                                            <td>
+                                                <input type="text" name="registration_number" value="{{$settings['registration_number']}}" class="form-control" required>
+                                            </td>
+                                        </tr>
                                         <tr>
                                             <td>Current Session</td>
                                             <td>
@@ -206,17 +224,12 @@
                                         <tr>
                                         
                                         <tr>
-                                            <td>Support Email Address</td>
+                                            <td>SUG Subaccount</td>
                                             <td>
-                                                <input type="text" name="Support_Email" value="{{$settings['Support_Email']}}" class="form-control" required>
+                                                <input type="text" name="SUG_account" value="{{$settings['SUG_account']}}" class="form-control" required>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>Sender's Domain Email</td>
-                                            <td>
-                                                <input type="text" name="Domain_Email" value="{{$settings['Domain_Email']}}" class="form-control" required>
-                                            </td>
-                                        </tr>
+                                        
                                         
                                     </tbody>
                                 </table>
